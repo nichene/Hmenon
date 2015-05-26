@@ -39,7 +39,7 @@ public class MainLogin extends ActionBarActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainLogin.this, "logado com sucesso!", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainLogin.this, edtNome.getText().toString() +" logado com sucesso!", Toast.LENGTH_LONG).show();
 
             }
         });
