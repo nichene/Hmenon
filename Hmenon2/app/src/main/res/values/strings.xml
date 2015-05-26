@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">"Hmenon "</string>
+    <string name="hmenon">HMENON : De Recife a Olinda </string>
+
+    <string name="cadastrar">CADASTRE-SE</string>
+    <string name="login">LOGIN</string>
+
+
+    <string name="action_settings">Settings</string>
+
+</resources>
