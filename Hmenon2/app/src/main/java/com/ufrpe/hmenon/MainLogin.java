@@ -31,7 +31,7 @@ public class MainLogin extends ActionBarActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainLogin.this, "Cadastrado com sucesso!", Toast.LENGTH_LONG);
+                Toast.makeText(MainLogin.this, edtNome.getText().toString() +" você foi cadastrado com sucesso!", Toast.LENGTH_LONG).show();
 
             }
         });
@@ -39,7 +39,7 @@ public class MainLogin extends ActionBarActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainLogin.this, "logado com sucesso!", Toast.LENGTH_LONG);
+                Toast.makeText(MainLogin.this, "logado com sucesso!", Toast.LENGTH_LONG).show();
 
             }
         });
