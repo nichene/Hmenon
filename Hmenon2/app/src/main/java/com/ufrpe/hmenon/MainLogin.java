@@ -1,5 +1,6 @@
 package com.ufrpe.hmenon;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -16,11 +17,14 @@ public class MainLogin extends ActionBarActivity {
     private EditText edtNome;
     private EditText edtSenha;
     private UsuarioService service;
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         service = new UsuarioService(this);
+
+        context = this;
 
         setContentView(R.layout.activity_login);
 
@@ -35,8 +39,7 @@ public class MainLogin extends ActionBarActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                service.validarCadastro();
-                Toast.makeText(MainLogin.this, "Cadastros realizados com sucesso!", Toast.LENGTH_LONG).show();
+                setContentView(R.layout.activity_cadastro);
 
             }
         });
@@ -46,6 +49,9 @@ public class MainLogin extends ActionBarActivity {
             public void onClick(View v) {
                 boolean confirmado = service.validarLogin(edtNome.getText().toString(), edtSenha.getText().toString());
                 if (confirmado){
+
+                    setContentView(R.layout.activity_main);
+
                     Toast.makeText(MainLogin.this, edtNome.getText().toString() +" logado com sucesso!", Toast.LENGTH_LONG).show();
                 }
                 else {
@@ -78,5 +84,8 @@ public class MainLogin extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    public static Context getContext(){
+        return MainLogin.context;
     }
 }

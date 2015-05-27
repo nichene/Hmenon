@@ -1,10 +1,8 @@
 package com.ufrpe.hmenon;
 
 import android.content.Context;
+import android.widget.Toast;
 
-/**
- * Created by Ricardo on 26/05/2015.
- */
 public class UsuarioService {
     private UsuarioDAO dao;
 
@@ -12,8 +10,13 @@ public class UsuarioService {
         dao = new UsuarioDAO(context);
     }
 
-    public void validarCadastro(){
-        dao.addAll();
+    public void validarCadastro(Usuario usuario){
+        if (dao.buscar(usuario.getNome()) != null){
+            dao.inserir(usuario);
+        }
+        else {
+            Toast.makeText(MainLogin.getContext(), "Esse Usuário já está cadastrado!", Toast.LENGTH_LONG).show();
+        }
     }
 
 
