@@ -1,8 +1,5 @@
-package com.ufrpe.hmenon;
+package com.ufrpe.hmenon.dominio;
 
-/**
- * Created by Ricardo on 26/05/2015.
- */
 public class Usuario {
     private long id;
     private String nome;

@@ -1,13 +1,10 @@
-package com.ufrpe.hmenon;
+package com.ufrpe.hmenon.usuariodao;
 
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-/**
- * Created by Ricardo on 26/05/2015.
- */
 public class Helper extends SQLiteOpenHelper{
     private static final String NOMEDB = "hmenon";
     private static final int VERSAODB = 3;

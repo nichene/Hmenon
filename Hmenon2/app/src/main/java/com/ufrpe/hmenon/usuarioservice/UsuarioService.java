@@ -1,10 +1,10 @@
-package com.ufrpe.hmenon;
+package com.ufrpe.hmenon.usuarioservice;
 
 import android.content.Context;
 
-/**
- * Created by Ricardo on 26/05/2015.
- */
+import com.ufrpe.hmenon.dominio.Usuario;
+import com.ufrpe.hmenon.usuariodao.UsuarioDAO;
+
 public class UsuarioService {
     private UsuarioDAO dao;
 

@@ -1,13 +1,12 @@
-package com.ufrpe.hmenon;
+package com.ufrpe.hmenon.usuariodao;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-/**
- * Created by Ricardo on 26/05/2015.
- */
+import com.ufrpe.hmenon.dominio.Usuario;
+
 public class UsuarioDAO {
     private SQLiteDatabase db;
     private Helper helper;

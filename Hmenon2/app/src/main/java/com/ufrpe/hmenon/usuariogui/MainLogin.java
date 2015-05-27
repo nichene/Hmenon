@@ -1,4 +1,4 @@
-package com.ufrpe.hmenon;
+package com.ufrpe.hmenon.usuariogui;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.ufrpe.hmenon.R;
+import com.ufrpe.hmenon.usuarioservice.UsuarioService;
 
 
 public class MainLogin extends ActionBarActivity {
@@ -46,6 +49,7 @@ public class MainLogin extends ActionBarActivity {
             public void onClick(View v) {
                 boolean confirmado = service.validarLogin(edtNome.getText().toString(), edtSenha.getText().toString());
                 if (confirmado){
+                    setContentView(R.layout.activity_main);
                     Toast.makeText(MainLogin.this, edtNome.getText().toString() +" logado com sucesso!", Toast.LENGTH_LONG).show();
                 }
                 else {
