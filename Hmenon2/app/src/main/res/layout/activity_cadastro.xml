@@ -26,7 +26,8 @@
         android:hint="Nome"
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:singleLine="true"/>
 
     <EditText
         android:password="true"
@@ -35,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edtNomeCadastro"
-
+        android:singleLine="true"
         android:layout_alignParentLeft="true" />
 
     <EditText
@@ -45,6 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edtSenhaCadastro"
+        android:singleLine="true"
          />
     <Button
         android:id="@+id/btnConfirmarCadastro"
