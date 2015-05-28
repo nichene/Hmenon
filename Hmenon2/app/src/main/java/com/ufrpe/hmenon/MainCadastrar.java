@@ -41,6 +41,7 @@ public class MainCadastrar extends ActionBarActivity {
 
 
 
+
                 if (senhaString.equals(senhaConfirmadaString)) {
 
                     Usuario usuario = new Usuario();

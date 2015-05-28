@@ -23,6 +23,7 @@ public class UsuarioDAO {
         db.close();
     }
 
+
     public Usuario buscar(String nome){
         db = helper.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from "+Helper.TABLE_USUARIO

@@ -12,7 +12,6 @@ public class UsuarioService {
 
     public void validarCadastro(Usuario usuario){
 
-
         if (dao.buscar(usuario.getNome()) == (null)){
             dao.inserir(usuario);
 

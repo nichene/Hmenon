@@ -55,6 +55,7 @@ public class MainLogin extends ActionBarActivity {
                 boolean confirmado = service.validarLogin(edtNome.getText().toString(), edtSenha.getText().toString());
                 if (confirmado){
 
+
                     Intent intent2 = new Intent(MainLogin.this, MainActivity.class);
                     startActivity(intent2);
 
