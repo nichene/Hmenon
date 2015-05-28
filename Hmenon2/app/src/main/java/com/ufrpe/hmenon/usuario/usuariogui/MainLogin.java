@@ -1,4 +1,4 @@
-package com.ufrpe.hmenon;
+package com.ufrpe.hmenon.usuario.usuariogui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.ufrpe.hmenon.MainActivity;
+import com.ufrpe.hmenon.R;
+import com.ufrpe.hmenon.usuario.usuarioservice.UsuarioService;
 
 
 public class MainLogin extends ActionBarActivity {

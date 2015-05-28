@@ -1,4 +1,4 @@
-package com.ufrpe.hmenon;
+package com.ufrpe.hmenon.usuario.dominio;
 
 public class Usuario {
     private long id;
