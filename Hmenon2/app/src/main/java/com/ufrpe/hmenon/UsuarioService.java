@@ -11,12 +11,17 @@ public class UsuarioService {
     }
 
     public void validarCadastro(Usuario usuario){
-        if (dao.buscar(usuario.getNome()) != null){
+
+
+        if (dao.buscar(usuario.getNome()) == (null)){
             dao.inserir(usuario);
+
         }
         else {
             Toast.makeText(MainLogin.getContext(), "Esse Usuário já está cadastrado!", Toast.LENGTH_LONG).show();
+
         }
+
     }
 
 

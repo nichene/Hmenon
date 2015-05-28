@@ -33,7 +33,7 @@ public class UsuarioDAO {
             usuario = new Usuario();
             usuario.setId(cursor.getLong(0));
             usuario.setNome(cursor.getString(1));
-            usuario.setSenha(cursor.getString(3));
+            usuario.setSenha(cursor.getString(2));
         }
         db.close();
         return usuario;

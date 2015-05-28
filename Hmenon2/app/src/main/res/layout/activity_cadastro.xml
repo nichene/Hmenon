@@ -29,6 +29,7 @@
         android:layout_height="wrap_content" />
 
     <EditText
+        android:password="true"
         android:id="@+id/edtSenhaCadastro"
         android:hint="Digite sua senha"
         android:layout_width="match_parent"
@@ -38,6 +39,7 @@
         android:layout_alignParentLeft="true" />
 
     <EditText
+        android:password="true"
         android:id="@+id/edtConfirme"
         android:hint="Confirme sua senha"
         android:layout_width="match_parent"
