@@ -64,7 +64,8 @@
         android:text="@string/login"
         android:layout_below="@+id/edtSenha"
         android:layout_toRightOf="@+id/btnCadastrar"
-        android:layout_toEndOf="@+id/btnCadastrar" />
+        android:layout_toEndOf="@+id/btnCadastrar"
+        android:enabled="false" />
 
 
 </RelativeLayout>

@@ -55,7 +55,8 @@
         android:text="Cadastrar"
         android:layout_below="@+id/edtConfirme"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="30dp"
+        android:enabled="false" />
 
 
 </RelativeLayout>

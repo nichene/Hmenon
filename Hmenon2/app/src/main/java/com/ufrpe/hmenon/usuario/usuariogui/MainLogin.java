@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +26,12 @@ public class MainLogin extends ActionBarActivity {
     private UsuarioService service;
     private static Context context;
 
+
+    public boolean isReady(EditText editText){
+        return editText.getText().toString().trim().length() > 0;
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +47,22 @@ public class MainLogin extends ActionBarActivity {
         btnCadastrar = (Button)findViewById(R.id.btnCadastrar);
         btnLogin = (Button)findViewById(R.id.btnLogin);
 
+        edtSenha.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                btnLogin.setEnabled(isReady(edtNome) && isReady(edtSenha));
+            }
+        });
 
 
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
