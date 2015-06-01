@@ -83,6 +83,7 @@ public class MainLogin extends ActionBarActivity {
             public void onClick(View v) {
                 boolean confirmed;
 
+
                 User user = service.checkLogin(edtNome.getText().toString(), edtSenha.getText().toString());
                 confirmed = user != null;
 
