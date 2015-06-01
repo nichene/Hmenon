@@ -1,6 +1,6 @@
-package com.ufrpe.hmenon.usuario.dominio;
+package com.ufrpe.hmenon.user.domain;
 
-public class Usuario {
+public class User {
     private long id;
     private String nome;
     private String senha;

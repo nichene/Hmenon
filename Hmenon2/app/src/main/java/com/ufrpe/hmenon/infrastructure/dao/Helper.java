@@ -1,4 +1,4 @@
-package com.ufrpe.hmenon;
+package com.ufrpe.hmenon.infrastructure.dao;
 
 
 import android.content.Context;

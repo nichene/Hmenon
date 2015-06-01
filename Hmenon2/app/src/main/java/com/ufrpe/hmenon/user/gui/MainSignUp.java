@@ -1,4 +1,4 @@
-package com.ufrpe.hmenon.usuario.usuariogui;
+package com.ufrpe.hmenon.user.gui;
 
 
 import android.content.Intent;
@@ -13,16 +13,17 @@ import android.widget.Toast;
 
 import com.ufrpe.hmenon.MainActivity;
 import com.ufrpe.hmenon.R;
-import com.ufrpe.hmenon.usuario.dominio.Usuario;
-import com.ufrpe.hmenon.usuario.usuarioservice.UsuarioService;
+import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
+import com.ufrpe.hmenon.user.domain.User;
+import com.ufrpe.hmenon.user.service.userService;
 
-public class MainCadastrar extends ActionBarActivity {
+public class MainSignUp extends ActionBarActivity {
 
     private Button btnCadastrar;
     private EditText edtNome;
     private EditText edtConfirme;
     private EditText edtSenha;
-    private UsuarioService service;
+    private userService service;
     private String senhaString;
     private String senhaConfirmadaString;
 
@@ -34,9 +35,9 @@ public class MainCadastrar extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro);
+        setContentView(R.layout.activity_signup);
 
-        service = new UsuarioService(MainLogin.getContext());
+        service = new userService(MainLogin.getContext());
         edtNome = (EditText) findViewById(R.id.edtNomeCadastro);
         edtSenha = (EditText) findViewById(R.id.edtSenhaCadastro);
         edtConfirme = (EditText) findViewById(R.id.edtConfirme);
@@ -71,22 +72,27 @@ public class MainCadastrar extends ActionBarActivity {
 
                 if (senhaString.equals(senhaConfirmadaString)) {
 
-                    Usuario usuario = new Usuario();
-                    usuario.setNome(edtNome.getText().toString());
-                    usuario.setSenha(edtSenha.getText().toString());
+                    User user = new User();
+                    user.setNome(edtNome.getText().toString());
+                    user.setSenha(edtSenha.getText().toString());
 
-                    boolean cadastro = service.validarCadastro(usuario);
+                    User u = service.checkSignUp(user);
 
-                    if (cadastro) {
 
-                        Toast.makeText(MainCadastrar.this, "Cadastro realizados com sucesso!", Toast.LENGTH_LONG).show();
-                        Intent intent2 = new Intent(MainCadastrar.this, MainActivity.class);
-                        startActivity(intent2);
+
+                    if (u != null) {
+
+                        StaticUser sUser = new StaticUser();
+                        StaticUser.setUser(user);
+
+
+                        Intent intentGoMain = new Intent(MainSignUp.this, MainActivity.class);
+                        startActivity(intentGoMain);
                     }
 
 
                 } else {
-                    Toast.makeText(MainCadastrar.this, "As senhas não estão equivalentes!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainSignUp.this, "As senhas não estão equivalentes!", Toast.LENGTH_LONG).show();
                 }
             }
 

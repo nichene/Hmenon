@@ -1,4 +1,4 @@
-package com.ufrpe.hmenon.usuario.usuariogui;
+package com.ufrpe.hmenon.user.gui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +15,8 @@ import android.widget.Toast;
 
 import com.ufrpe.hmenon.MainActivity;
 import com.ufrpe.hmenon.R;
-import com.ufrpe.hmenon.usuario.usuarioservice.UsuarioService;
+import com.ufrpe.hmenon.user.domain.User;
+import com.ufrpe.hmenon.user.service.userService;
 
 
 public class MainLogin extends ActionBarActivity {
@@ -23,7 +24,7 @@ public class MainLogin extends ActionBarActivity {
     private Button btnLogin;
     private EditText edtNome;
     private EditText edtSenha;
-    private UsuarioService service;
+    private userService service;
     private static Context context;
 
 
@@ -35,7 +36,7 @@ public class MainLogin extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        service = new UsuarioService(this);
+        service = new userService(this);
 
         context = this;
 
@@ -69,8 +70,8 @@ public class MainLogin extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(MainLogin.this, MainCadastrar.class);
-                startActivity(intent);
+                Intent intentGoSignUp = new Intent(MainLogin.this, MainSignUp.class);
+                startActivity(intentGoSignUp);
 
 
 
@@ -80,12 +81,16 @@ public class MainLogin extends ActionBarActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean confirmado = service.validarLogin(edtNome.getText().toString(), edtSenha.getText().toString());
-                if (confirmado){
+                boolean confirmed;
+
+                User user = service.checkLogin(edtNome.getText().toString(), edtSenha.getText().toString());
+                confirmed = user != null;
+
+                if (confirmed){
 
 
-                    Intent intent2 = new Intent(MainLogin.this, MainActivity.class);
-                    startActivity(intent2);
+                    Intent intentGoMain = new Intent(MainLogin.this, MainActivity.class);
+                    startActivity(intentGoMain);
 
 
                     Toast.makeText(MainLogin.this, edtNome.getText().toString() +" logado com sucesso!", Toast.LENGTH_LONG).show();
