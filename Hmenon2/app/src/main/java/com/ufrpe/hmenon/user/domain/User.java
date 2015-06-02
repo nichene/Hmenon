@@ -18,7 +18,7 @@ public class User {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setName(String nome) {
         this.nome = nome;
     }
 
@@ -26,7 +26,7 @@ public class User {
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public void setPassword(String senha) {
         this.senha = senha;
     }
 

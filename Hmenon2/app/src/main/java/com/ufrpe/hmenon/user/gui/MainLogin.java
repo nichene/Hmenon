@@ -12,25 +12,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.ufrpe.hmenon.MainActivity;
 import com.ufrpe.hmenon.R;
-import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.user.domain.User;
-import com.ufrpe.hmenon.user.service.userService;
+import com.ufrpe.hmenon.user.service.UserBusiness;
 
 
 public class MainLogin extends ActionBarActivity {
     private Button btnCadastrar;
     private Button btnLogin;
-    private EditText edtNome;
-    private EditText edtSenha;
-    private userService service;
+    private EditText edtName;
+    private EditText edtPassword;
+    private UserBusiness service;
     private static Context context;
 
-
-    public boolean isReady(EditText editText){
-        return editText.getText().toString().trim().length() > 0;
+    public boolean isReady(EditText editText, int i){
+        return editText.getText().toString().trim().length() > i;
     }
 
 
@@ -38,32 +35,28 @@ public class MainLogin extends ActionBarActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        service = new userService(this);
+        service = new UserBusiness(this);
 
         context = this;
 
         setContentView(R.layout.activity_login);
 
-        edtNome = (EditText)findViewById(R.id.edtNome);
-        edtSenha = (EditText)findViewById(R.id.edtSenha);
-
+        edtName = (EditText)findViewById(R.id.edtNome);
+        edtPassword = (EditText)findViewById(R.id.edtSenha);
         btnCadastrar = (Button)findViewById(R.id.btnCadastrar);
         btnLogin = (Button)findViewById(R.id.btnLogin);
 
-        edtSenha.addTextChangedListener(new TextWatcher() {
+        edtPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                btnLogin.setEnabled(isReady(edtNome) && isReady(edtSenha));
+                btnLogin.setEnabled(isReady(edtName, 3) && isReady(edtPassword, 3));
             }
         });
 
@@ -74,32 +67,25 @@ public class MainLogin extends ActionBarActivity {
                 finish();
                 Intent intentGoSignUp = new Intent(MainLogin.this, MainSignUp.class);
                 startActivity(intentGoSignUp);
-
-
-
             }
         });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean confirmed;
 
-
-                User user = service.checkLogin(edtNome.getText().toString(), edtSenha.getText().toString());
-                confirmed = user != null;
-
-                if (confirmed){
-                    finish();
-                    StaticUser.setUser(user);
+                String name = edtName.getText().toString();
+                String password = edtPassword.getText().toString();
+                User user = new User();
+                user.setName(name);
+                user.setPassword(password);
+                try {
+                    service.checkLogin(user);
+                    Toast.makeText(MainLogin.this, edtName.getText().toString() +" logado com sucesso!", Toast.LENGTH_LONG).show();
                     Intent intentGoMain = new Intent(MainLogin.this, MainActivity.class);
                     startActivity(intentGoMain);
-
-
-                    Toast.makeText(MainLogin.this, edtNome.getText().toString() +" logado com sucesso!", Toast.LENGTH_LONG).show();
-                }
-                else {
-                    Toast.makeText(MainLogin.this, "Usuario ou Senha invalida", Toast.LENGTH_LONG).show();
+                } catch (Exception e){
+                    Toast.makeText(MainLogin.this, e.getMessage().toString(), Toast.LENGTH_LONG).show();
                 }
             }
         });

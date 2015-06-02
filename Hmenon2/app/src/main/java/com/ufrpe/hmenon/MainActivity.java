@@ -5,16 +5,15 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.SearchView;
 
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.user.gui.MainLogin;
 
 
 public class MainActivity extends ActionBarActivity {
-    private EditText edtPesquisar;
-    private Button btnPesquisar;
+    SearchView search;
+
 
     @Override
     public void onBackPressed() {
@@ -22,18 +21,13 @@ public class MainActivity extends ActionBarActivity {
         StaticUser.setUser(null);
         Intent intentGoLogin = new Intent(MainActivity.this, MainLogin.class);
         startActivity(intentGoLogin);
-
-
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+        search = (SearchView) findViewById(R.id.search);
         setContentView(R.layout.activity_main);
-
-
-
     }
 
 

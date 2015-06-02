@@ -5,7 +5,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
 
-
     <TextView
         android:text="@string/hmenon"
         android:textSize="20dp"
@@ -24,8 +23,7 @@
         android:layout_marginTop="30dp" />
 
     <EditText
-
-        android:hint="Nome"
+        android:hint="Nome (mínimo 4 caracteres)"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView"
@@ -35,8 +33,9 @@
         android:id="@+id/edtNome"
         android:singleLine="true"
         />
+
     <EditText
-        android:hint="Senha"
+        android:hint="Senha (mínimo 4 caracteres)"
         android:inputType="textPassword"
         android:id="@+id/edtSenha"
         android:layout_width="match_parent"
@@ -51,12 +50,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cadastrar"
-
         android:layout_below="@+id/edtSenha"
         android:layout_alignLeft="@+id/textView"
         android:layout_alignStart="@+id/textView"
         android:layout_marginLeft="33dp"
         android:layout_marginStart="33dp" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,6 +65,5 @@
         android:layout_toRightOf="@+id/btnCadastrar"
         android:layout_toEndOf="@+id/btnCadastrar"
         android:enabled="false" />
-
 
 </RelativeLayout>

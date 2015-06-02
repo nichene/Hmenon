@@ -22,8 +22,8 @@
         android:layout_marginTop="30dp" />
 
     <EditText
-        android:id="@+id/edtNomeCadastro"
-        android:hint="Nome"
+        android:id="@+id/edtNameSignUp"
+        android:hint="Nome (mínimo 4 caracteres)"
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,29 +31,29 @@
 
     <EditText
         android:password="true"
-        android:id="@+id/edtSenhaCadastro"
-        android:hint="Digite sua senha"
+        android:id="@+id/edtPasswordSignUp"
+        android:hint="Senha (mínimo 4 caracteres)"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edtNomeCadastro"
+        android:layout_below="@+id/edtNameSignUp"
         android:singleLine="true"
         android:layout_alignParentLeft="true" />
 
     <EditText
         android:password="true"
-        android:id="@+id/edtConfirme"
-        android:hint="Confirme sua senha"
+        android:id="@+id/edtConfirm"
+        android:hint="Confirme Senha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edtSenhaCadastro"
+        android:layout_below="@+id/edtPasswordSignUp"
         android:singleLine="true"
          />
     <Button
-        android:id="@+id/btnConfirmarCadastro"
+        android:id="@+id/btnConfirmSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cadastrar"
-        android:layout_below="@+id/edtConfirme"
+        android:layout_below="@+id/edtConfirm"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:enabled="false" />

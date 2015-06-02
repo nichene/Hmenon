@@ -13,19 +13,16 @@ import android.widget.Toast;
 
 import com.ufrpe.hmenon.MainActivity;
 import com.ufrpe.hmenon.R;
-import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.user.domain.User;
-import com.ufrpe.hmenon.user.service.userService;
+import com.ufrpe.hmenon.user.service.UserBusiness;
 
 public class MainSignUp extends ActionBarActivity {
 
     private Button btnCadastrar;
-    private EditText edtNome;
-    private EditText edtConfirme;
-    private EditText edtSenha;
-    private userService service;
-    private String senhaString;
-    private String senhaConfirmadaString;
+    private EditText edtName;
+    private EditText edtConfirm;
+    private EditText edtPassword;
+    private UserBusiness service;
 
     @Override
     public void onBackPressed() {
@@ -33,8 +30,8 @@ public class MainSignUp extends ActionBarActivity {
         Intent intentGoLogin = new Intent(MainSignUp.this, MainLogin.class);
         startActivity(intentGoLogin);
     }
-    public boolean isReady(EditText editText){
-        return editText.getText().toString().trim().length() > 0;
+    public boolean isReady(EditText editText, int i){
+        return editText.getText().toString().trim().length() > i;
     }
 
 
@@ -43,14 +40,14 @@ public class MainSignUp extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        service = new userService(MainLogin.getContext());
-        edtNome = (EditText) findViewById(R.id.edtNomeCadastro);
-        edtSenha = (EditText) findViewById(R.id.edtSenhaCadastro);
-        edtConfirme = (EditText) findViewById(R.id.edtConfirme);
-        btnCadastrar = (Button) findViewById(R.id.btnConfirmarCadastro);
+        service = new UserBusiness(MainLogin.getContext());
+        edtName = (EditText) findViewById(R.id.edtNameSignUp);
+        edtPassword = (EditText) findViewById(R.id.edtPasswordSignUp);
+        edtConfirm = (EditText) findViewById(R.id.edtConfirm);
+        btnCadastrar = (Button) findViewById(R.id.btnConfirmSignUp);
 
 
-        edtConfirme.addTextChangedListener(new TextWatcher() {
+        edtConfirm.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -63,7 +60,7 @@ public class MainSignUp extends ActionBarActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                btnCadastrar.setEnabled(isReady(edtNome) && isReady(edtSenha) && isReady(edtConfirme));
+                btnCadastrar.setEnabled(isReady(edtName, 3) && isReady(edtPassword, 3) && isReady(edtConfirm, 3));
 
             }
         });
@@ -71,32 +68,19 @@ public class MainSignUp extends ActionBarActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                senhaString = edtSenha.getText().toString();
-                senhaConfirmadaString = edtConfirme.getText().toString();
-
-
-                if (senhaString.equals(senhaConfirmadaString)) {
-
-                    User user = new User();
-                    user.setNome(edtNome.getText().toString());
-                    user.setSenha(edtSenha.getText().toString());
-
-                    User u = service.checkSignUp(user);
-
-
-
-                    if (u != null) {
-
-                        StaticUser.setUser(user);
-                        finish();
-                        Intent intentGoMain = new Intent(MainSignUp.this, MainActivity.class);
-                        startActivity(intentGoMain);
-                    }
-
-
-                } else {
-                    Toast.makeText(MainSignUp.this, "As senhas não estão equivalentes!", Toast.LENGTH_LONG).show();
+                String name = edtName.getText().toString();
+                String password = edtPassword.getText().toString();
+                String confirmedPassword = edtConfirm.getText().toString();
+                User user = new User();
+                user.setName(name);
+                user.setPassword(password);
+                try {
+                    service.checkSignUp (user, confirmedPassword);
+                    finish();
+                    Intent intentGoMain = new Intent(MainSignUp.this, MainActivity.class);
+                    startActivity(intentGoMain);
+                } catch (Exception e){
+                    Toast.makeText(MainSignUp.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
 
