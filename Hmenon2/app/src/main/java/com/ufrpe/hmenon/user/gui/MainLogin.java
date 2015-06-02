@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.ufrpe.hmenon.MainActivity;
 import com.ufrpe.hmenon.R;
+import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.user.domain.User;
 import com.ufrpe.hmenon.user.service.userService;
 
@@ -34,8 +35,9 @@ public class MainLogin extends ActionBarActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         service = new userService(this);
 
         context = this;
@@ -69,7 +71,7 @@ public class MainLogin extends ActionBarActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                finish();
                 Intent intentGoSignUp = new Intent(MainLogin.this, MainSignUp.class);
                 startActivity(intentGoSignUp);
 
@@ -88,8 +90,8 @@ public class MainLogin extends ActionBarActivity {
                 confirmed = user != null;
 
                 if (confirmed){
-
-
+                    finish();
+                    StaticUser.setUser(user);
                     Intent intentGoMain = new Intent(MainLogin.this, MainActivity.class);
                     startActivity(intentGoMain);
 
@@ -112,6 +114,8 @@ public class MainLogin extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

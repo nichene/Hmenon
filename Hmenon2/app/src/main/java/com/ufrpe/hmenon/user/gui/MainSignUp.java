@@ -27,6 +27,12 @@ public class MainSignUp extends ActionBarActivity {
     private String senhaString;
     private String senhaConfirmadaString;
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intentGoLogin = new Intent(MainSignUp.this, MainLogin.class);
+        startActivity(intentGoLogin);
+    }
     public boolean isReady(EditText editText){
         return editText.getText().toString().trim().length() > 0;
     }
@@ -82,10 +88,8 @@ public class MainSignUp extends ActionBarActivity {
 
                     if (u != null) {
 
-                        StaticUser sUser = new StaticUser();
                         StaticUser.setUser(user);
-
-
+                        finish();
                         Intent intentGoMain = new Intent(MainSignUp.this, MainActivity.class);
                         startActivity(intentGoMain);
                     }
