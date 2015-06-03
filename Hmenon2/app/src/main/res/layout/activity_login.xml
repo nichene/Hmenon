@@ -46,7 +46,7 @@
          />
 
     <Button
-        android:id="@+id/btnCadastrar"
+        android:id="@+id/btnCadastreSe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cadastrar"
@@ -62,8 +62,8 @@
         android:id="@+id/btnLogin"
         android:text="@string/login"
         android:layout_below="@+id/edtSenha"
-        android:layout_toRightOf="@+id/btnCadastrar"
-        android:layout_toEndOf="@+id/btnCadastrar"
+        android:layout_toRightOf="@+id/btnCadastreSe"
+        android:layout_toEndOf="@+id/btnCadastreSe"
         android:enabled="false" />
 
 </RelativeLayout>

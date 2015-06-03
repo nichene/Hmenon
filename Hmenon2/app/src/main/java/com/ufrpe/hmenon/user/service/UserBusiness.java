@@ -31,7 +31,6 @@ public class UserBusiness {
         dao.delete(user);
     }
 
-
     public void checkLogin(User user) throws Exception{
         StringBuilder exception = new StringBuilder();
         if (dao.search(user.getNome(), user.getSenha()) == null){

@@ -77,8 +77,7 @@ public class MainSignUp extends ActionBarActivity {
                 try {
                     service.checkSignUp (user, confirmedPassword);
                     finish();
-                    Intent intentGoMain = new Intent(MainSignUp.this, MainActivity.class);
-                    startActivity(intentGoMain);
+                    startActivity(new Intent(MainSignUp.this, MainActivity.class));
                 } catch (Exception e){
                     Toast.makeText(MainSignUp.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 }

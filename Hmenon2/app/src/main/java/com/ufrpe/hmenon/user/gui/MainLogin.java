@@ -19,7 +19,7 @@ import com.ufrpe.hmenon.user.service.UserBusiness;
 
 
 public class MainLogin extends ActionBarActivity {
-    private Button btnCadastrar;
+    private Button btnCadastreSe;
     private Button btnLogin;
     private EditText edtName;
     private EditText edtPassword;
@@ -35,15 +35,15 @@ public class MainLogin extends ActionBarActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        service = new UserBusiness(this);
-
         context = this;
+        service = new UserBusiness(context);
+
 
         setContentView(R.layout.activity_login);
 
         edtName = (EditText)findViewById(R.id.edtNome);
         edtPassword = (EditText)findViewById(R.id.edtSenha);
-        btnCadastrar = (Button)findViewById(R.id.btnCadastrar);
+        btnCadastreSe = (Button)findViewById(R.id.btnCadastreSe);
         btnLogin = (Button)findViewById(R.id.btnLogin);
 
         edtPassword.addTextChangedListener(new TextWatcher() {
@@ -61,7 +61,7 @@ public class MainLogin extends ActionBarActivity {
         });
 
 
-        btnCadastrar.setOnClickListener(new View.OnClickListener() {
+        btnCadastreSe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
