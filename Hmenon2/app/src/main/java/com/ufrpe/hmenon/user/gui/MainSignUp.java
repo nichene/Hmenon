@@ -20,7 +20,7 @@ public class MainSignUp extends ActionBarActivity {
 
     private Button btnCadastrar;
     private EditText edtName;
-    private EditText edtConfirm;
+    private EditText edtConfirmPassword;
     private EditText edtPassword;
     private UserBusiness service;
 
@@ -43,11 +43,11 @@ public class MainSignUp extends ActionBarActivity {
         service = new UserBusiness(MainLogin.getContext());
         edtName = (EditText) findViewById(R.id.edtNameSignUp);
         edtPassword = (EditText) findViewById(R.id.edtPasswordSignUp);
-        edtConfirm = (EditText) findViewById(R.id.edtConfirm);
+        edtConfirmPassword = (EditText) findViewById(R.id.edtConfirm);
         btnCadastrar = (Button) findViewById(R.id.btnConfirmSignUp);
 
 
-        edtConfirm.addTextChangedListener(new TextWatcher() {
+        edtConfirmPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -60,7 +60,7 @@ public class MainSignUp extends ActionBarActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                btnCadastrar.setEnabled(isReady(edtName, 3) && isReady(edtPassword, 3) && isReady(edtConfirm, 3));
+                btnCadastrar.setEnabled(isReady(edtName, 3) && isReady(edtPassword, 3) && isReady(edtConfirmPassword, 3));
 
             }
         });
@@ -70,7 +70,7 @@ public class MainSignUp extends ActionBarActivity {
             public void onClick(View v) {
                 String name = edtName.getText().toString();
                 String password = edtPassword.getText().toString();
-                String confirmedPassword = edtConfirm.getText().toString();
+                String confirmedPassword = edtConfirmPassword.getText().toString();
                 User user = new User();
                 user.setName(name);
                 user.setPassword(password);

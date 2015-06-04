@@ -5,14 +5,19 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.SearchView;
 
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
+import com.ufrpe.hmenon.user.gui.MainEdit;
 import com.ufrpe.hmenon.user.gui.MainLogin;
 
 
 public class MainActivity extends ActionBarActivity {
     SearchView search;
+    private Button btnEditarUsuario;
+
 
 
     @Override
@@ -28,8 +33,18 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         search = (SearchView) findViewById(R.id.search);
         setContentView(R.layout.activity_main);
-    }
 
+        btnEditarUsuario = (Button) findViewById(R.id.btnEditarUsuario);
+        btnEditarUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentGoEdit = new Intent(MainActivity.this, MainEdit.class);
+                startActivity(intentGoEdit);
+             }
+
+        });
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -52,4 +67,5 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
