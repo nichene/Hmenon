@@ -82,8 +82,10 @@ public class MainLogin extends ActionBarActivity {
                 try {
                     service.checkLogin(user);
                     Toast.makeText(MainLogin.this, edtName.getText().toString() +" logado com sucesso!", Toast.LENGTH_LONG).show();
+                    finish();
                     Intent intentGoMain = new Intent(MainLogin.this, MainActivity.class);
                     startActivity(intentGoMain);
+
                 } catch (Exception e){
                     Toast.makeText(MainLogin.this, e.getMessage().toString(), Toast.LENGTH_LONG).show();
                 }
