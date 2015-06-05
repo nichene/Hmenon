@@ -22,19 +22,23 @@
             android:screenOrientation="portrait"
             ></activity>
         <activity
+            android:name=".user.gui.MainDelete"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
             ></activity>
         <activity
-            android:name=".user.gui.MainEditPass"
+            android:name=".user.gui.MainEditUserName"
             android:screenOrientation="portrait"
             ></activity>
         <activity
-            android:name=".user.gui.MainEdit"
+            android:name=".user.gui.MainEditUserPassword"
             android:screenOrientation="portrait"
             ></activity>
         <activity
-            android:name=".user.gui.MainEditName"
+            android:name=".user.gui.MainSettings"
             android:screenOrientation="portrait"
             ></activity>
 

@@ -2,8 +2,8 @@ package com.ufrpe.hmenon.user.domain;
 
 public class User {
     private long id;
-    private String nome;
-    private String senha;
+    private String name;
+    private String password;
 
 
     public long getId() {
@@ -14,20 +14,20 @@ public class User {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
     public void setName(String nome) {
-        this.nome = nome;
+        this.name = nome;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String senha) {
-        this.senha = senha;
+        this.password = senha;
     }
 
 }

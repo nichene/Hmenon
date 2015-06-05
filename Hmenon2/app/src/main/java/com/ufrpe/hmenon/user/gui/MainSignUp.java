@@ -27,6 +27,7 @@ public class MainSignUp extends ActionBarActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        finish();
         Intent intentGoLogin = new Intent(MainSignUp.this, MainLogin.class);
         startActivity(intentGoLogin);
     }

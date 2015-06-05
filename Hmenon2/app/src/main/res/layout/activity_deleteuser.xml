@@ -23,37 +23,32 @@
         android:layout_gravity="center_horizontal"
         android:id="@+id/imageView" />
 
-
-
-    <EditText
-        android:password="true"
-        android:id="@+id/edtPasswordEdit"
-        android:hint="Nova Senha (mínimo 4 caracteres)"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:password="true"
-        android:id="@+id/edtConfirmEditPass"
-        android:hint="Confirme Nova Senha"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edtPasswordEdit"
-        android:singleLine="true"
-        />
-    <Button
-        android:id="@+id/btnConfirmEditPass"
+    <TextView
+        android:text="Deseja realmente apagar sua conta?"
+        android:textSize="20dp"
+        android:layout_below="@id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CONFIRMAR"
-        android:layout_marginTop="30dp"
-        android:enabled="false"
-        android:layout_below="@+id/edtConfirmEditPass"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView2" />
+    <Button
+        android:text="SIM"
+        android:id="@+id/btnConfirmDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        android:layout_below="@+id/textView2"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView" />
+    <Button
+        android:text="VOLTAR"
+        android:id="@+id/btnCancelDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btnConfirmDelete"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
 
 
 </RelativeLayout>

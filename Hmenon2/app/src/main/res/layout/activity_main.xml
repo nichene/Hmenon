@@ -31,12 +31,12 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnEditarUsuario"
-        android:text="Editar Dados"
+        android:id="@+id/btnSettings"
+        android:text="Configurações"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
 
-    />
+        />
 
 </RelativeLayout>

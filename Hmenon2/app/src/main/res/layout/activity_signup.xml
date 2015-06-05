@@ -23,7 +23,7 @@
 
     <EditText
         android:id="@+id/edtNameSignUp"
-        android:hint="Nome (mín. 4 caracteres)"
+        android:hint="Nome (mínimo 4 caracteres)"
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
     <EditText
         android:password="true"
         android:id="@+id/edtPasswordSignUp"
-        android:hint="Senha (mín. 4 caracteres)"
+        android:hint="Senha (mínimo 4 caracteres)"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edtNameSignUp"

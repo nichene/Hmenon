@@ -10,19 +10,20 @@ import android.widget.Button;
 import android.widget.SearchView;
 
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
-import com.ufrpe.hmenon.user.gui.MainEdit;
+import com.ufrpe.hmenon.user.gui.MainSettings;
 import com.ufrpe.hmenon.user.gui.MainLogin;
 
 
 public class MainActivity extends ActionBarActivity {
     SearchView search;
-    private Button btnEditarUsuario;
+    private Button btnSettings;
 
 
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        finish();
         StaticUser.setUser(null);
         Intent intentGoLogin = new Intent(MainActivity.this, MainLogin.class);
         startActivity(intentGoLogin);
@@ -34,13 +35,14 @@ public class MainActivity extends ActionBarActivity {
         search = (SearchView) findViewById(R.id.search);
         setContentView(R.layout.activity_main);
 
-        btnEditarUsuario = (Button) findViewById(R.id.btnEditarUsuario);
-        btnEditarUsuario.setOnClickListener(new View.OnClickListener() {
+        btnSettings = (Button) findViewById(R.id.btnSettings);
+        btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentGoEdit = new Intent(MainActivity.this, MainEdit.class);
+                finish();
+                Intent intentGoEdit = new Intent(MainActivity.this, MainSettings.class);
                 startActivity(intentGoEdit);
-             }
+            }
 
         });
 
