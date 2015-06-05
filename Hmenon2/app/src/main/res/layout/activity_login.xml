@@ -23,7 +23,7 @@
         android:layout_marginTop="30dp" />
 
     <EditText
-        android:hint="Nome (mínimo 4 caracteres)"
+        android:hint="Nome (mín. 4 caracteres)"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView"
@@ -35,7 +35,7 @@
         />
 
     <EditText
-        android:hint="Senha (mínimo 4 caracteres)"
+        android:hint="Senha (mín. 4 caracteres)"
         android:inputType="textPassword"
         android:id="@+id/edtSenha"
         android:layout_width="match_parent"

@@ -25,7 +25,7 @@
 
     <EditText
         android:id="@+id/edtNameEdit"
-        android:hint="Novo Nome (mínimo 4 caracteres)"
+        android:hint="Novo Nome (mín. 4 caracteres)"
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
     <EditText
         android:password="true"
         android:id="@+id/edtPasswordEdit"
-        android:hint="Nova Senha (mínimo 4 caracteres)"
+        android:hint="Nova Senha (mín. 4 caracteres)"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edtNameEdit"
