@@ -37,7 +37,6 @@ public class UserDAO extends DAO{
                 String.valueOf(user.getId())});
 
         close();
-
     }
 
 
