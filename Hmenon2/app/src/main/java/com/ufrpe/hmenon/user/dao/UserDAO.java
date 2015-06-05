@@ -2,6 +2,7 @@ package com.ufrpe.hmenon.user.dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+
 import com.ufrpe.hmenon.infrastructure.dao.DAO;
 import com.ufrpe.hmenon.infrastructure.dao.Helper;
 import com.ufrpe.hmenon.user.domain.User;
@@ -25,6 +26,20 @@ public class UserDAO extends DAO{
         getDb().insert(Helper.TABLE_USER, null, values);
         close();
     }
+
+    public void update(User user){
+        open();
+        ContentValues values = new ContentValues();
+        values.put(Helper.COLUMN_NAME, user.getNome());
+        values.put(Helper.COLUMN_PASSWORD, user.getSenha());
+
+        getDb().update(Helper.TABLE_USER,values,Helper.COLUMN_ID + " = ?", new String[]{
+                String.valueOf(user.getId())});
+
+        close();
+
+    }
+
 
     public void delete(User user){
         open();
