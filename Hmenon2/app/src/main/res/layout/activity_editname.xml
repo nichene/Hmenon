@@ -21,24 +21,38 @@
         android:layout_marginTop="30dp"
         android:layout_gravity="center_horizontal"
         android:id="@+id/imageView" />
-    <Button
-        android:layout_width="wrap_content"
+
+
+
+    <EditText
+        android:password="true"
+        android:id="@+id/edtNameEdit"
+        android:hint="Novo Nome (mínimo 4 caracteres)"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Alterar Nome"
-        android:id="@+id/btnEditName"
-        android:layout_below="@+id/imageView"
-        android:layout_alignLeft="@+id/btnEditPass"
-        android:layout_alignStart="@+id/btnEditPass"
-        android:layout_marginTop="134dp"
-        android:layout_alignRight="@+id/btnEditPass"
-        android:layout_alignEnd="@+id/btnEditPass" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Alterar Senha"
-        android:id="@+id/btnEditPass"
+        android:singleLine="true"
         android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/imageView"
-        android:layout_alignStart="@+id/imageView" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:password="true"
+        android:id="@+id/edtConfirmEditName"
+        android:hint="Confirme Novo Nome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtNameEdit"
+        android:singleLine="true"
+        />
+    <Button
+        android:id="@+id/btnConfirmEditName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CONFIRMAR"
+        android:layout_marginTop="30dp"
+        android:enabled="false"
+        android:layout_below="@+id/edtConfirmEditName"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>

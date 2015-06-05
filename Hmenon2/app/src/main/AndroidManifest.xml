@@ -26,7 +26,15 @@
             android:screenOrientation="portrait"
             ></activity>
         <activity
+            android:name=".user.gui.MainEditPass"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity
             android:name=".user.gui.MainEdit"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity
+            android:name=".user.gui.MainEditName"
             android:screenOrientation="portrait"
             ></activity>
 

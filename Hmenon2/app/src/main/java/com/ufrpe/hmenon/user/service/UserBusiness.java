@@ -42,4 +42,29 @@ public class UserBusiness {
             throw new Exception(exception.toString());
         }
     }
-}
+
+    public void checkEdit (String newName, String confirmedNewName)throws Exception{
+        StringBuilder exception = new StringBuilder();
+        if (newName != confirmedNewName) {
+            exception.append("Os nomes não estão equivalentes");
+        }
+        else if (dao.search((newName)) != null){
+            exception.append("Nome já cadastrado, favor tentar outro nome");
+
+        }
+        if (exception.length() > 0){
+            dao.update(newName);
+
+
+
+        {
+        }
+
+
+        }
+
+    }
+
+
+    }
+
