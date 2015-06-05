@@ -78,10 +78,6 @@ public class UserDAO extends DAO{
         close();
         return user;
     }
-    public void update(String nome){
-        open();
-        getDb().update("hmenon", null, Helper.COLUMN_NAME + " = ?", new String[]{nome});
-        close();
-    }
+
 
 }
