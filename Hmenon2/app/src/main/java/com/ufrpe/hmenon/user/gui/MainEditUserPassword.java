@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.ufrpe.hmenon.MainActivity;
 import com.ufrpe.hmenon.R;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.user.service.UserBusiness;
@@ -16,6 +18,7 @@ import com.ufrpe.hmenon.user.service.UserBusiness;
 public class MainEditUserPassword extends ActionBarActivity {
 
     private EditText edtEditPassword;
+    private EditText edtPassword;
     private EditText edtConfirmEditPassword;
     private Button btnConfirmEditPassword;
     private UserBusiness service;
@@ -24,8 +27,8 @@ public class MainEditUserPassword extends ActionBarActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        Intent intentGoSettings = new Intent(MainEditUserPassword.this, MainSettings.class);
-        startActivity(intentGoSettings);
+        Intent intentGoMain = new Intent(MainEditUserPassword.this, MainActivity.class);
+        startActivity(intentGoMain);
     }
 
     public boolean isReady(EditText editText, int i){
@@ -39,6 +42,7 @@ public class MainEditUserPassword extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_edituserpassword);
+        edtPassword = (EditText) findViewById(R.id.edtPasswordEditPassword);
         edtEditPassword = (EditText) findViewById(R.id.edtPasswordEdit);
         edtConfirmEditPassword = (EditText) findViewById(R.id.edtConfirmPasswordEdit);
         btnConfirmEditPassword = (Button) findViewById(R.id.btnConfirmPasswordEdit);
@@ -55,17 +59,18 @@ public class MainEditUserPassword extends ActionBarActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                btnConfirmEditPassword.setEnabled(isReady(edtEditPassword, 3) && isReady(edtConfirmEditPassword, 3));
+                btnConfirmEditPassword.setEnabled(isReady(edtPassword, 3) && isReady(edtEditPassword, 3) && isReady(edtConfirmEditPassword, 3));
 
             }
         });
         btnConfirmEditPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String oldPassword = edtPassword.getText().toString();
                 String password = edtEditPassword.getText().toString();
                 String confirmedPassword = edtConfirmEditPassword.getText().toString();
                 try {
-                    service.checkPasswordUpdate(password, confirmedPassword);
+                    service.checkPasswordUpdate(password, confirmedPassword, oldPassword);
                     StaticUser.getUser().setPassword(password);
                     Toast.makeText(MainEditUserPassword.this, "Alterações feitas com sucesso", Toast.LENGTH_LONG).show();
                     onBackPressed();

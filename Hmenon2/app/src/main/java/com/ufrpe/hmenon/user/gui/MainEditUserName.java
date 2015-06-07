@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.ufrpe.hmenon.MainActivity;
 import com.ufrpe.hmenon.R;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.user.service.UserBusiness;
@@ -18,6 +19,7 @@ import com.ufrpe.hmenon.user.service.UserBusiness;
 public class MainEditUserName extends ActionBarActivity{
 
     private EditText edtEditName;
+    private EditText edtPassword;
     private EditText edtConfirmEditName;
     private Button btnConfirmEditName;
     private UserBusiness service;
@@ -26,8 +28,8 @@ public class MainEditUserName extends ActionBarActivity{
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        Intent intentGoSettings = new Intent(MainEditUserName.this, MainSettings.class);
-        startActivity(intentGoSettings);
+        Intent intentGoMain = new Intent(MainEditUserName.this, MainActivity.class);
+        startActivity(intentGoMain);
     }
 
     public boolean isReady(EditText editText, int i){
@@ -40,6 +42,7 @@ public class MainEditUserName extends ActionBarActivity{
         setContentView(R.layout.activity_editusername);
 
         service = new UserBusiness(MainLogin.getContext());
+        edtPassword = (EditText) findViewById(R.id.edtNameEditPassword);
         edtEditName = (EditText) findViewById(R.id.edtNameEdit);
         edtConfirmEditName = (EditText) findViewById(R.id.edtConfirmNameEdit);
         btnConfirmEditName = (Button) findViewById(R.id.btnConfirmEdit);
@@ -63,10 +66,11 @@ public class MainEditUserName extends ActionBarActivity{
         btnConfirmEditName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String oldPassword = edtPassword.getText().toString();
                 String name = edtEditName.getText().toString();
                 String confirmedName = edtConfirmEditName.getText().toString();
                 try {
-                    service.checkNameUpdate(name, confirmedName);
+                    service.checkNameUpdate(name, confirmedName, oldPassword);
                     StaticUser.getUser().setPassword(name);
                     Toast.makeText(MainEditUserName.this, "Alterações feitas com sucesso", Toast.LENGTH_LONG).show();
                     onBackPressed();

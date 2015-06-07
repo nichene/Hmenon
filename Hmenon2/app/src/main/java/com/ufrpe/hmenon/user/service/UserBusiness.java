@@ -12,6 +12,7 @@ public class UserBusiness {
         dao.setUpAttributes(context);
     }
 
+
     public void checkSignUp(User user, String confirmed) throws Exception {
         StringBuilder exception = new StringBuilder();
         if (!user.getPassword().equals(confirmed)) {
@@ -27,10 +28,12 @@ public class UserBusiness {
             throw new Exception(exception.toString());
         }
     }
-    public void checkDelete(User user) throws Exception{
+    public void checkDelete(User user, String password) throws Exception{
         StringBuilder exception = new StringBuilder();
         if (dao.search(user.getName())== null){
             exception.append("Erro ao deletar, usuário não existe");
+        } else if (!user.getPassword().equals(password)){
+            exception.append("Senha Incorreta");
         } else {
             dao.delete(user);
         }
@@ -39,28 +42,34 @@ public class UserBusiness {
         }
     }
 
-    public void checkNameUpdate(String name, String confirmedName) throws Exception{
+    public void checkNameUpdate(String name, String confirmedName, String password) throws Exception{
         StringBuilder exception = new StringBuilder();
+        User user = StaticUser.getUser();
         if (!name.equals(confirmedName)){
             exception.append("Os nomes não estão equivalentes!");
         } else if (dao.search(name) != null){
             exception.append("O nome já está sendo usado");
+        } else if (!user.getPassword().equals(password)){
+            exception.append("Senha Incorreta");
         } else {
             dao.updateName(name);
             StaticUser.getUser().setName(name);
         }
-
         if (exception.length() > 0){
             throw new Exception(exception.toString());
         }
 
     }
 
-    public void checkPasswordUpdate(String password, String confirmedPassword) throws Exception{
+    public void checkPasswordUpdate(String password, String confirmedPassword, String oldPassword) throws Exception{
         StringBuilder exception = new StringBuilder();
+        User user = StaticUser.getUser();
         if (!password.equals(confirmedPassword)) {
             exception.append("As senhas não estão equivalentes!");
-        } else {
+        } else if (!user.getPassword().equals(oldPassword)){
+            exception.append("Senha Incorreta");
+        }
+        else {
             dao.updatePassword(password);
         }
         if (exception.length() > 0){
