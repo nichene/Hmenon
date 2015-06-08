@@ -37,64 +37,6 @@ public class MainActivity extends ActionBarActivity {
     private ListView lista;
 
 
-    public void showDeleteDialog(Activity activity){
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("Apagar Conta");
-        builder.setMessage("Confirme sua senha para apagar conta");
-        final EditText prompt = new EditText(this);
-        prompt.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        builder.setView(prompt);
-        builder.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                try {
-                    service.checkDelete(StaticUser.getUser(), prompt.getText().toString());
-                    StaticUser.setUser(null);
-                    finish();
-                    Intent intentGoLogin = new Intent(MainActivity.this, MainLogin.class);
-                    startActivity(intentGoLogin);
-
-                } catch (Exception e){
-                    Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-        builder.setNegativeButton("CANCELAR", null);
-        builder.show();
-    }
-
-    private void getOverflowMenu(){
-        try {
-            ViewConfiguration configuration = ViewConfiguration.get(this);
-            Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
-            if (menuKeyField != null){
-                menuKeyField.setAccessible(true);
-                menuKeyField.setBoolean(configuration, false);
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    public void setListHeight(ListView view){
-        ListAdapter listAdapter = view.getAdapter();
-        if (listAdapter != null){
-            int number = listAdapter.getCount();
-            int totalHeight = 0;
-            for (int i = 0; i < number; i++){
-                View item = listAdapter.getView(i,null,view);
-                item.measure(0,0);
-                totalHeight += item.getMeasuredHeight();
-            }
-            int totalDividersHeight = view.getDividerHeight()*(number-1);
-            ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-            layoutParams.height = totalHeight+totalDividersHeight;
-            view.setLayoutParams(layoutParams);
-            view.requestLayout();
-        }
-    }
-
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -179,6 +121,62 @@ public class MainActivity extends ActionBarActivity {
             name.setText(currentContact);
 
             return view;
+        }
+    }
+    public void setListHeight(ListView view){
+        ListAdapter listAdapter = view.getAdapter();
+        if (listAdapter != null){
+            int number = listAdapter.getCount();
+            int totalHeight = 0;
+            for (int i = 0; i < number; i++){
+                View item = listAdapter.getView(i,null,view);
+                item.measure(0,0);
+                totalHeight += item.getMeasuredHeight();
+            }
+            int totalDividersHeight = view.getDividerHeight()*(number-1);
+            ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+            layoutParams.height = totalHeight+totalDividersHeight;
+            view.setLayoutParams(layoutParams);
+            view.requestLayout();
+        }
+    }
+
+    public void showDeleteDialog(Activity activity){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle("Apagar Conta");
+        builder.setMessage("Confirme sua senha para apagar conta");
+        final EditText prompt = new EditText(this);
+        prompt.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        builder.setView(prompt);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                try {
+                    service.checkDelete(StaticUser.getUser(), prompt.getText().toString());
+                    StaticUser.setUser(null);
+                    finish();
+                    Intent intentGoLogin = new Intent(MainActivity.this, MainLogin.class);
+                    startActivity(intentGoLogin);
+
+                } catch (Exception e){
+                    Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        builder.setNegativeButton("CANCELAR", null);
+        builder.show();
+    }
+
+    private void getOverflowMenu(){
+        try {
+            ViewConfiguration configuration = ViewConfiguration.get(this);
+            Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+            if (menuKeyField != null){
+                menuKeyField.setAccessible(true);
+                menuKeyField.setBoolean(configuration, false);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 
