@@ -24,20 +24,17 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:src="@drawable/recife_olinda"
         android:id="@+id/imgRecife"
-        android:layout_alignParentBottom="true"
-
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        />
     <ListView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/list">
-        </ListView>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listPoints"
+        android:layout_below="@+id/imgRecife"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"></ListView>
 
 </RelativeLayout>
 </ScrollView>

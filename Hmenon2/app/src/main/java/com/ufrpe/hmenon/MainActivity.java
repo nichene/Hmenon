@@ -9,9 +9,15 @@ import android.support.v7.app.ActionBarActivity;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewConfiguration;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.user.gui.MainEditUserName;
@@ -20,11 +26,15 @@ import com.ufrpe.hmenon.user.gui.MainLogin;
 import com.ufrpe.hmenon.user.service.UserBusiness;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
-    SearchView search;
-    UserBusiness service;
+    private SearchView search;
+    private UserBusiness service;
+    private List<String> nomes;
+    private ListView lista;
 
 
     public void showDeleteDialog(Activity activity){
@@ -66,6 +76,23 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    public void setListHeight(ListView view){
+        ListAdapter listAdapter = view.getAdapter();
+        if (listAdapter != null){
+            int number = listAdapter.getCount();
+            int totalHeight = 0;
+            for (int i = 0; i < number; i++){
+                View item = listAdapter.getView(i,null,view);
+                item.measure(0,0);
+                totalHeight += item.getMeasuredHeight();
+            }
+            int totalDividersHeight = view.getDividerHeight()*(number-1);
+            ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+            layoutParams.height = totalHeight+totalDividersHeight;
+            view.setLayoutParams(layoutParams);
+            view.requestLayout();
+        }
+    }
 
 
     @Override
@@ -80,10 +107,24 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        lista = (ListView) findViewById(R.id.listPoints);
+        nomes = new ArrayList<>();
+        nomes.add("Lalala");
+        nomes.add("Lelele");
+        nomes.add("Lilili");
+        nomes.add("Lololo");
+        nomes.add("Lululu");
+        nomes.add("Lalal");
+        nomes.add("Lelel");
+        nomes.add("Lilil");
+        nomes.add("Lolol");
+        nomes.add("Lulul");
+        populate();
+        setListHeight(lista);
         getOverflowMenu();
         service = new UserBusiness(MainLogin.getContext());
         search = (SearchView) findViewById(R.id.search);
-        setContentView(R.layout.activity_main);
 
     }
 
@@ -116,6 +157,29 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    private void populate(){
+        ArrayAdapter<String> adapter = new ContactListAdapter();
+        lista.setAdapter(adapter);
+
+    }
+    private class ContactListAdapter extends ArrayAdapter<String> {
+        public ContactListAdapter(){
+            super(MainActivity.this, R.layout.list_item, nomes);
+        }
+
+        @Override
+        public View getView(int position, View view, ViewGroup parent){
+            if (view == null)
+                view = getLayoutInflater().inflate(R.layout.list_item, parent, false);
+
+            String currentContact = nomes.get(position);
+
+            TextView name = (TextView) view.findViewById(R.id.textNome);
+            name.setText(currentContact);
+
+            return view;
+        }
     }
 
 }
