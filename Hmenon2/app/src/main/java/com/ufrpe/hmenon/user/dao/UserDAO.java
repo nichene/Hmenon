@@ -21,15 +21,15 @@ public class UserDAO extends DAO{
     public void insert(User user){
         open();
         ContentValues values = new ContentValues();
-        values.put(Helper.COLUMN_NAME, user.getName());
-        values.put(Helper.COLUMN_PASSWORD, user.getPassword());
+        values.put(Helper.USER_NAME, user.getName());
+        values.put(Helper.USER_PASSWORD, user.getPassword());
         getDb().insert(Helper.TABLE_USER, null, values);
         close();
     }
 
     public void delete(User user){
         open();
-        getDb().delete(Helper.TABLE_USER, Helper.COLUMN_NAME + " = ?", new String[]{user.getName()});
+        getDb().delete(Helper.TABLE_USER, Helper.USER_NAME + " = ?", new String[]{user.getName()});
         close();
 
     }
@@ -37,7 +37,7 @@ public class UserDAO extends DAO{
     public User search(String name){
         open();
         Cursor cursor = getDb().rawQuery("select * from " + Helper.TABLE_USER
-                + " where " + Helper.COLUMN_NAME
+                + " where " + Helper.USER_NAME
                 + " = ?", new String[]{name});
         User user = null;
         if (cursor.moveToFirst()){
@@ -54,8 +54,8 @@ public class UserDAO extends DAO{
         open();
         User user = StaticUser.getUser();
         ContentValues values = new ContentValues();
-        values.put(Helper.COLUMN_NAME, name);
-        getDb().update(Helper.TABLE_USER, values, Helper.COLUMN_NAME + " = ?", new String[]{user.getName()});
+        values.put(Helper.USER_NAME, name);
+        getDb().update(Helper.TABLE_USER, values, Helper.USER_NAME + " = ?", new String[]{user.getName()});
         close();
     }
 
@@ -63,15 +63,15 @@ public class UserDAO extends DAO{
         open();
         User user = StaticUser.getUser();
         ContentValues values = new ContentValues();
-        values.put(Helper.COLUMN_PASSWORD, password);
-        getDb().update(Helper.TABLE_USER, values, Helper.COLUMN_NAME + " = ?", new String[]{user.getName()});
+        values.put(Helper.USER_PASSWORD, password);
+        getDb().update(Helper.TABLE_USER, values, Helper.USER_NAME + " = ?", new String[]{user.getName()});
     }
 
     public User search(String name, String password){
         open();
         Cursor cursor = getDb().rawQuery("select * from " + Helper.TABLE_USER
-                + " where " + Helper.COLUMN_NAME
-                + " = ? and " + Helper.COLUMN_PASSWORD + " = ?", new String[]{name, password});
+                + " where " + Helper.USER_NAME
+                + " = ? and " + Helper.USER_PASSWORD + " = ?", new String[]{name, password});
         User user = null;
         if (cursor.moveToFirst()){
             user = new User();

@@ -6,8 +6,12 @@
 
     <string name="cadastrar">CADASTRE-SE</string>
     <string name="login">LOGIN</string>
-
-
     <string name="action_settings">Settings</string>
 
+    <string name="marcoZeroName">Marco Zero</string>
+    <string name="marcoZeroResume">Marco Zero é o local em que Recife nasceu e serve como ponto inicial das estradas de Pernambuco.</string>
+    <string name="marcoZeroHistory">Marco Zero é o local em que Recife nasceu e serve como ponto inicial das estradas de Pernambuco.  Do Marco Zero, olhando para o mar, se vê o Parque das Esculturas: um conjunto de peças de cerâmica produzidas pelo artista plástico Francisco Brennand onde se destaca a Coluna de Cristal. Inaugurada em 2000, a instalação foi feita em homenagem aos 500 anos de Descobrimento do Brasil. Há um porto no local de onde é possível fazer a travessia de barco para o parque a fim de ver as obras de perto.</string>
+
+    <string name="brennandName">Oficina Brennand</string>
+    <string name="brennanResume">Surgindo das ruínas da antiga fábrica Cerâmica São João, o acervo conta com mais de duas mil peças, entre esculturas e pinturas.</string>
 </resources>

@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListAdapter;
@@ -20,6 +21,10 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
+import com.ufrpe.hmenon.turisticpoint.History;
+import com.ufrpe.hmenon.turisticpoint.MainTuristicPoint;
+import com.ufrpe.hmenon.turisticpoint.TouristicPoint;
+import com.ufrpe.hmenon.turisticpoint.TouristicPointBusiness;
 import com.ufrpe.hmenon.user.gui.MainEditUserName;
 import com.ufrpe.hmenon.user.gui.MainEditUserPassword;
 import com.ufrpe.hmenon.user.gui.MainLogin;
@@ -32,8 +37,9 @@ import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
     private SearchView search;
-    private UserBusiness service;
-    private List<String> nomes;
+    private UserBusiness userService;
+    private TouristicPointBusiness touristicPointBusiness;
+    private List<TouristicPoint> touristicPoints;
     private ListView lista;
 
 
@@ -50,23 +56,43 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        touristicPointBusiness = new TouristicPointBusiness(MainLogin.getContext());
+
+        touristicPointBusiness.checkReset();
+
+        TouristicPoint point = new TouristicPoint();
+        point.setHistory(new History());
+        point.setName(getResources().getString(R.string.marcoZeroName));
+        point.setHistoryResume(getResources().getString(R.string.marcoZeroResume));
+        point.setHistoryText(getResources().getString(R.string.marcoZeroHistory));
+        touristicPointBusiness.checkInsert(point);
+
+        point = new TouristicPoint();
+        point.setHistory(new History());
+        point.setName(getResources().getString(R.string.brennandName));
+        point.setHistoryResume(getResources().getString(R.string.brennanResume));
+        point.setHistoryText(getResources().getString(R.string.brennanResume));
+        touristicPointBusiness.checkInsert(point);
+
         lista = (ListView) findViewById(R.id.listPoints);
-        nomes = new ArrayList<>();
-        nomes.add("Lalala");
-        nomes.add("Lelele");
-        nomes.add("Lilili");
-        nomes.add("Lololo");
-        nomes.add("Lululu");
-        nomes.add("Lalal");
-        nomes.add("Lelel");
-        nomes.add("Lilil");
-        nomes.add("Lolol");
-        nomes.add("Lulul");
+        touristicPoints = touristicPointBusiness.checkGetAll(new ArrayList<TouristicPoint>());
         populate();
         setListHeight(lista);
         getOverflowMenu();
-        service = new UserBusiness(MainLogin.getContext());
+        userService = new UserBusiness(MainLogin.getContext());
         search = (SearchView) findViewById(R.id.search);
+
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TouristicPoint touristicPoint = touristicPoints.get(position);
+                MainTuristicPoint.setUpScreen(touristicPoint.getName(), touristicPoint.getHistory().getResume());
+                Intent intentGoPointScreen = new Intent(MainActivity.this, MainTuristicPoint.class);
+                finish();
+                startActivity(intentGoPointScreen);
+
+            }
+        });
 
     }
 
@@ -101,24 +127,24 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
     private void populate(){
-        ArrayAdapter<String> adapter = new ContactListAdapter();
+        ArrayAdapter<TouristicPoint> adapter = new ContactListAdapter();
         lista.setAdapter(adapter);
 
     }
-    private class ContactListAdapter extends ArrayAdapter<String> {
+    private class ContactListAdapter extends ArrayAdapter<TouristicPoint> {
         public ContactListAdapter(){
-            super(MainActivity.this, R.layout.list_item, nomes);
+            super(MainActivity.this, R.layout.list_item, touristicPoints);
         }
 
         @Override
         public View getView(int position, View view, ViewGroup parent){
-            if (view == null)
+            if (view == null) {
                 view = getLayoutInflater().inflate(R.layout.list_item, parent, false);
+            }
 
-            String currentContact = nomes.get(position);
-
+            TouristicPoint currentPoint = touristicPoints.get(position);
             TextView name = (TextView) view.findViewById(R.id.textNome);
-            name.setText(currentContact);
+            name.setText(String.valueOf(position + 1) + ": " + currentPoint.getName());
 
             return view;
         }
@@ -152,7 +178,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 try {
-                    service.checkDelete(StaticUser.getUser(), prompt.getText().toString());
+                    userService.checkDelete(StaticUser.getUser(), prompt.getText().toString());
                     StaticUser.setUser(null);
                     finish();
                     Intent intentGoLogin = new Intent(MainActivity.this, MainLogin.class);

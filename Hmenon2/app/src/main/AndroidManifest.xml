@@ -22,9 +22,9 @@
             android:screenOrientation="portrait"
             ></activity>
         <activity
-            android:name=".user.gui.MainDelete"
-            android:screenOrientation="portrait"
-            ></activity>
+            android:name=".turisticpoint.MainTuristicPoint"
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
@@ -37,14 +37,6 @@
             android:name=".user.gui.MainEditUserPassword"
             android:screenOrientation="portrait"
             ></activity>
-        <activity
-            android:name=".user.gui.MainSettings"
-            android:screenOrientation="portrait"
-            ></activity>
-
-
-
-
     </application>
 
 </manifest>
