@@ -36,7 +36,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class MainActivity extends ActionBarActivity {
     private SearchView search;
     private UserBusiness userService;
