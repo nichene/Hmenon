@@ -1,4 +1,4 @@
-package com.ufrpe.hmenon.turisticpoint;
+package com.ufrpe.hmenon.turisticpoint.domain;
 public class History {
     private String resume;
     private String completeHistory;

@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.ufrpe.hmenon.MainActivity;
+import com.ufrpe.hmenon.infrastructure.gui.MainActivity;
 import com.ufrpe.hmenon.R;
 import com.ufrpe.hmenon.user.domain.User;
 import com.ufrpe.hmenon.user.service.UserBusiness;

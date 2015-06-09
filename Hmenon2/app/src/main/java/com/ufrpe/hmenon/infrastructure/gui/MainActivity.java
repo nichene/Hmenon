@@ -1,4 +1,4 @@
-package com.ufrpe.hmenon;
+package com.ufrpe.hmenon.infrastructure.gui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,11 +20,13 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.ufrpe.hmenon.R;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
-import com.ufrpe.hmenon.turisticpoint.History;
-import com.ufrpe.hmenon.turisticpoint.MainTuristicPoint;
-import com.ufrpe.hmenon.turisticpoint.TouristicPoint;
-import com.ufrpe.hmenon.turisticpoint.TouristicPointBusiness;
+import com.ufrpe.hmenon.turisticpoint.domain.History;
+import com.ufrpe.hmenon.turisticpoint.gui.MainTuristicPoint;
+import com.ufrpe.hmenon.turisticpoint.domain.TouristicPoint;
+import com.ufrpe.hmenon.turisticpoint.service.TouristicPointBusiness;
 import com.ufrpe.hmenon.user.gui.MainEditUserName;
 import com.ufrpe.hmenon.user.gui.MainEditUserPassword;
 import com.ufrpe.hmenon.user.gui.MainLogin;
@@ -65,13 +67,39 @@ public class MainActivity extends ActionBarActivity {
         point.setName(getResources().getString(R.string.marcoZeroName));
         point.setHistoryResume(getResources().getString(R.string.marcoZeroResume));
         point.setHistoryText(getResources().getString(R.string.marcoZeroHistory));
+        point.setImage(getResources().getString(R.string.marcoZeroImage));
         touristicPointBusiness.checkInsert(point);
 
         point = new TouristicPoint();
         point.setHistory(new History());
         point.setName(getResources().getString(R.string.brennandName));
-        point.setHistoryResume(getResources().getString(R.string.brennanResume));
-        point.setHistoryText(getResources().getString(R.string.brennanResume));
+        point.setHistoryResume(getResources().getString(R.string.brennandResume));
+        point.setHistoryText(getResources().getString(R.string.brennandResume));
+        point.setImage(getResources().getString(R.string.brennandImage));
+        touristicPointBusiness.checkInsert(point);
+
+        point = new TouristicPoint();
+        point.setHistory(new History());
+        point.setName(getResources().getString(R.string.museuDePernambucoName));
+        point.setHistoryResume(getResources().getString(R.string.museuDePernambucoResume));
+        point.setHistoryText(getResources().getString(R.string.museuDePernambucoHistory));
+        point.setImage(getResources().getString(R.string.museuDePernambucoImage));
+        touristicPointBusiness.checkInsert(point);
+
+        point = new TouristicPoint();
+        point.setHistory(new History());
+        point.setName(getResources().getString(R.string.sinagogaName));
+        point.setHistoryResume(getResources().getString(R.string.sinagogaResume));
+        point.setHistoryText(getResources().getString(R.string.sinagogaHistory));
+        point.setImage(getResources().getString(R.string.sinagogaImage));
+        touristicPointBusiness.checkInsert(point);
+
+        point = new TouristicPoint();
+        point.setHistory(new History());
+        point.setName(getResources().getString(R.string.forteCincoPontasName));
+        point.setHistoryResume(getResources().getString(R.string.forteCincoPontasResume));
+        point.setHistoryText(getResources().getString(R.string.forteCincoPontasHistory));
+        point.setImage(getResources().getString(R.string.forteCincoPontasImage));
         touristicPointBusiness.checkInsert(point);
 
         lista = (ListView) findViewById(R.id.listPoints);
@@ -86,7 +114,10 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TouristicPoint touristicPoint = touristicPoints.get(position);
-                MainTuristicPoint.setUpScreen(touristicPoint.getName(), touristicPoint.getHistory().getResume());
+                String resume = touristicPoint.getHistory().getResume();
+                String name = touristicPoint.getName();
+                String image = touristicPoint.getImage();
+                MainTuristicPoint.setUpScreen(name, resume, image);
                 Intent intentGoPointScreen = new Intent(MainActivity.this, MainTuristicPoint.class);
                 finish();
                 startActivity(intentGoPointScreen);

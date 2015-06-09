@@ -1,4 +1,5 @@
-package com.ufrpe.hmenon.turisticpoint;
+package com.ufrpe.hmenon.turisticpoint.domain;
+
 
 public class TouristicPoint {
     private Long id;

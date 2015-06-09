@@ -49,7 +49,7 @@ ADDED from AndroidManifest.xml:20:9
 		ADDED from AndroidManifest.xml:22:13
 	android:name
 		ADDED from AndroidManifest.xml:21:13
-activity#com.ufrpe.hmenon.MainActivity
+activity#com.ufrpe.hmenon.infrastructure.gui.MainActivity
 ADDED from AndroidManifest.xml:24:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:26:13

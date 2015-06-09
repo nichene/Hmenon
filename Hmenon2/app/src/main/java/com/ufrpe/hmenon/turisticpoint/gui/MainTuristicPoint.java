@@ -1,11 +1,13 @@
-package com.ufrpe.hmenon.turisticpoint;
+package com.ufrpe.hmenon.turisticpoint.gui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.ufrpe.hmenon.infrastructure.gui.MainActivity;
 import com.ufrpe.hmenon.R;
 
 public class MainTuristicPoint extends ActionBarActivity{
@@ -15,6 +17,15 @@ public class MainTuristicPoint extends ActionBarActivity{
     private ImageView image;
     private static String nameStatic;
     private static String resumeStatic;
+    private static String imageStatic;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        Intent intentGoMain = new Intent(MainTuristicPoint.this, MainActivity.class);
+        startActivity(intentGoMain);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +55,13 @@ public class MainTuristicPoint extends ActionBarActivity{
         image = (ImageView) findViewById(R.id.image1);
         name.setText(nameStatic);
         resume.setText(resumeStatic);
+        int resId = getResources().getIdentifier(imageStatic, "drawable", getPackageName());
+        image.setImageResource(resId);
+
     }
-    public static void setUpScreen(String name, String resume){
+    public static void setUpScreen(String name, String resume, String image){
         nameStatic = name;
         resumeStatic = resume;
+        imageStatic = image;
     }
 }
