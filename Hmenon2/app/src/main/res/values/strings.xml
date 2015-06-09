@@ -12,25 +12,70 @@
     <string name="marcoZeroResume">Marco Zero é o local em que Recife nasceu e serve como ponto inicial das estradas de Pernambuco.</string>
     <string name="marcoZeroHistory">Marco Zero é o local em que Recife nasceu e serve como ponto inicial das estradas de Pernambuco.  Do Marco Zero, olhando para o mar, se vê o Parque das Esculturas: um conjunto de peças de cerâmica produzidas pelo artista plástico Francisco Brennand onde se destaca a Coluna de Cristal. Inaugurada em 2000, a instalação foi feita em homenagem aos 500 anos de Descobrimento do Brasil. Há um porto no local de onde é possível fazer a travessia de barco para o parque a fim de ver as obras de perto.</string>
     <string name="marcoZeroImage">marco_zero</string>
+    <string name="marcoZeroActivityText">
+O Marco Zero é aberto ao público, lá se pode encontrar:\n
+\n
+<b>Centro de Artesanato de Pernambuco\n</b>
+Avenida Alfredo Lisboa, s/n, Armazém 11, Recife Antigo\n
+Fone: (81) 3181-3451\n
+www.artesanatodepernambuco.pe.gov.br\n
+Aberto diariamente, das 10h às 20h\n
+Entrada gratuita\n
+\n
+<u>Caixa Cultural Recife\n</u>
+Avenida Alfredo Lisboa, 505, Recife Antigo\n
+Fone: (81) 3425-1906\n
+www.caixacultural.com.br\n
+Aberto de terça-feira a sábado, das 10h às 20h; aos domingos, das 10h às 18h\n
+Entrada gratuita\n
+</string>
 
     <string name="brennandName">Oficina Brennand</string>
     <string name="brennandResume">Surgindo das ruínas da antiga fábrica Cerâmica São João, o acervo conta com mais de duas mil peças, entre esculturas e pinturas.</string>
     <string name="brennandHistory">Surgindo das ruínas da antiga fábrica Cerâmica São João, o acervo conta com mais de duas mil peças, entre esculturas e pinturas.</string>
     <string name="brennandImage">brennand</string>
-    
+    <string name="brennandActivityText">
+HORÁRIO DE FUNCIONAMENTO\n
+De segunda a quinta-feira, das 8h às 17h.\n
+sexta-feira, das 8h às 16h.\n
+Fecha sábado, domingo e feriado.\n
+\n
+INGRESSOS\n
+R$ 10, inteira.\n
+R$ 5, meia (estudantes, professores e pessoas acima de 60 anos).\n
+</string>
+
     <string name="museuDePernambucoName">Museu do Estado de Pernambuco</string>
     <string name="museuDePernambucoResume">Atualmente o acervo do Museu do Estado possui mais de 14 mil itens acervo com peças importantes do período Colonial e também do período holandês.</string>
     <string name="museuDePernambucoHistory">No palacete do século XIX onde viveu o filho do Barão de Beberibe, funciona desde 1929 o Museu do Estado de Pernambuco. Atualmente o acervo do Museu do Estado possui mais de 14 mil itens acervo com peças importantes do período Colonial e também do período holandês.  O MEPE inaugurou recentemente o Palacete Estácio Coimbra, espaço que irá retratar como era um casario pernambucano durante o século XIX.</string>
     <string name="museuDePernambucoImage">museu_de_pernambuco</string>
+    <string name="museuDePernambucoActivityText">
+HORÁRIO DE FUNCIONAMENTO:\n
+Terça a sexta das 9h às 17h\n
+Sábados e domingos das 14h às 17h\n
+\n
+INGRESSOS:\n
+R$ 5,00 (inteira) e R$ 2,50 (meia)
+    </string>
 
     <string name="sinagogaName">Sinagoga Kahal Zur Israel </string>
     <string name="sinagogaResume">Suas instalações compreendem hoje o Centro Judaico de Pernambuco tornando o Nordeste do Brasil a "Terra Prometida" para cristãos-novos e judeus ibéricos nos séculos XVI e XVII.</string>
     <string name="sinagogaHistory">Suas instalações compreendem hoje o Centro Judaico de Pernambuco.Funcionou em Pernambuco durante o período de dominação holandesa(1630 a 1657). O Nordeste do Brasil foi a "Terra Prometida" para cristãos-novos e judeus ibéricos nos séculos XVI e XVII. A ocupação holandesa no Recife trouxe grande número de judeus portugueses de Amsterdã. Com eles, inúmeros cristãos-novos e descendentes que já viviam no Recife retornaram ao judaísmo, formando algumas congregações. Entre elas, a Kahal Zur Israel, Primeira Sinagoga das Américas.</string>
     <string name="sinagogaImage">sinagoga</string>
+    <string name="sinagogaActivityText">
+HORÁRIO DE FUNCIONAMENTO:\n
+Terça a sexta feira: das 9h às 17h (entrada até às 16:30h)\n
+Domingo: das 14h às 18h (entrada até às 17:30h)\n
+    </string>
 
     <string name="forteCincoPontasName">Forte das Cinco Pontas</string>
     <string name="forteCincoPontasResume">O local funciona como Centro Turístico e abriga o Museu da Cidade do Recife e o Teatro do Forte.</string>
     <string name="forteCincoPontasHistory">Foi construído em 1630 pelos holandeses. Originalmente, era feito de taipa. Os portugueses o chamavam de Forte das Cacimbas. A fortaleza foi totalmente destruída em 1677 e restaurada por Fernandes Vieira, desta vez, reconstruído com apenas quatro pontas. No também denominado Forte de São Tiago, encontra-se um monumento em homenagem a Frei Caneca, que foi líder da Confederação do Equador. O local também funciona como Centro Turístico e abriga o Museu da Cidade do Recife e o Teatro do Forte.</string>
     <string name="forteCincoPontasImage">forte_cinco_pontas</string>
+    <string name="forteCincoPontasActivityText">
+HORÁRIO DE FUNCIONAMENTO:\n
+terça a sexta-feira das 9h às 16h30\n
+sábados e domingos e feriados das 13h30 às 17h\n
+    </string>
 
 </resources>

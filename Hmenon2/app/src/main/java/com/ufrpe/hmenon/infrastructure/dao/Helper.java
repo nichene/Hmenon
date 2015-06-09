@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Helper extends SQLiteOpenHelper{
     private static final String NAMEDB = "hmenon";
-    private static final int VERSIONDB = 10;
+    private static final int VERSIONDB = 11;
     public static final String TABLE_USER = "user";
     public static final String USER_ID = "_user_id";
     public static final String USER_NAME = "user_name";
@@ -18,6 +18,7 @@ public class Helper extends SQLiteOpenHelper{
     public static final String TOURISTICPOINT_RESUME = "touristic_point_resume";
     public static final String TOURISTICPOINT_HISTORY = "touristic_point_history";
     public static final String TOURISTICPOINT_IMAGE = "touristic_point_image";
+    public static final String TOURISTICPOINT_ACTIVITYTEXT = "touristic_point_activity_text";
 
 
     public Helper(Context context){
@@ -36,7 +37,8 @@ public class Helper extends SQLiteOpenHelper{
                 TOURISTICPOINT_NAME + " text not null,"+
                 TOURISTICPOINT_RESUME +" text not null," +
                 TOURISTICPOINT_HISTORY +" text not null," +
-                TOURISTICPOINT_IMAGE + " text not null);");
+                TOURISTICPOINT_IMAGE + " text not null," +
+                TOURISTICPOINT_ACTIVITYTEXT + " text not null);");
     }
 
     @Override

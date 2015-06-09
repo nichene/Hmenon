@@ -22,7 +22,7 @@
             android:screenOrientation="portrait"
             ></activity>
         <activity
-            android:name=".turisticpoint.gui.MainTuristicPoint"
+            android:name=".touristicpoint.gui.MainTuristicPoint"
             android:screenOrientation="portrait">
         </activity>
         <activity

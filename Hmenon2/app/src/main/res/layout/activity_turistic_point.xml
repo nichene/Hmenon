@@ -48,7 +48,7 @@
                         android:textSize="20dp"
                         android:text="Nome do Local"
                         android:layout_gravity="center_horizontal"
-                        android:id="@+id/textLocalName"/>
+                        android:id="@+id/txtLocalName"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:gravity="center"
@@ -56,7 +56,7 @@
                         android:layout_height="wrap_content"
                         android:text="resumo da historia aqui"
                         android:layout_marginTop="30dp"
-                        android:id="@+id/textLocalResume"/>
+                        android:id="@+id/txtLocalResume"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -64,8 +64,14 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:orientation="vertical">
-
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:layout_marginTop="30dp"
+                        android:id="@+id/txtActivity"
+                        android:text="Exemplo"
+                        />
                 </LinearLayout>
 
                 <LinearLayout

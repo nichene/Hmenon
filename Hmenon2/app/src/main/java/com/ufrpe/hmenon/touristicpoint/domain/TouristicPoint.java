@@ -1,4 +1,4 @@
-package com.ufrpe.hmenon.turisticpoint.domain;
+package com.ufrpe.hmenon.touristicpoint.domain;
 
 
 public class TouristicPoint {
@@ -6,7 +6,14 @@ public class TouristicPoint {
     private String name;
     private History history;
     private String image;
+    private String ActivityText;
 
+    public String getActivityText() {
+        return ActivityText;
+    }
+    public void setActivityText(String activityText) {
+        ActivityText = activityText;
+    }
     public Long getId() {
         return id;
     }

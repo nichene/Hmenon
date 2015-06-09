@@ -1,9 +1,9 @@
-package com.ufrpe.hmenon.turisticpoint.service;
+package com.ufrpe.hmenon.touristicpoint.service;
 
 import android.content.Context;
 
-import com.ufrpe.hmenon.turisticpoint.domain.TouristicPoint;
-import com.ufrpe.hmenon.turisticpoint.dao.TouristicPointDao;
+import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
+import com.ufrpe.hmenon.touristicpoint.dao.TouristicPointDao;
 
 import java.util.ArrayList;
 

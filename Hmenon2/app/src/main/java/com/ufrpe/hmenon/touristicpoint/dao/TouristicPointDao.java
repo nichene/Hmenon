@@ -1,11 +1,11 @@
-package com.ufrpe.hmenon.turisticpoint.dao;
+package com.ufrpe.hmenon.touristicpoint.dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import com.ufrpe.hmenon.infrastructure.dao.DAO;
 import com.ufrpe.hmenon.infrastructure.dao.Helper;
-import com.ufrpe.hmenon.turisticpoint.domain.History;
-import com.ufrpe.hmenon.turisticpoint.domain.TouristicPoint;
+import com.ufrpe.hmenon.touristicpoint.domain.History;
+import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 
 import java.util.ArrayList;
 
@@ -25,12 +25,19 @@ public class TouristicPointDao extends DAO{
         values.put(Helper.TOURISTICPOINT_RESUME, point.getHistory().getResume());
         values.put(Helper.TOURISTICPOINT_HISTORY, point.getHistory().getCompleteHistory());
         values.put(Helper.TOURISTICPOINT_IMAGE, point.getImage());
+        values.put(Helper.TOURISTICPOINT_ACTIVITYTEXT, point.getActivityText());
         getDb().insert(Helper.TABLE_TOURISTICPOINT, null, values);
         close();
     }
     public ArrayList<TouristicPoint> returnAll(ArrayList<TouristicPoint> points){
         open();
-        Cursor cursor = getDb().query(Helper.TABLE_TOURISTICPOINT, new String[]{Helper.TOURISTICPOINT_ID, Helper.TOURISTICPOINT_NAME, Helper.TOURISTICPOINT_RESUME, Helper.TOURISTICPOINT_HISTORY, Helper.TOURISTICPOINT_IMAGE}, null, null, null, null, null);
+        Cursor cursor = getDb().query(Helper.TABLE_TOURISTICPOINT, new String[]{
+                Helper.TOURISTICPOINT_ID,
+                Helper.TOURISTICPOINT_NAME,
+                Helper.TOURISTICPOINT_RESUME,
+                Helper.TOURISTICPOINT_HISTORY,
+                Helper.TOURISTICPOINT_IMAGE,
+                Helper.TOURISTICPOINT_ACTIVITYTEXT}, null, null, null, null, null);
         if (cursor.moveToFirst()){
             do {
                 TouristicPoint point = new TouristicPoint();
@@ -41,6 +48,7 @@ public class TouristicPointDao extends DAO{
                 point.setHistoryResume(cursor.getString(2));
                 point.setHistoryText(cursor.getString(3));
                 point.setImage(cursor.getString(4));
+                point.setActivityText(cursor.getString(5));
                 points.add(point);
             } while (cursor.moveToNext());
         }
@@ -55,7 +63,8 @@ public class TouristicPointDao extends DAO{
                 Helper.TOURISTICPOINT_NAME + " text not null," +
                 Helper.TOURISTICPOINT_RESUME + " text not null," +
                 Helper.TOURISTICPOINT_HISTORY + " text not null," +
-                Helper.TOURISTICPOINT_IMAGE + " text not null);");
+                Helper.TOURISTICPOINT_IMAGE + " text not null," +
+                Helper.TOURISTICPOINT_ACTIVITYTEXT + " text not null);");
         close();
     }
 }
