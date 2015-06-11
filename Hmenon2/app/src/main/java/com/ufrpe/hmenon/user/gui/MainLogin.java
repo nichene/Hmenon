@@ -1,6 +1,5 @@
 package com.ufrpe.hmenon.user.gui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -10,8 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.infrastructure.gui.MainActivity;
 import com.ufrpe.hmenon.R;
+import com.ufrpe.hmenon.infrastructure.gui.MainInitial;
 import com.ufrpe.hmenon.user.domain.User;
 import com.ufrpe.hmenon.user.service.UserBusiness;
 
@@ -19,10 +20,9 @@ import com.ufrpe.hmenon.user.service.UserBusiness;
 public class MainLogin extends ActionBarActivity {
     private Button btnCadastreSe;
     private Button btnLogin;
-    private EditText edtName;
+    private EditText edtEmail;
     private EditText edtPassword;
     private UserBusiness service;
-    private static Context context;
 
     public boolean isReady(EditText editText, int i){
         return editText.getText().toString().trim().length() > i;
@@ -33,13 +33,12 @@ public class MainLogin extends ActionBarActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        context = this;
-        service = new UserBusiness(context);
+        service = new UserBusiness(MainInitial.getContext());
 
 
         setContentView(R.layout.activity_login);
 
-        edtName = (EditText)findViewById(R.id.edtNome);
+        edtEmail = (EditText)findViewById(R.id.edtNome);
         edtPassword = (EditText)findViewById(R.id.edtSenha);
         btnCadastreSe = (Button)findViewById(R.id.btnCadastreSe);
         btnLogin = (Button)findViewById(R.id.btnLogin);
@@ -54,7 +53,7 @@ public class MainLogin extends ActionBarActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                btnLogin.setEnabled(isReady(edtName, 3) && isReady(edtPassword, 3));
+                btnLogin.setEnabled(isReady(edtEmail, 3) && isReady(edtPassword, 3));
             }
         });
 
@@ -72,14 +71,14 @@ public class MainLogin extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                String name = edtName.getText().toString();
+                String email = edtEmail.getText().toString();
                 String password = edtPassword.getText().toString();
                 User user = new User();
-                user.setName(name);
+                user.setEmail(email);
                 user.setPassword(password);
                 try {
                     service.checkLogin(user);
-                    Toast.makeText(MainLogin.this, edtName.getText().toString() +" logado com sucesso!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainLogin.this, StaticUser.getUser().getName() +" logado com sucesso!", Toast.LENGTH_LONG).show();
                     finish();
                     Intent intentGoMain = new Intent(MainLogin.this, MainActivity.class);
                     startActivity(intentGoMain);
@@ -94,7 +93,4 @@ public class MainLogin extends ActionBarActivity {
 
     }
 
-    public static Context getContext(){
-        return MainLogin.context;
-    }
 }

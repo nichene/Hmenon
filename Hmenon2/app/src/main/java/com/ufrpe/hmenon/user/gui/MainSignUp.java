@@ -13,12 +13,14 @@ import android.widget.Toast;
 
 import com.ufrpe.hmenon.infrastructure.gui.MainActivity;
 import com.ufrpe.hmenon.R;
+import com.ufrpe.hmenon.infrastructure.gui.MainInitial;
 import com.ufrpe.hmenon.user.domain.User;
 import com.ufrpe.hmenon.user.service.UserBusiness;
 
 public class MainSignUp extends ActionBarActivity {
 
     private Button btnCadastrar;
+    private EditText edtEmail;
     private EditText edtName;
     private EditText edtConfirmPassword;
     private EditText edtPassword;
@@ -41,7 +43,8 @@ public class MainSignUp extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        service = new UserBusiness(MainLogin.getContext());
+        service = new UserBusiness(MainInitial.getContext());
+        edtEmail  = (EditText) findViewById(R.id.edtEmailSignUp);
         edtName = (EditText) findViewById(R.id.edtNameSignUp);
         edtPassword = (EditText) findViewById(R.id.edtPasswordSignUp);
         edtConfirmPassword = (EditText) findViewById(R.id.edtConfirm);
@@ -69,10 +72,12 @@ public class MainSignUp extends ActionBarActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String email = edtEmail.getText().toString();
                 String name = edtName.getText().toString();
                 String password = edtPassword.getText().toString();
                 String confirmedPassword = edtConfirmPassword.getText().toString();
                 User user = new User();
+                user.setEmail(email);
                 user.setName(name);
                 user.setPassword(password);
                 try {

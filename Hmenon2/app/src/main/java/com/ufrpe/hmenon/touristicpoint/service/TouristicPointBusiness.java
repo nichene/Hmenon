@@ -15,14 +15,19 @@ public class TouristicPointBusiness {
 
     private TouristicPointDao dao = TouristicPointDao.getInstance();
 
-    public void checkInsert(TouristicPoint point){
-        dao.insert(point);
+    public void checkInsert(ArrayList<TouristicPoint> list){
+        if (isEmpty()){
+            for (TouristicPoint point : list){
+                dao.insert(point);
+            }
+        }
     }
-    public ArrayList<TouristicPoint> checkGetAll(ArrayList<TouristicPoint> points){
-        dao.returnAll(points);
-        return points;
+
+    public ArrayList<TouristicPoint> checkGetAll(){
+        return dao.returnAll();
     }
-    public void checkReset(){
-        dao.reset();
+
+    private boolean isEmpty(){
+        return dao.isEmpty();
     }
 }

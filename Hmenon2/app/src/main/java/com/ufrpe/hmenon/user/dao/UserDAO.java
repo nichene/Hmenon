@@ -21,6 +21,7 @@ public class UserDAO extends DAO{
     public void insert(User user){
         open();
         ContentValues values = new ContentValues();
+        values.put(Helper.USER_EMAIL, user.getEmail());
         values.put(Helper.USER_NAME, user.getName());
         values.put(Helper.USER_PASSWORD, user.getPassword());
         getDb().insert(Helper.TABLE_USER, null, values);
@@ -29,22 +30,22 @@ public class UserDAO extends DAO{
 
     public void delete(User user){
         open();
-        getDb().delete(Helper.TABLE_USER, Helper.USER_NAME + " = ?", new String[]{user.getName()});
+        getDb().delete(Helper.TABLE_USER, Helper.USER_EMAIL + " = ?", new String[]{user.getEmail()});
         close();
-
     }
 
-    public User search(String name){
+    public User search(String email){
         open();
         Cursor cursor = getDb().rawQuery("select * from " + Helper.TABLE_USER
-                + " where " + Helper.USER_NAME
-                + " = ?", new String[]{name});
+                + " where " + Helper.USER_EMAIL
+                + " = ?", new String[]{email});
         User user = null;
         if (cursor.moveToFirst()){
             user = new User();
             user.setId(cursor.getLong(0));
-            user.setName(cursor.getString(1));
-            user.setPassword(cursor.getString(2));
+            user.setEmail(cursor.getString(1));
+            user.setName(cursor.getString(2));
+            user.setPassword(cursor.getString(3));
         }
         close();
         return user;
@@ -55,7 +56,7 @@ public class UserDAO extends DAO{
         User user = StaticUser.getUser();
         ContentValues values = new ContentValues();
         values.put(Helper.USER_NAME, name);
-        getDb().update(Helper.TABLE_USER, values, Helper.USER_NAME + " = ?", new String[]{user.getName()});
+        getDb().update(Helper.TABLE_USER, values, Helper.USER_EMAIL + " = ?", new String[]{user.getEmail()});
         close();
     }
 
@@ -64,20 +65,21 @@ public class UserDAO extends DAO{
         User user = StaticUser.getUser();
         ContentValues values = new ContentValues();
         values.put(Helper.USER_PASSWORD, password);
-        getDb().update(Helper.TABLE_USER, values, Helper.USER_NAME + " = ?", new String[]{user.getName()});
+        getDb().update(Helper.TABLE_USER, values, Helper.USER_EMAIL + " = ?", new String[]{user.getEmail()});
     }
 
-    public User search(String name, String password){
+    public User search(String email, String password){
         open();
         Cursor cursor = getDb().rawQuery("select * from " + Helper.TABLE_USER
-                + " where " + Helper.USER_NAME
-                + " = ? and " + Helper.USER_PASSWORD + " = ?", new String[]{name, password});
+                + " where " + Helper.USER_EMAIL
+                + " = ? and " + Helper.USER_PASSWORD + " = ?", new String[]{email, password});
         User user = null;
         if (cursor.moveToFirst()){
             user = new User();
             user.setId(cursor.getLong(0));
-            user.setName(cursor.getString(1));
-            user.setPassword(cursor.getString(2));
+            user.setEmail(cursor.getString(1));
+            user.setName(cursor.getString(2));
+            user.setPassword(cursor.getString(3));
         }
         close();
         return user;

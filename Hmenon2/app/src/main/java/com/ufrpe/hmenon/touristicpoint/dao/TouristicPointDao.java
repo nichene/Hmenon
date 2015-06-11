@@ -6,7 +6,6 @@ import com.ufrpe.hmenon.infrastructure.dao.DAO;
 import com.ufrpe.hmenon.infrastructure.dao.Helper;
 import com.ufrpe.hmenon.touristicpoint.domain.History;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
-
 import java.util.ArrayList;
 
 public class TouristicPointDao extends DAO{
@@ -29,8 +28,9 @@ public class TouristicPointDao extends DAO{
         getDb().insert(Helper.TABLE_TOURISTICPOINT, null, values);
         close();
     }
-    public ArrayList<TouristicPoint> returnAll(ArrayList<TouristicPoint> points){
+    public ArrayList<TouristicPoint> returnAll(){
         open();
+        ArrayList<TouristicPoint> points = new ArrayList<>();
         Cursor cursor = getDb().query(Helper.TABLE_TOURISTICPOINT, new String[]{
                 Helper.TOURISTICPOINT_ID,
                 Helper.TOURISTICPOINT_NAME,
@@ -55,16 +55,18 @@ public class TouristicPointDao extends DAO{
         close();
         return points;
     }
-    public void reset(){
+    public boolean isEmpty(){
         open();
-        getDb().execSQL("drop table if exists " + Helper.TABLE_TOURISTICPOINT);
-        getDb().execSQL("create table " + Helper.TABLE_TOURISTICPOINT + "(" +
-                Helper.TOURISTICPOINT_ID + " integer primary key autoincrement," +
-                Helper.TOURISTICPOINT_NAME + " text not null," +
-                Helper.TOURISTICPOINT_RESUME + " text not null," +
-                Helper.TOURISTICPOINT_HISTORY + " text not null," +
-                Helper.TOURISTICPOINT_IMAGE + " text not null," +
-                Helper.TOURISTICPOINT_ACTIVITYTEXT + " text not null);");
+        boolean empty;
+        Cursor cursor = getDb().query(Helper.TABLE_TOURISTICPOINT, new String[]{
+                Helper.TOURISTICPOINT_ID,
+                Helper.TOURISTICPOINT_NAME,
+                Helper.TOURISTICPOINT_RESUME,
+                Helper.TOURISTICPOINT_HISTORY,
+                Helper.TOURISTICPOINT_IMAGE,
+                Helper.TOURISTICPOINT_ACTIVITYTEXT}, null, null, null, null, null);
+        empty = !cursor.moveToFirst();
         close();
+        return empty;
     }
 }

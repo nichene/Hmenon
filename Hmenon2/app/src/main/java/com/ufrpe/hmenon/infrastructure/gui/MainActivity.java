@@ -20,10 +20,8 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.ufrpe.hmenon.R;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
-import com.ufrpe.hmenon.touristicpoint.domain.History;
 import com.ufrpe.hmenon.touristicpoint.gui.MainTuristicPoint;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.touristicpoint.service.TouristicPointBusiness;
@@ -31,9 +29,7 @@ import com.ufrpe.hmenon.user.gui.MainEditUserName;
 import com.ufrpe.hmenon.user.gui.MainEditUserPassword;
 import com.ufrpe.hmenon.user.gui.MainLogin;
 import com.ufrpe.hmenon.user.service.UserBusiness;
-
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
@@ -57,61 +53,13 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        touristicPointBusiness = new TouristicPointBusiness(MainLogin.getContext());
-
-        touristicPointBusiness.checkReset();
-
-        TouristicPoint point = new TouristicPoint();
-        point.setHistory(new History());
-        point.setName(getResources().getString(R.string.marcoZeroName));
-        point.setHistoryResume(getResources().getString(R.string.marcoZeroResume));
-        point.setHistoryText(getResources().getString(R.string.marcoZeroHistory));
-        point.setImage(getResources().getString(R.string.marcoZeroImage));
-        point.setActivityText(getResources().getString(R.string.marcoZeroActivityText));
-        touristicPointBusiness.checkInsert(point);
-
-        point = new TouristicPoint();
-        point.setHistory(new History());
-        point.setName(getResources().getString(R.string.brennandName));
-        point.setHistoryResume(getResources().getString(R.string.brennandResume));
-        point.setHistoryText(getResources().getString(R.string.brennandResume));
-        point.setImage(getResources().getString(R.string.brennandImage));
-        point.setActivityText(getResources().getString(R.string.brennandActivityText));
-        touristicPointBusiness.checkInsert(point);
-
-        point = new TouristicPoint();
-        point.setHistory(new History());
-        point.setName(getResources().getString(R.string.museuDePernambucoName));
-        point.setHistoryResume(getResources().getString(R.string.museuDePernambucoResume));
-        point.setHistoryText(getResources().getString(R.string.museuDePernambucoHistory));
-        point.setImage(getResources().getString(R.string.museuDePernambucoImage));
-        point.setActivityText(getResources().getString(R.string.museuDePernambucoActivityText));
-        touristicPointBusiness.checkInsert(point);
-
-        point = new TouristicPoint();
-        point.setHistory(new History());
-        point.setName(getResources().getString(R.string.sinagogaName));
-        point.setHistoryResume(getResources().getString(R.string.sinagogaResume));
-        point.setHistoryText(getResources().getString(R.string.sinagogaHistory));
-        point.setImage(getResources().getString(R.string.sinagogaImage));
-        point.setActivityText(getResources().getString(R.string.sinagogaActivityText));
-        touristicPointBusiness.checkInsert(point);
-
-        point = new TouristicPoint();
-        point.setHistory(new History());
-        point.setName(getResources().getString(R.string.forteCincoPontasName));
-        point.setHistoryResume(getResources().getString(R.string.forteCincoPontasResume));
-        point.setHistoryText(getResources().getString(R.string.forteCincoPontasHistory));
-        point.setImage(getResources().getString(R.string.forteCincoPontasImage));
-        point.setActivityText(getResources().getString(R.string.forteCincoPontasActivityText));
-        touristicPointBusiness.checkInsert(point);
-
         lista = (ListView) findViewById(R.id.listPoints);
-        touristicPoints = touristicPointBusiness.checkGetAll(new ArrayList<TouristicPoint>());
+        touristicPointBusiness = new TouristicPointBusiness(MainInitial.getContext());
+        touristicPoints = touristicPointBusiness.checkGetAll();
         populate();
         setListHeight(lista);
         getOverflowMenu();
-        userService = new UserBusiness(MainLogin.getContext());
+        userService = new UserBusiness(MainInitial.getContext());
         search = (SearchView) findViewById(R.id.search);
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {

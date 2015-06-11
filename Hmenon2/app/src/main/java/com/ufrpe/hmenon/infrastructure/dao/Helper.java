@@ -7,11 +7,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Helper extends SQLiteOpenHelper{
     private static final String NAMEDB = "hmenon";
-    private static final int VERSIONDB = 11;
+    private static final int VERSIONDB = 12;
+
     public static final String TABLE_USER = "user";
     public static final String USER_ID = "_user_id";
+    public static final String USER_EMAIL = "user_email";
     public static final String USER_NAME = "user_name";
     public static final String USER_PASSWORD = "user_password";
+
     public static final String TABLE_TOURISTICPOINT = "touristic_point";
     public static final String TOURISTICPOINT_ID = "_touristic_point_id";
     public static final String TOURISTICPOINT_NAME = "touristic_point_name";
@@ -30,6 +33,7 @@ public class Helper extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table "+ TABLE_USER +"(" +
                 USER_ID +" integer primary key autoincrement," +
+                USER_EMAIL + " text not null," +
                 USER_NAME +" text not null," +
                 USER_PASSWORD +" text not null);");
         db.execSQL("create table "+ TABLE_TOURISTICPOINT +"(" +

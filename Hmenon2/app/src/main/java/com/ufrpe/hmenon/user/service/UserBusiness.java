@@ -80,13 +80,15 @@ public class UserBusiness {
 
     public void checkLogin(User user) throws Exception{
         StringBuilder exception = new StringBuilder();
-        if (dao.search(user.getName(), user.getPassword()) == null){
-            exception.append("Usuário ou Senha inválida");
+        User u = dao.search(user.getEmail(), user.getPassword());
+        if (u == null){
+            exception.append("Email ou Senha inválida");
         } else {
-            StaticUser.setUser(user);
+            StaticUser.setUser(u);
         }
         if (exception.length() > 0){
             throw new Exception(exception.toString());
         }
     }
 }
+

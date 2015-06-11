@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.ufrpe.hmenon.infrastructure.gui.MainActivity;
 import com.ufrpe.hmenon.R;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
+import com.ufrpe.hmenon.infrastructure.gui.MainInitial;
 import com.ufrpe.hmenon.user.service.UserBusiness;
 
 public class MainEditUserPassword extends ActionBarActivity {
@@ -38,7 +39,7 @@ public class MainEditUserPassword extends ActionBarActivity {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        service = new UserBusiness(MainLogin.getContext());
+        service = new UserBusiness(MainInitial.getContext());
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_edituserpassword);
