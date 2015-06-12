@@ -30,7 +30,7 @@ public class UserBusiness {
     }
     public void checkDelete(User user, String password) throws Exception{
         StringBuilder exception = new StringBuilder();
-        if (dao.search(user.getName())== null){
+        if (dao.search(user.getEmail())== null){
             exception.append("Erro ao deletar, usuário não existe");
         } else if (!user.getPassword().equals(password)){
             exception.append("Senha Incorreta");
