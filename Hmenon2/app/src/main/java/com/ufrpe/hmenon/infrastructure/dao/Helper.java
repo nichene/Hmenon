@@ -1,13 +1,22 @@
 package com.ufrpe.hmenon.infrastructure.dao;
 
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+import com.ufrpe.hmenon.touristicpoint.domain.History;
+import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
+import org.w3c.dom.Document;
+import java.io.File;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 public class Helper extends SQLiteOpenHelper{
     private static final String NAMEDB = "hmenon";
-    private static final int VERSIONDB = 12;
+    private static final int VERSIONDB = 13;
+    private Document document;
 
     public static final String TABLE_USER = "user";
     public static final String USER_ID = "_user_id";
@@ -43,6 +52,7 @@ public class Helper extends SQLiteOpenHelper{
                 TOURISTICPOINT_HISTORY +" text not null," +
                 TOURISTICPOINT_IMAGE + " text not null," +
                 TOURISTICPOINT_ACTIVITYTEXT + " text not null);");
+
     }
 
     @Override
@@ -51,4 +61,38 @@ public class Helper extends SQLiteOpenHelper{
         db.execSQL("drop table if exists "+ TABLE_TOURISTICPOINT);
         onCreate(db);
     }
+
+    private void openFile(){
+
+        Uri path = Uri.parse("android.resource://com.ufrpe.hmenon//touristicpointresource//touristic_point_resource.xml");
+        File file = new File(path.getPath());
+        try {
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = documentBuilderFactory.newDocumentBuilder();
+            document = builder.parse(file);
+        } catch (Exception e){
+
+        }
+    }
+    public TouristicPoint createPoint(String pointName){
+        TouristicPoint point = new TouristicPoint();
+        point.setName(document.getElementsByTagName(pointName+"Name").item(0).getTextContent());
+        point.setHistory(new History());
+        point.setHistoryResume(document.getElementsByTagName(pointName+"Resume").item(0).getTextContent());
+        point.setHistoryText(document.getElementsByTagName(pointName+"History").item(0).getTextContent());
+        point.setImage(document.getElementsByTagName(pointName+"Image").item(0).getTextContent());
+        point.setActivityText(document.getElementsByTagName(pointName+"ActivityText").item(0).getTextContent());
+        return point;
+    }
+
+    private void insertTouristicPoint(TouristicPoint point, SQLiteDatabase db){
+        ContentValues values = new ContentValues();
+        values.put(Helper.TOURISTICPOINT_NAME, point.getName());
+        values.put(Helper.TOURISTICPOINT_RESUME, point.getHistory().getResume());
+        values.put(Helper.TOURISTICPOINT_HISTORY, point.getHistory().getCompleteHistory());
+        values.put(Helper.TOURISTICPOINT_IMAGE, point.getImage());
+        values.put(Helper.TOURISTICPOINT_ACTIVITYTEXT, point.getActivityText());
+        db.insert(Helper.TABLE_TOURISTICPOINT, null, values);
+    }
+
 }

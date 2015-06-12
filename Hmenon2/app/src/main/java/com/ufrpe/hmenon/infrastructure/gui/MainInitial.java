@@ -3,6 +3,7 @@ package com.ufrpe.hmenon.infrastructure.gui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import com.ufrpe.hmenon.R;
 import com.ufrpe.hmenon.touristicpoint.domain.History;
@@ -12,18 +13,15 @@ import com.ufrpe.hmenon.user.gui.MainLogin;
 import java.util.ArrayList;
 
 public class MainInitial extends ActionBarActivity {
-
+    private static Context context;
     private TouristicPointBusiness touristicPointBusiness;
     private ArrayList<TouristicPoint> points;
-    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_initial);
-
         context = this;
-
         touristicPointBusiness = new TouristicPointBusiness(MainInitial.getContext());
         points = new ArrayList<>();
 
@@ -33,17 +31,18 @@ public class MainInitial extends ActionBarActivity {
         points.add(createPoint("sinagoga"));
         points.add(createPoint("forteCincoPontas"));
         touristicPointBusiness.checkInsert(points);
-        try {
-            Thread.sleep(3000, 0);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        finish();
-        Intent intentGoLogin = new Intent(MainInitial.this, MainLogin.class);
-        startActivity(intentGoLogin);
 
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+                Intent intentGoLogin = new Intent(MainInitial.this, MainLogin.class);
+                startActivity(intentGoLogin);
+            }
+        }, 3000);
     }
-
     public TouristicPoint createPoint(String pointName){
         TouristicPoint point = new TouristicPoint();
         int idName = getResources().getIdentifier(pointName+"Name", "string", getPackageName());
