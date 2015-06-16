@@ -92,5 +92,7 @@ HORÁRIO DE FUNCIONAMENTO:\n
 terça a sexta-feira das 9h às 16h30\n
 sábados e domingos e feriados das 13h30 às 17h\n
     </string>
+    <string name="canceled_scan">Leitura cancelada</string>
+    <string name="not_a_qr_code">Não é um QR code</string>
 
 </resources>

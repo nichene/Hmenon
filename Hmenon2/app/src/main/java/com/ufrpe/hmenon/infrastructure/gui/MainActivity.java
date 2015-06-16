@@ -2,6 +2,7 @@ package com.ufrpe.hmenon.infrastructure.gui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,10 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
 import com.ufrpe.hmenon.R;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.touristicpoint.gui.MainTuristicPoint;
@@ -38,6 +43,7 @@ public class MainActivity extends ActionBarActivity {
     private TouristicPointBusiness touristicPointBusiness;
     private List<TouristicPoint> touristicPoints;
     private ListView lista;
+    private Context currentContext = MainActivity.this;
 
 
     @Override
@@ -103,6 +109,9 @@ public class MainActivity extends ActionBarActivity {
             case R.id.deleteUser:
                 showDeleteDialog(MainActivity.this);
                 break;
+            case R.id.scanQR:
+                IntentIntegrator intentToScan = new IntentIntegrator(MainActivity.this);
+                intentToScan.initiateScan();
         }
 
         return super.onOptionsItemSelected(item);
@@ -187,4 +196,24 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode,
+                intent);
+        try {
+            if (!scanResult.getFormatName().equals("QR_CODE")) /*possivel 'nullptrexcept'*/ {
+                /*Leitura de um codigo que nao seja do formato QR_CODE*/
+                throw new Exception(getString(R.string.not_a_qr_code));
+            }
+            Toast.makeText(currentContext, "FORMAT: " + scanResult.getFormatName() + "\nCONTENT: "
+                    + scanResult.getContents(), Toast.LENGTH_SHORT).show();
+        }
+        catch (NullPointerException nullptrexcept) {
+            Toast.makeText(currentContext, getString(R.string.canceled_scan),
+                    Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception e) {
+            Toast.makeText(currentContext, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
 }
