@@ -17,8 +17,10 @@ public class UserBusiness {
         StringBuilder exception = new StringBuilder();
         if (!user.getPassword().equals(confirmed)) {
             exception.append("As senhas não estão equivalentes!");
-        } else if (dao.search(user.getName()) != null) {
+        } else if (dao.search(user.getEmail()) != null) {
             exception.append("Esse Usuário ja está cadastrado");
+        } else if (!user.getEmail().contains("@")){
+            exception.append("Email Inválido");
         } else {
             dao.insert(user);
             StaticUser.setUser(user);

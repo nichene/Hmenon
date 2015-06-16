@@ -6,13 +6,39 @@ public class TouristicPoint {
     private String name;
     private History history;
     private String image;
-    private String ActivityText;
+    private String activityText;
+    private String coordinates;
+    private String map;
+    private String address;
 
+    public String getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(String coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getMap() {
+        return map;
+    }
+
+    public void setMap(String map) {
+        this.map = map;
+    }
     public String getActivityText() {
-        return ActivityText;
+        return activityText;
     }
     public void setActivityText(String activityText) {
-        ActivityText = activityText;
+        this.activityText = activityText;
     }
     public Long getId() {
         return id;

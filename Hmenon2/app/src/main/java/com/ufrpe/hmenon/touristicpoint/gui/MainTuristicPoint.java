@@ -8,6 +8,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import com.ufrpe.hmenon.infrastructure.gui.MainActivity;
 import com.ufrpe.hmenon.R;
+import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 
 public class MainTuristicPoint extends ActionBarActivity{
 
@@ -15,10 +16,15 @@ public class MainTuristicPoint extends ActionBarActivity{
     private TextView resume;
     private ImageView image;
     private TextView activity;
+    private TextView address;
+    private ImageView map;
     private static String nameStatic;
     private static String resumeStatic;
     private static String imageStatic;
     private static String activityStatic;
+    private static String addressStatic;
+    private static String mapStatic;
+    private static String coordinatesStatic;
 
     @Override
     public void onBackPressed() {
@@ -56,17 +62,26 @@ public class MainTuristicPoint extends ActionBarActivity{
         resume = (TextView) findViewById(R.id.txtLocalResume);
         image = (ImageView) findViewById(R.id.image1);
         activity = (TextView) findViewById(R.id.txtActivity);
+        address = (TextView) findViewById(R.id.txtAddress);
+        map = (ImageView) findViewById(R.id.imgMap);
+
         name.setText(nameStatic);
         resume.setText(resumeStatic);
         activity.setText(activityStatic);
-        int resId = getResources().getIdentifier(imageStatic, "drawable", getPackageName());
-        image.setImageResource(resId);
+        address.setText(addressStatic);
+        int idMap = getResources().getIdentifier(mapStatic, "drawable", getPackageName());
+        int idImage = getResources().getIdentifier(imageStatic, "drawable", getPackageName());
+        image.setImageResource(idImage);
+        map.setImageResource(idMap);
 
     }
-    public static void setUpScreen(String name, String resume, String image, String activity){
-        nameStatic = name;
-        resumeStatic = resume;
-        imageStatic = image;
-        activityStatic = activity;
+    public static void setUpScreen(TouristicPoint point){
+        nameStatic = point.getName();
+        resumeStatic = point.getHistory().getResume();
+        imageStatic = point.getImage();
+        activityStatic = point.getActivityText();
+        mapStatic = point.getMap();
+        coordinatesStatic = point.getCoordinates();
+        addressStatic = point.getAddress();
     }
 }

@@ -50,6 +50,12 @@ public class MainInitial extends ActionBarActivity {
         int idHistory = getResources().getIdentifier(pointName+"History", "string", getPackageName());
         int idImage = getResources().getIdentifier(pointName+"Image", "string", getPackageName());
         int idActivityHistory = getResources().getIdentifier(pointName + "ActivityText", "string", getPackageName());
+        int idAddress = getResources().getIdentifier(pointName+"Address", "string", getPackageName());
+        int idCoordinates = getResources().getIdentifier(pointName+"Coordinates", "string", getPackageName());
+        int idMap = getResources().getIdentifier(pointName+"Map", "string", getPackageName());
+        point.setMap(getResources().getString(idMap));
+        point.setAddress(getResources().getString(idAddress));
+        point.setCoordinates(getResources().getString(idCoordinates));
         point.setName(getResources().getString(idName));
         point.setHistory(new History());
         point.setHistoryResume(getResources().getString(idResume));

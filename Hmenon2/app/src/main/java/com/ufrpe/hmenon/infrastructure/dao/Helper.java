@@ -15,7 +15,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 public class Helper extends SQLiteOpenHelper{
     private static final String NAMEDB = "hmenon";
-    private static final int VERSIONDB = 13;
+    private static final int VERSIONDB = 14;
     private Document document;
 
     public static final String TABLE_USER = "user";
@@ -31,6 +31,9 @@ public class Helper extends SQLiteOpenHelper{
     public static final String TOURISTICPOINT_HISTORY = "touristic_point_history";
     public static final String TOURISTICPOINT_IMAGE = "touristic_point_image";
     public static final String TOURISTICPOINT_ACTIVITYTEXT = "touristic_point_activity_text";
+    public static final String TOURISTICPOINT_ADDRESS = "touristic_point_adress";
+    public static final String TOURISTICPOINT_MAP = "touristic_point_map";
+    public static final String TOURISTICPOINT_COORDINATES = "touristic_point_coordinate";
 
 
     public Helper(Context context){
@@ -51,7 +54,10 @@ public class Helper extends SQLiteOpenHelper{
                 TOURISTICPOINT_RESUME +" text not null," +
                 TOURISTICPOINT_HISTORY +" text not null," +
                 TOURISTICPOINT_IMAGE + " text not null," +
-                TOURISTICPOINT_ACTIVITYTEXT + " text not null);");
+                TOURISTICPOINT_ACTIVITYTEXT + " text not null," +
+                TOURISTICPOINT_ADDRESS + " text not null," +
+                TOURISTICPOINT_MAP + " text not null," +
+                TOURISTICPOINT_COORDINATES + " text not null);");
 
     }
 
@@ -69,9 +75,11 @@ public class Helper extends SQLiteOpenHelper{
         try {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = documentBuilderFactory.newDocumentBuilder();
-            document = builder.parse(file);
+            document = builder.parse("touristic_point_resource.xml");
+            document = builder.parse("/touristic_point_resource.xml");
+            document = builder.parse(".touristic_point_resource.xml");
         } catch (Exception e){
-
+            e.printStackTrace();
         }
     }
     public TouristicPoint createPoint(String pointName){

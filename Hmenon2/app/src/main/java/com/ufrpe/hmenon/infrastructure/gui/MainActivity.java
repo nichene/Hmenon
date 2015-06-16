@@ -66,11 +66,8 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TouristicPoint touristicPoint = touristicPoints.get(position);
-                String resume = touristicPoint.getHistory().getResume();
-                String name = touristicPoint.getName();
-                String image = touristicPoint.getImage();
-                String activity = touristicPoint.getActivityText();
-                MainTuristicPoint.setUpScreen(name, resume, image, activity);
+
+                MainTuristicPoint.setUpScreen(touristicPoint);
                 Intent intentGoPointScreen = new Intent(MainActivity.this, MainTuristicPoint.class);
                 finish();
                 startActivity(intentGoPointScreen);

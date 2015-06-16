@@ -11,6 +11,7 @@
     <string name="marcoZeroName">Marco Zero</string>
     <string name="marcoZeroCoordinates">-8.052949,-34.8897615</string>
     <string name="marcoZeroAddress">Endereço: Avenida Alfredo Lisboa, s/n - Recife, PE, 50030-150</string>
+    <string name="marcoZeroMap">marco_zero_map</string>
     <string name="marcoZeroResume">Marco Zero é o local em que Recife nasceu e serve como ponto inicial das estradas de Pernambuco.</string>
     <string name="marcoZeroHistory">Marco Zero é o local em que Recife nasceu e serve como ponto inicial das estradas de Pernambuco.  Do Marco Zero, olhando para o mar, se vê o Parque das Esculturas: um conjunto de peças de cerâmica produzidas pelo artista plástico Francisco Brennand onde se destaca a Coluna de Cristal. Inaugurada em 2000, a instalação foi feita em homenagem aos 500 anos de Descobrimento do Brasil. Há um porto no local de onde é possível fazer a travessia de barco para o parque a fim de ver as obras de perto.</string>
     <string name="marcoZeroImage">marco_zero</string>
@@ -35,6 +36,7 @@ Entrada gratuita\n
     <string name="brennandName">Oficina Brennand</string>
     <string name="brennandCoordinates">-8.052721,-34.973859</string>
     <string name="brennandAddress">Endereço: Propriedade Santos Cosme e Damião, S/N - Várzea, Recife - PE, 50740-970</string>
+    <string name="brennandMap">brennand_map</string>
     <string name="brennandResume">Surgindo das ruínas da antiga fábrica Cerâmica São João, o acervo conta com mais de duas mil peças, entre esculturas e pinturas.</string>
     <string name="brennandHistory">Surgindo das ruínas da antiga fábrica Cerâmica São João, o acervo conta com mais de duas mil peças, entre esculturas e pinturas.</string>
     <string name="brennandImage">brennand</string>
@@ -52,6 +54,7 @@ R$ 5, meia (estudantes, professores e pessoas acima de 60 anos).\n
     <string name="museuDePernambucoName">Museu do Estado de Pernambuco</string>
     <string name="museuDePernambucoCoordinates">-8.04476,-34.901748</string>
     <string name="museuDePernambucoAddress">Endereço: Av. Rui Barbosa, 960 - Graças, Recife - PE, 52050-000</string>
+    <string name="museuDePernambucoMap">museu_de_pernambuco_map</string>
     <string name="museuDePernambucoResume">Atualmente o acervo do Museu do Estado possui mais de 14 mil itens acervo com peças importantes do período Colonial e também do período holandês.</string>
     <string name="museuDePernambucoHistory">No palacete do século XIX onde viveu o filho do Barão de Beberibe, funciona desde 1929 o Museu do Estado de Pernambuco. Atualmente o acervo do Museu do Estado possui mais de 14 mil itens acervo com peças importantes do período Colonial e também do período holandês.  O MEPE inaugurou recentemente o Palacete Estácio Coimbra, espaço que irá retratar como era um casario pernambucano durante o século XIX.</string>
     <string name="museuDePernambucoImage">museu_de_pernambuco</string>
@@ -67,6 +70,7 @@ R$ 5,00 (inteira) e R$ 2,50 (meia)
     <string name="sinagogaName">Sinagoga Kahal Zur Israel </string>
     <string name="sinagogaCoordinates">-8.061834,-34.871424</string>
     <string name="sinagogaAddress">Endereço: Rua do Bom Jesus, 197 - Recife, 50030-170</string>
+    <string name="sinagogaMap">sinagoga_map</string>
     <string name="sinagogaResume">Suas instalações compreendem hoje o Centro Judaico de Pernambuco tornando o Nordeste do Brasil a "Terra Prometida" para cristãos-novos e judeus ibéricos nos séculos XVI e XVII.</string>
     <string name="sinagogaHistory">Suas instalações compreendem hoje o Centro Judaico de Pernambuco.Funcionou em Pernambuco durante o período de dominação holandesa(1630 a 1657). O Nordeste do Brasil foi a "Terra Prometida" para cristãos-novos e judeus ibéricos nos séculos XVI e XVII. A ocupação holandesa no Recife trouxe grande número de judeus portugueses de Amsterdã. Com eles, inúmeros cristãos-novos e descendentes que já viviam no Recife retornaram ao judaísmo, formando algumas congregações. Entre elas, a Kahal Zur Israel, Primeira Sinagoga das Américas.</string>
     <string name="sinagogaImage">sinagoga</string>
@@ -79,6 +83,7 @@ Domingo: das 14h às 18h (entrada até às 17:30h)\n
     <string name="forteCincoPontasName">Forte das Cinco Pontas</string>
     <string name="forteCincoPontasCoordinates">-8.0717312,-34.88096</string>
     <string name="forteCincoPontasAddress">Endereço: Praça das Cinco Pontas, s/n - São José, Recife - PE, 50020-500</string>
+    <string name="forteCincoPontasMap">forte_cinco_pontas_map</string>
     <string name="forteCincoPontasResume">O local funciona como Centro Turístico e abriga o Museu da Cidade do Recife e o Teatro do Forte.</string>
     <string name="forteCincoPontasHistory">Foi construído em 1630 pelos holandeses. Originalmente, era feito de taipa. Os portugueses o chamavam de Forte das Cacimbas. A fortaleza foi totalmente destruída em 1677 e restaurada por Fernandes Vieira, desta vez, reconstruído com apenas quatro pontas. No também denominado Forte de São Tiago, encontra-se um monumento em homenagem a Frei Caneca, que foi líder da Confederação do Equador. O local também funciona como Centro Turístico e abriga o Museu da Cidade do Recife e o Teatro do Forte.</string>
     <string name="forteCincoPontasImage">forte_cinco_pontas</string>

@@ -25,6 +25,9 @@ public class TouristicPointDao extends DAO{
         values.put(Helper.TOURISTICPOINT_HISTORY, point.getHistory().getCompleteHistory());
         values.put(Helper.TOURISTICPOINT_IMAGE, point.getImage());
         values.put(Helper.TOURISTICPOINT_ACTIVITYTEXT, point.getActivityText());
+        values.put(Helper.TOURISTICPOINT_ADDRESS, point.getAddress());
+        values.put(Helper.TOURISTICPOINT_MAP, point.getMap());
+        values.put(Helper.TOURISTICPOINT_COORDINATES, point.getCoordinates());
         getDb().insert(Helper.TABLE_TOURISTICPOINT, null, values);
         close();
     }
@@ -37,7 +40,10 @@ public class TouristicPointDao extends DAO{
                 Helper.TOURISTICPOINT_RESUME,
                 Helper.TOURISTICPOINT_HISTORY,
                 Helper.TOURISTICPOINT_IMAGE,
-                Helper.TOURISTICPOINT_ACTIVITYTEXT}, null, null, null, null, null);
+                Helper.TOURISTICPOINT_ACTIVITYTEXT,
+                Helper.TOURISTICPOINT_ADDRESS,
+                Helper.TOURISTICPOINT_MAP,
+                Helper.TOURISTICPOINT_COORDINATES}, null, null, null, null, null);
         if (cursor.moveToFirst()){
             do {
                 TouristicPoint point = new TouristicPoint();
@@ -49,6 +55,9 @@ public class TouristicPointDao extends DAO{
                 point.setHistoryText(cursor.getString(3));
                 point.setImage(cursor.getString(4));
                 point.setActivityText(cursor.getString(5));
+                point.setAddress(cursor.getString(6));
+                point.setMap(cursor.getString(7));
+                point.setCoordinates(cursor.getString(8));
                 points.add(point);
             } while (cursor.moveToNext());
         }
@@ -64,7 +73,10 @@ public class TouristicPointDao extends DAO{
                 Helper.TOURISTICPOINT_RESUME,
                 Helper.TOURISTICPOINT_HISTORY,
                 Helper.TOURISTICPOINT_IMAGE,
-                Helper.TOURISTICPOINT_ACTIVITYTEXT}, null, null, null, null, null);
+                Helper.TOURISTICPOINT_ACTIVITYTEXT,
+                Helper.TOURISTICPOINT_ADDRESS,
+                Helper.TOURISTICPOINT_MAP,
+                Helper.TOURISTICPOINT_COORDINATES}, null, null, null, null, null);
         empty = !cursor.moveToFirst();
         close();
         return empty;
