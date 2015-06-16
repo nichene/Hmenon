@@ -94,5 +94,6 @@ sábados e domingos e feriados das 13h30 às 17h\n
     </string>
     <string name="canceled_scan">Leitura cancelada</string>
     <string name="not_a_qr_code">Não é um QR code</string>
+    <string name="invalid_qr_code">O código não consta no banco</string>
 
 </resources>

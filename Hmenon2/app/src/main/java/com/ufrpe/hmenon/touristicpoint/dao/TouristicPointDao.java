@@ -2,6 +2,7 @@ package com.ufrpe.hmenon.touristicpoint.dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+
 import com.ufrpe.hmenon.infrastructure.dao.DAO;
 import com.ufrpe.hmenon.infrastructure.dao.Helper;
 import com.ufrpe.hmenon.touristicpoint.domain.History;
@@ -80,5 +81,46 @@ public class TouristicPointDao extends DAO{
         empty = !cursor.moveToFirst();
         close();
         return empty;
+    }
+
+    /**
+     * Recupera um ponto turístico do banco de dados a partir de do id no qual o ponto turístico foi
+     * armazenado.
+     *
+     * @param id - Id da linha requisitada.
+     * @return - Instância de TouristicPoint referente à linha requisitada
+     */
+    public TouristicPoint getPointFromId(long id) {
+        this.open();
+        Cursor cursor = getDb().query(Helper.TABLE_TOURISTICPOINT, new String[]{
+                Helper.TOURISTICPOINT_ID,
+                Helper.TOURISTICPOINT_NAME,
+                Helper.TOURISTICPOINT_RESUME,
+                Helper.TOURISTICPOINT_HISTORY,
+                Helper.TOURISTICPOINT_IMAGE,
+                Helper.TOURISTICPOINT_ACTIVITYTEXT,
+                Helper.TOURISTICPOINT_ADDRESS,
+                Helper.TOURISTICPOINT_MAP,
+                Helper.TOURISTICPOINT_COORDINATES},
+                Helper.TOURISTICPOINT_ID + "=?", new String[]{ String.valueOf(id) },
+                null, null, null);
+
+        TouristicPoint point = new TouristicPoint();
+        point.setHistory(new History());
+
+        if (cursor.moveToFirst()) {
+            point.setId(cursor.getLong(0));
+            point.setName(cursor.getString(1));
+            point.setHistoryResume(cursor.getString(2));
+            point.setHistoryText(cursor.getString(3));
+            point.setImage(cursor.getString(4));
+            point.setActivityText(cursor.getString(5));
+            point.setAddress(cursor.getString(6));
+            point.setMap(cursor.getString(7));
+            point.setCoordinates(cursor.getString(8));
+
+            return point;
+        }
+        return null;
     }
 }

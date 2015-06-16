@@ -5,9 +5,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.CursorIndexOutOfBoundsException;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -200,20 +202,43 @@ public class MainActivity extends ActionBarActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode,
                 intent);
-        try {
-            if (!scanResult.getFormatName().equals("QR_CODE")) /*possivel 'nullptrexcept'*/ {
-                /*Leitura de um codigo que nao seja do formato QR_CODE*/
-                throw new Exception(getString(R.string.not_a_qr_code));
+
+        if (scanResult != null) {
+            Log.d("scanRes", "!null");
+            if (scanResult.getContents() == null) {
+                Log.d("scanRes.Cont", "null");
+                Toast.makeText(currentContext, getString(R.string.canceled_scan),
+                        Toast.LENGTH_SHORT).show();
             }
-            Toast.makeText(currentContext, "FORMAT: " + scanResult.getFormatName() + "\nCONTENT: "
-                    + scanResult.getContents(), Toast.LENGTH_SHORT).show();
-        }
-        catch (NullPointerException nullptrexcept) {
-            Toast.makeText(currentContext, getString(R.string.canceled_scan),
-                    Toast.LENGTH_SHORT).show();
-        }
-        catch (Exception e) {
-            Toast.makeText(currentContext, e.getMessage(), Toast.LENGTH_SHORT).show();
+            else {
+                Log.d("scanRes.Contents", "!null");
+                if (!scanResult.getFormatName().equals("QR_CODE")) {
+                    Toast.makeText(currentContext, getString(R.string.not_a_qr_code),
+                            Toast.LENGTH_SHORT).show();
+                }
+
+                try {
+                    TouristicPoint point = touristicPointBusiness.getTouristicPointById(
+                            Integer.parseInt(scanResult.getContents()));
+
+                    if (point == null) {
+                        throw new Exception(getString(R.string.invalid_qr_code));
+                    }
+
+                    MainTuristicPoint.setUpScreen(point);
+                    Intent intentToPoint = new Intent(currentContext, MainTuristicPoint.class);
+                    finish();
+                    startActivity(intentToPoint);
+                }
+                catch (NumberFormatException numFormExcept) {
+                    Toast.makeText(currentContext, getString(R.string.invalid_qr_code),
+                            Toast.LENGTH_SHORT).show();
+                }
+                catch (Exception e) {
+                    Toast.makeText(currentContext, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
         }
     }
+
 }
