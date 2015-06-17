@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -57,7 +57,6 @@ public class MainActivity extends ActionBarActivity {
         touristicPointBusiness = new TouristicPointBusiness(MainInitial.getContext());
         touristicPoints = touristicPointBusiness.checkGetAll();
         populate();
-        setListHeight(lista);
         getOverflowMenu();
         userService = new UserBusiness(MainInitial.getContext());
         search = (SearchView) findViewById(R.id.search);
@@ -124,30 +123,16 @@ public class MainActivity extends ActionBarActivity {
             }
 
             TouristicPoint currentPoint = touristicPoints.get(position);
-            TextView name = (TextView) view.findViewById(R.id.textNome);
-            name.setText(String.valueOf(position + 1) + ": " + currentPoint.getName());
+            TextView name = (TextView) view.findViewById(R.id.txtNome);
+            name.setText(currentPoint.getName());
+            TextView distance = (TextView) view.findViewById(R.id.txtDistance);
+            ImageView image = (ImageView) view.findViewById(R.id.imgPointIcon);
+            int idIcon = getResources().getIdentifier("icon_"+currentPoint.getImage(), "drawable", getPackageName());
+            image.setImageResource(idIcon);
 
             return view;
         }
     }
-    public void setListHeight(ListView view){
-        ListAdapter listAdapter = view.getAdapter();
-        if (listAdapter != null){
-            int number = listAdapter.getCount();
-            int totalHeight = 0;
-            for (int i = 0; i < number; i++){
-                View item = listAdapter.getView(i,null,view);
-                item.measure(0,0);
-                totalHeight += item.getMeasuredHeight();
-            }
-            int totalDividersHeight = view.getDividerHeight()*(number-1);
-            ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-            layoutParams.height = totalHeight+totalDividersHeight;
-            view.setLayoutParams(layoutParams);
-            view.requestLayout();
-        }
-    }
-
     public void showDeleteDialog(Activity activity){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle("Apagar Conta");

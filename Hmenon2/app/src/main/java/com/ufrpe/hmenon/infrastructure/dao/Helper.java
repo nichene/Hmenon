@@ -15,7 +15,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 public class Helper extends SQLiteOpenHelper{
     private static final String NAMEDB = "hmenon";
-    private static final int VERSIONDB = 14;
+    private static final int VERSIONDB = 15;
     private Document document;
 
     public static final String TABLE_USER = "user";
@@ -58,7 +58,6 @@ public class Helper extends SQLiteOpenHelper{
                 TOURISTICPOINT_ADDRESS + " text not null," +
                 TOURISTICPOINT_MAP + " text not null," +
                 TOURISTICPOINT_COORDINATES + " text not null);");
-
     }
 
     @Override
@@ -69,15 +68,13 @@ public class Helper extends SQLiteOpenHelper{
     }
 
     private void openFile(){
-
-        Uri path = Uri.parse("android.resource://com.ufrpe.hmenon//touristicpointresource//touristic_point_resource.xml");
-        File file = new File(path.getPath());
+        File file = new File("/touristic_point_resource.xml");
         try {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = documentBuilderFactory.newDocumentBuilder();
-            document = builder.parse("touristic_point_resource.xml");
-            document = builder.parse("/touristic_point_resource.xml");
-            document = builder.parse(".touristic_point_resource.xml");
+            //document = builder.parse("touristic_point_resource.xml");
+            document = builder.parse(file);
+            //document = builder.parse(".touristic_point_resource.xml");
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -90,6 +87,9 @@ public class Helper extends SQLiteOpenHelper{
         point.setHistoryText(document.getElementsByTagName(pointName+"History").item(0).getTextContent());
         point.setImage(document.getElementsByTagName(pointName+"Image").item(0).getTextContent());
         point.setActivityText(document.getElementsByTagName(pointName+"ActivityText").item(0).getTextContent());
+        point.setCoordinates(document.getElementsByTagName(pointName+"Coordinates").item(0).getTextContent());
+        point.setAddress(document.getElementsByTagName(pointName+"Address").item(0).getTextContent());
+        point.setMap(document.getElementsByTagName(pointName+"Map").item(0).getTextContent());
         return point;
     }
 
@@ -100,6 +100,9 @@ public class Helper extends SQLiteOpenHelper{
         values.put(Helper.TOURISTICPOINT_HISTORY, point.getHistory().getCompleteHistory());
         values.put(Helper.TOURISTICPOINT_IMAGE, point.getImage());
         values.put(Helper.TOURISTICPOINT_ACTIVITYTEXT, point.getActivityText());
+        values.put(Helper.TOURISTICPOINT_ADDRESS, point.getAddress());
+        values.put(Helper.TOURISTICPOINT_MAP, point.getMap());
+        values.put(Helper.TOURISTICPOINT_COORDINATES, point.getCoordinates());
         db.insert(Helper.TABLE_TOURISTICPOINT, null, values);
     }
 

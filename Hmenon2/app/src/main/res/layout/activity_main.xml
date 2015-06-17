@@ -17,22 +17,13 @@
     <android.widget.SearchView
         android:id="@+id/search"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/imgRecife"
-        android:layout_alignEnd="@+id/imgRecife">
+        android:layout_height="wrap_content">
     </android.widget.SearchView>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/recife_olinda"
-        android:id="@+id/imgRecife"
-        />
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="400dp"
+        android:layout_below="@+id/search"
         android:id="@+id/listPoints"
-        android:layout_below="@+id/imgRecife"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"></ListView>
 
