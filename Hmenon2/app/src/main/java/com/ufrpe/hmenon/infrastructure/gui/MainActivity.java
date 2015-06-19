@@ -2,6 +2,7 @@ package com.ufrpe.hmenon.infrastructure.gui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
@@ -21,6 +22,10 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
 import com.ufrpe.hmenon.R;
 import com.ufrpe.hmenon.infrastructure.domain.GPSTracker;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
@@ -42,6 +47,7 @@ public class MainActivity extends ActionBarActivity {
     private List<TouristicPoint> touristicPoints;
     private ListView lista;
     private GPSTracker gps;
+    private Context currentContext = MainActivity.this;
 
 
     @Override
@@ -75,10 +81,8 @@ public class MainActivity extends ActionBarActivity {
                 Intent intentGoPointScreen = new Intent(MainActivity.this, MainTuristicPoint.class);
                 finish();
                 startActivity(intentGoPointScreen);
-
             }
         });
-
     }
 
     @Override
@@ -107,6 +111,9 @@ public class MainActivity extends ActionBarActivity {
             case R.id.deleteUser:
                 showDeleteDialog(MainActivity.this);
                 break;
+            case R.id.scanQR:
+                IntentIntegrator intentToScan = new IntentIntegrator(MainActivity.this);
+                intentToScan.initiateScan();
         }
 
         return super.onOptionsItemSelected(item);
@@ -151,7 +158,10 @@ public class MainActivity extends ActionBarActivity {
                 Toast.makeText(MainActivity.this, "GPS ou Rede desligados", Toast.LENGTH_LONG).show();
             }
             ImageView image = (ImageView) view.findViewById(R.id.imgPointIcon);
-            int idIcon = getResources().getIdentifier("icon_"+currentPoint.getImage(), "drawable", getPackageName());
+
+            int idIcon = getResources().getIdentifier("icon_"+currentPoint.getImage(), "drawable",
+                    getPackageName());
+
             image.setImageResource(idIcon);
 
             return view;
@@ -159,12 +169,12 @@ public class MainActivity extends ActionBarActivity {
     }
     public void showDeleteDialog(Activity activity){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("Apagar Conta");
-        builder.setMessage("Confirme sua senha para apagar conta");
+        builder.setTitle(getString(R.string.delete_account));
+        builder.setMessage(getString(R.string.confirm_password_to_delete_account));
         final EditText prompt = new EditText(this);
         prompt.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
         builder.setView(prompt);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 try {
@@ -179,7 +189,7 @@ public class MainActivity extends ActionBarActivity {
                 }
             }
         });
-        builder.setNegativeButton("CANCELAR", null);
+        builder.setNegativeButton(getString(R.string.cancel), null);
         builder.show();
     }
 
@@ -193,6 +203,47 @@ public class MainActivity extends ActionBarActivity {
             }
         } catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode,
+                intent);
+
+        if (scanResult != null) {
+
+            if (scanResult.getContents() == null) {
+                Toast.makeText(currentContext, getString(R.string.canceled_scan),
+                        Toast.LENGTH_SHORT).show();
+            }
+            else {
+                if (!scanResult.getFormatName().equals("QR_CODE")) {
+                    Toast.makeText(currentContext, getString(R.string.not_a_qr_code),
+                            Toast.LENGTH_SHORT).show();
+                }
+                try {
+                    TouristicPoint point = touristicPointBusiness.getTouristicPointById(
+                            scanResult.getContents());
+
+                    if (point == null) {
+                        throw new Exception(getString(R.string.invalid_qr_code));
+                    }
+
+                    MainTuristicPoint.setUpScreen(point);
+                    Intent intentToPoint = new Intent(currentContext, MainTuristicPoint.class);
+                    finish();
+                    startActivity(intentToPoint);
+                }
+                catch (NumberFormatException numFormExcept) {
+                    Toast.makeText(currentContext, getString(R.string.invalid_qr_code),
+                            Toast.LENGTH_SHORT).show();
+                }
+                catch (Exception e) {
+                    Toast.makeText(currentContext, getString(R.string.invalid_qr_code),
+                            Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
