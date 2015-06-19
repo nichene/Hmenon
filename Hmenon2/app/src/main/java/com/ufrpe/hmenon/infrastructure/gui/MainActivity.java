@@ -215,7 +215,9 @@ public class MainActivity extends ActionBarActivity {
                             Toast.LENGTH_SHORT).show();
                 }
                 catch (Exception e) {
-                    Toast.makeText(currentContext, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(currentContext, getString(R.string.invalid_qr_code),
+                            Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                 }
             }
         }

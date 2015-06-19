@@ -136,7 +136,7 @@ public class TouristicPointBusiness {
         cipher.init(Cipher.DECRYPT_MODE, secretKey);
         byte[] byteCipher = Base64.decode(stringCipher, Base64.DEFAULT);
         byte[] newPlainText = cipher.doFinal(byteCipher);
-//        String id = new String(newPlainText, "UTF8");
+
         return new String(newPlainText, "UTF8");
     }
 }
