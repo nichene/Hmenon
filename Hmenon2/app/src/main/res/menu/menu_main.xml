@@ -20,4 +20,10 @@
                 android:visible="true"/>
         </menu>
         </item>
+
+    <item
+        android:title="Escanear QR"
+        android:id="@+id/scanQR"
+        android:visible="true"/>
+
 </menu>

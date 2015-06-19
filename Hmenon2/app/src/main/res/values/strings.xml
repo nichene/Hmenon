@@ -93,4 +93,12 @@ terça a sexta-feira das 9h às 16h30\n
 sábados e domingos e feriados das 13h30 às 17h\n
     </string>
 
+    <string name="canceled_scan">Leitura cancelada</string>
+    <string name="not_a_qr_code">Não é um QR code</string>
+    <string name="invalid_qr_code">O código não consta no banco</string>
+    <string name="delete_account">Apagar Conta</string>
+    <string name="confirm_password_to_delete_account">Confirme sua senha para apagar conta</string>
+    <string name="ok">OK</string>
+    <string name="cancel">CANCELAR</string>
+
 </resources>
