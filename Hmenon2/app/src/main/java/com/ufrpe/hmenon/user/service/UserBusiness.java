@@ -5,6 +5,9 @@ import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.user.dao.UserDAO;
 import com.ufrpe.hmenon.user.domain.User;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class UserBusiness {
     private UserDAO dao = UserDAO.getInstance();
 
@@ -19,7 +22,7 @@ public class UserBusiness {
             exception.append("As senhas não estão equivalentes!");
         } else if (dao.search(user.getEmail()) != null) {
             exception.append("Esse Usuário ja está cadastrado");
-        } else if (!user.getEmail().contains("@")){
+        } else if (!EmailValidator.validar(user.getEmail())){
             exception.append("Email Inválido");
         } else {
             dao.insert(user);
