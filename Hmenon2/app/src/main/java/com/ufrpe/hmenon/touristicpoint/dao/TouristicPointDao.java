@@ -17,6 +17,27 @@ public class TouristicPointDao extends DAO{
         return instance;
     }
 
+    /**
+     * Recupera ponto turístico armazenado no cursor.
+     *
+     * @param cursor - Objeto cursor com o ponto turístico recuperado do banco de dados.
+     * @return - Ponto turístico do cursor como instância da classe TouristicPoint.
+     */
+    private static TouristicPoint recoverPointFromCursor(Cursor cursor) {
+        TouristicPoint point = new TouristicPoint();
+
+        point.setId(cursor.getLong(0));
+        point.setName(cursor.getString(1));
+        point.setHistoryResume(cursor.getString(2));
+        point.setHistoryText(cursor.getString(3));
+        point.setImage(cursor.getString(4));
+        point.setActivityText(cursor.getString(5));
+        point.setAddress(cursor.getString(6));
+        point.setMap(cursor.getString(7));
+        point.setCoordinates(cursor.getString(8));
+
+        return point;
+    }
     public void insert(TouristicPoint point){
         open();
         ContentValues values = new ContentValues();
@@ -46,19 +67,7 @@ public class TouristicPointDao extends DAO{
                 Helper.TOURISTICPOINT_COORDINATES}, null, null, null, null, null);
         if (cursor.moveToFirst()){
             do {
-                TouristicPoint point = new TouristicPoint();
-                History history = new History();
-                point.setHistory(history);
-                point.setId(cursor.getLong(0));
-                point.setName(cursor.getString(1));
-                point.setHistoryResume(cursor.getString(2));
-                point.setHistoryText(cursor.getString(3));
-                point.setImage(cursor.getString(4));
-                point.setActivityText(cursor.getString(5));
-                point.setAddress(cursor.getString(6));
-                point.setMap(cursor.getString(7));
-                point.setCoordinates(cursor.getString(8));
-                points.add(point);
+                points.add(recoverPointFromCursor(cursor));
             } while (cursor.moveToNext());
         }
         close();
@@ -104,21 +113,8 @@ public class TouristicPointDao extends DAO{
                 Helper.TOURISTICPOINT_ID + "=?", new String[]{ String.valueOf(id) },
                 null, null, null);
 
-        TouristicPoint point = new TouristicPoint();
-        point.setHistory(new History());
-
         if (cursor.moveToFirst()) {
-            point.setId(cursor.getLong(0));
-            point.setName(cursor.getString(1));
-            point.setHistoryResume(cursor.getString(2));
-            point.setHistoryText(cursor.getString(3));
-            point.setImage(cursor.getString(4));
-            point.setActivityText(cursor.getString(5));
-            point.setAddress(cursor.getString(6));
-            point.setMap(cursor.getString(7));
-            point.setCoordinates(cursor.getString(8));
-
-            return point;
+            return recoverPointFromCursor(cursor);
         }
         return null;
     }
@@ -137,21 +133,8 @@ public class TouristicPointDao extends DAO{
                 Helper.TOURISTICPOINT_NAME + "=?", new String[]{nome},
                 null, null, null);
 
-        TouristicPoint point = new TouristicPoint();
-        point.setHistory(new History());
-
         if (cursor.moveToFirst()) {
-            point.setId(cursor.getLong(0));
-            point.setName(cursor.getString(1));
-            point.setHistoryResume(cursor.getString(2));
-            point.setHistoryText(cursor.getString(3));
-            point.setImage(cursor.getString(4));
-            point.setActivityText(cursor.getString(5));
-            point.setAddress(cursor.getString(6));
-            point.setMap(cursor.getString(7));
-            point.setCoordinates(cursor.getString(8));
-
-            return point;
+            return recoverPointFromCursor(cursor);
         }
         return null;
     }

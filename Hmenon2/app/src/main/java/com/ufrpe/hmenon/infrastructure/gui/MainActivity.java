@@ -37,10 +37,16 @@ import com.ufrpe.hmenon.user.gui.MainEditUserName;
 import com.ufrpe.hmenon.user.gui.MainEditUserPassword;
 import com.ufrpe.hmenon.user.gui.MainLogin;
 import com.ufrpe.hmenon.user.service.UserBusiness;
+
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
+import java.security.InvalidKeyException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
 
 public class MainActivity extends ActionBarActivity {
     private SearchView search;
@@ -110,8 +116,7 @@ public class MainActivity extends ActionBarActivity {
                     }
                     touristicPoints = listAux;
                     populate();
-                }
-                else {
+                } else {
                     touristicPoints = allPoints;
                     populate();
                 }
@@ -255,7 +260,7 @@ public class MainActivity extends ActionBarActivity {
                             scanResult.getContents());
 
                     if (point == null) {
-                        throw new Exception(getString(R.string.invalid_qr_code));
+                        throw new NullPointerException(getString(R.string.invalid_qr_code));
                     }
 
                     MainTuristicPoint.setUpScreen(point);
@@ -263,7 +268,9 @@ public class MainActivity extends ActionBarActivity {
                     finish();
                     startActivity(intentToPoint);
                 }
-                catch (NumberFormatException numFormExcept) {
+                catch (NumberFormatException | InvalidKeyException | IllegalBlockSizeException |
+                        BadPaddingException | UnsupportedEncodingException except) {
+
                     Toast.makeText(currentContext, getString(R.string.invalid_qr_code),
                             Toast.LENGTH_SHORT).show();
                 }
