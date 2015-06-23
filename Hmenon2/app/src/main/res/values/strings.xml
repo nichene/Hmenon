@@ -100,5 +100,6 @@ sábados e domingos e feriados das 13h30 às 17h\n
     <string name="confirm_password_to_delete_account">Confirme sua senha para apagar conta</string>
     <string name="ok">OK</string>
     <string name="cancel">CANCELAR</string>
+    <string name="action_search">action_search</string>
 
 </resources>

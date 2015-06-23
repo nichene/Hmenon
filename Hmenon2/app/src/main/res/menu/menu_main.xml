@@ -1,5 +1,5 @@
-
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:hmenon="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_settings"
         android:title="Configurações"
@@ -25,5 +25,10 @@
         android:title="Escanear QR"
         android:id="@+id/scanQR"
         android:visible="true"/>
+    <item android:id="@+id/action_search"
+        android:title="@string/action_search"
+        android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
+        hmenon:showAsAction="ifRoom|collapseActionView"
+        hmenon:actionViewClass="android.support.v7.widget.SearchView" />
 
 </menu>
