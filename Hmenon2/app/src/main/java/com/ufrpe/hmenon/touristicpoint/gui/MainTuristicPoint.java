@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -21,7 +20,6 @@ public class MainTuristicPoint extends ActionBarActivity{
     private TextView activity;
     private TextView address;
     private ImageView map;
-    private Button googleMaps;
     private static String nameStatic;
     private static String resumeStatic;
     private static String imageStatic;
@@ -77,8 +75,7 @@ public class MainTuristicPoint extends ActionBarActivity{
         int idImage = getResources().getIdentifier(imageStatic, "drawable", getPackageName());
         image.setImageResource(idImage);
         map.setImageResource(idMap);
-        googleMaps = (Button) findViewById(R.id.btnGoMaps);
-        googleMaps.setOnClickListener(new View.OnClickListener() {
+        map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goMaps = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:"+coordinatesStatic));

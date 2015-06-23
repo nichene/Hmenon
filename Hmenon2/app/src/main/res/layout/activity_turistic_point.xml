@@ -84,6 +84,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:layout_gravity="center"
+                        android:clickable="true"
                         android:id="@+id/imgMap"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -93,12 +94,6 @@
                         android:id="@+id/txtAddress"
                         android:text="Exemplo22"
                         />
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="IR GOOGLE MAPS"
-                        android:id="@+id/btnGoMaps"
-                        android:textSize="10sp"/>
 
                 </LinearLayout>
 
