@@ -268,8 +268,9 @@ public class MainActivity extends ActionBarActivity {
                     finish();
                     startActivity(intentToPoint);
                 }
-                catch (NumberFormatException | InvalidKeyException | IllegalBlockSizeException |
-                        BadPaddingException | UnsupportedEncodingException except) {
+                catch (NullPointerException | NumberFormatException | InvalidKeyException |
+                        IllegalBlockSizeException | BadPaddingException |
+                        UnsupportedEncodingException except) {
 
                     Toast.makeText(currentContext, getString(R.string.invalid_qr_code),
                             Toast.LENGTH_SHORT).show();
