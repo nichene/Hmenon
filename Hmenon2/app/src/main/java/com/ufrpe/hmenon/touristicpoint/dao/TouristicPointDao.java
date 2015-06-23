@@ -122,4 +122,37 @@ public class TouristicPointDao extends DAO{
         }
         return null;
     }
+    public TouristicPoint getPointFromName(String nome) {
+        this.open();
+        Cursor cursor = getDb().query(Helper.TABLE_TOURISTICPOINT, new String[]{
+                        Helper.TOURISTICPOINT_NAME,
+                        Helper.TOURISTICPOINT_ID,
+                        Helper.TOURISTICPOINT_RESUME,
+                        Helper.TOURISTICPOINT_HISTORY,
+                        Helper.TOURISTICPOINT_IMAGE,
+                        Helper.TOURISTICPOINT_ACTIVITYTEXT,
+                        Helper.TOURISTICPOINT_ADDRESS,
+                        Helper.TOURISTICPOINT_MAP,
+                        Helper.TOURISTICPOINT_COORDINATES},
+                Helper.TOURISTICPOINT_NAME + "=?", new String[]{nome},
+                null, null, null);
+
+        TouristicPoint point = new TouristicPoint();
+        point.setHistory(new History());
+
+        if (cursor.moveToFirst()) {
+            point.setId(cursor.getLong(0));
+            point.setName(cursor.getString(1));
+            point.setHistoryResume(cursor.getString(2));
+            point.setHistoryText(cursor.getString(3));
+            point.setImage(cursor.getString(4));
+            point.setActivityText(cursor.getString(5));
+            point.setAddress(cursor.getString(6));
+            point.setMap(cursor.getString(7));
+            point.setCoordinates(cursor.getString(8));
+
+            return point;
+        }
+        return null;
+    }
 }
