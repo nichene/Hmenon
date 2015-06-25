@@ -2,7 +2,7 @@ package com.ufrpe.hmenon.infrastructure.service;
 
 import android.content.Context;
 
-import com.ufrpe.hmenon.infrastructure.dao.FavouriteDao;
+import com.ufrpe.hmenon.infrastructure.dao.FavoriteDao;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.user.domain.User;
 
@@ -13,7 +13,7 @@ import com.ufrpe.hmenon.user.domain.User;
  */
 public class FavouriteBusiness {
 
-    private FavouriteDao dao = FavouriteDao.getInstance();
+    private FavoriteDao dao = FavoriteDao.getInstance();
     public FavouriteBusiness (Context context) { dao.setUpAttributes(context); }
 
     /**

@@ -7,23 +7,22 @@ import android.util.Log;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.user.domain.User;
 
-
 /**
- * Classe respons·vel por manipular sua respectiva tabela no banco de dados a partir das tabelas de
- * Usu·rios e Pontos turÌsticos.
+ * Classe respons√°vel por manipular sua respectiva tabela no banco de dados a partir das tabelas de
+ * Usu√°rios e Pontos tur√≠sticos.
  *
- * Possui mÈtodos para inserÁ„o, remoÁ„o e consulta da sua tabela no banco de dados.
+ * Possui m√©todos para inser√ß√£o, remo√ß√£o e consulta da sua tabela no banco de dados.
  */
-public class FavouriteDao extends DAO {
-    private FavouriteDao() {}
-    private static final FavouriteDao INSTANCE = new FavouriteDao();
-    public static FavouriteDao getInstance() { return INSTANCE; }
+public class FavoriteDao extends DAO {
+    private FavoriteDao() {}
+    private static final FavoriteDao INSTANCE = new FavoriteDao();
+    public static FavoriteDao getInstance() { return INSTANCE; }
 
     /**
      * Insere novo favorito no banco de dados.
      *
-     * @param user Usu·rio que adiciona ponto turÌstico a lista de favoritos.
-     * @param point Ponto turÌstico a ser marcado como favorito.
+     * @param user Usu√°rio que adiciona ponto tur√≠stico a lista de favoritos.
+     * @param point Ponto tur√≠stico a ser marcado como favorito.
      */
     public void insertFavourite(User user, TouristicPoint point) {
         open();
@@ -37,11 +36,11 @@ public class FavouriteDao extends DAO {
     }
 
     /**
-     * Remove o ponto turÌstico da lista de favoritos.
+     * Remove o ponto tur√≠stico da lista de favoritos.
      *
-     * @param user Usu·rio que requesita a remoÁ„o do ponto turÌstico da lista de favoritos.
-     * @param point Ponto turÌstico a ser removido da lista.
-     * @return Inteiro indicando o n˙mero de linhas removidas no banco de dados.
+     * @param user Usu√°rio que requesita a remo√ß√£o do ponto tur√≠stico da lista de favoritos.
+     * @param point Ponto tur√≠stico a ser removido da lista.
+     * @return Inteiro indicando o n√∫mero de linhas removidas no banco de dados.
      */
     public int removeFavourite(User user, TouristicPoint point) {
         String clause = Helper.FAVOURITE_USER_ID + " = ? AND "
@@ -57,9 +56,9 @@ public class FavouriteDao extends DAO {
     }
 
     /**
-     * Remove do banco de dados todos os favoritos do usu·rio fornecido.
+     * Remove do banco de dados todos os favoritos do usu√°rio fornecido.
      *
-     * @param user Usu·rio cujos favoritos devem ser removidos.
+     * @param user Usu√°rio cujos favoritos devem ser removidos.
      */
     public int removeSingleUserFavourites(User user) {
         String clause = Helper.FAVOURITE_USER_ID + " = ? ";
@@ -84,7 +83,7 @@ public class FavouriteDao extends DAO {
     /**
      * TESTES-IMPRIME_EM_LOGCAT_TODOS_OS_FAVORITOS_DO_USUARIO
      *
-     * @param user Usu·rio cujos favoritos ser„o consultados.
+     * @param user Usu√°rio cujos favoritos ser√£o consultados.
      */
     public void printUserFavourites(User user) {
         open();
@@ -123,10 +122,10 @@ public class FavouriteDao extends DAO {
     }
 
     /**
-     * Retorna o n˙mero de entradas na tabela de favoritos para um usu·rio especÌfico.
+     * Retorna o n√∫mero de entradas na tabela de favoritos para um usu√°rio espec√≠fico.
      *
-     * @param user Usu·rio cujo n˙mero de favoritos deve ser consultado.
-     * @return Quantidade de linhas na tabela de favoritos registrado relacionadas ao usu·rio
+     * @param user Usu√°rio cujo n√∫mero de favoritos deve ser consultado.
+     * @return Quantidade de linhas na tabela de favoritos registrado relacionadas ao usu√°rio
      * fornecido.
      */
     public int getUserFavouriteCount(User user) {
@@ -144,7 +143,7 @@ public class FavouriteDao extends DAO {
     }
 
     /**
-     * Retorna o n˙mero de entradas na tabela de favoritos.
+     * Retorna o n√∫mero de entradas na tabela de favoritos.
      *
      * @return Quantidade de linhas na tabela de favoritos.
      */
@@ -159,3 +158,4 @@ public class FavouriteDao extends DAO {
         return counter;
     }
 }
+
