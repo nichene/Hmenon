@@ -11,6 +11,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +31,7 @@ import com.google.zxing.integration.android.IntentResult;
 import com.ufrpe.hmenon.R;
 import com.ufrpe.hmenon.infrastructure.domain.GPSTracker;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
+import com.ufrpe.hmenon.infrastructure.service.FavouriteBusiness;
 import com.ufrpe.hmenon.touristicpoint.gui.MainTuristicPoint;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.touristicpoint.service.TouristicPointBusiness;
@@ -131,6 +133,12 @@ public class MainActivity extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
+        Log.d("MainActy", "new FavBuzz");
+        FavouriteBusiness fav = new FavouriteBusiness(currentContext);
+        Log.d("MainActy", "new TrpBuzz");
+        TouristicPointBusiness buzz = new TouristicPointBusiness(currentContext);
+
         switch (item.getItemId()){
             case R.id.editName:
                 finish();
@@ -148,8 +156,26 @@ public class MainActivity extends ActionBarActivity {
             case R.id.scanQR:
                 IntentIntegrator intentToScan = new IntentIntegrator(MainActivity.this);
                 intentToScan.initiateScan();
+                break;
+            case R.id.testeInsert:
+                ArrayList<TouristicPoint> pointsList = buzz.checkGetAll();
+                Log.d("MainActy", "favBuzz.markFav");
+                for (TouristicPoint point : pointsList) {
+                    fav.markPointAsFavourite(StaticUser.getUser(), point);
+                }
+                break;
+            case R.id.testePrintAll:
+                Log.d("MainActy", "favBuzz.printAll");
+                fav.printAllFavsUnderUser(StaticUser.getUser());
+                Log.d("MainActy - FavCount", "" + fav.getCount());
+                break;
+            case R.id.testeRemoval:
+                ArrayList<TouristicPoint> listPoints = buzz.checkGetAll();
+                Log.d("MainActy", "favBuzz.removePoint");
+                Log.d("TO_REM: " + listPoints.get(0).getId(), listPoints.get(0).getName());
+                fav.removeFavourite(StaticUser.getUser(), listPoints.get(0));
+                break;
         }
-
         return super.onOptionsItemSelected(item);
     }
     private void populate(){

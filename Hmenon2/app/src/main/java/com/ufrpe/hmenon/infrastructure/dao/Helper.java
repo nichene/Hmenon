@@ -10,6 +10,7 @@ import com.ufrpe.hmenon.touristicpoint.domain.History;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import org.w3c.dom.Document;
 import java.io.File;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -23,6 +24,7 @@ public class Helper extends SQLiteOpenHelper{
     public static final String USER_EMAIL = "user_email";
     public static final String USER_NAME = "user_name";
     public static final String USER_PASSWORD = "user_password";
+    public static final String CREATED_AT = "creation_date";
 
     public static final String TABLE_TOURISTICPOINT = "touristic_point";
     public static final String TOURISTICPOINT_ID = "_touristic_point_id";
@@ -35,6 +37,10 @@ public class Helper extends SQLiteOpenHelper{
     public static final String TOURISTICPOINT_MAP = "touristic_point_map";
     public static final String TOURISTICPOINT_COORDINATES = "touristic_point_coordinate";
 
+    public static final String TABLE_FAVOURITE = "favourite";
+    public static final String FAVOURITE_ID = "favourite_id";
+    public static final String FAVOURITE_USER_ID = "favourite_user_id";
+    public static final String FAVOURITE_POINT_ID = "favourite_point_id";
 
     public Helper(Context context){
         super(context, NAMEDB, null, VERSIONDB);
@@ -43,11 +49,11 @@ public class Helper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table "+ TABLE_USER +"(" +
-                USER_ID +" integer primary key autoincrement," +
+        db.execSQL("create table " + TABLE_USER + "(" +
+                USER_ID + " integer primary key autoincrement," +
                 USER_EMAIL + " text not null," +
-                USER_NAME +" text not null," +
-                USER_PASSWORD +" text not null);");
+                USER_NAME + " text not null," +
+                USER_PASSWORD + " text not null);");
         db.execSQL("create table "+ TABLE_TOURISTICPOINT +"(" +
                 TOURISTICPOINT_ID +" integer primary key autoincrement," +
                 TOURISTICPOINT_NAME + " text not null,"+
@@ -58,12 +64,17 @@ public class Helper extends SQLiteOpenHelper{
                 TOURISTICPOINT_ADDRESS + " text not null," +
                 TOURISTICPOINT_MAP + " text not null," +
                 TOURISTICPOINT_COORDINATES + " text not null);");
+        db.execSQL("create table " + TABLE_FAVOURITE + "(" +
+                FAVOURITE_ID + " integer primary key autoincrement, " +
+                FAVOURITE_POINT_ID + " integer, " +
+                FAVOURITE_USER_ID + " integer);");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("drop table if exists "+ TABLE_USER);
         db.execSQL("drop table if exists "+ TABLE_TOURISTICPOINT);
+        db.execSQL("drop table if exists "+ TABLE_FAVOURITE);
         onCreate(db);
     }
 
@@ -105,5 +116,4 @@ public class Helper extends SQLiteOpenHelper{
         values.put(Helper.TOURISTICPOINT_COORDINATES, point.getCoordinates());
         db.insert(Helper.TABLE_TOURISTICPOINT, null, values);
     }
-
 }

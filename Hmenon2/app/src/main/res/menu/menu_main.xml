@@ -31,4 +31,19 @@
         hmenon:showAsAction="ifRoom|collapseActionView"
         hmenon:actionViewClass="android.support.v7.widget.SearchView" />
 
+    <item
+    android:title="TesteInsert"
+    android:id="@+id/testeInsert"
+    android:visible="true"/>
+
+    <item
+        android:title="TestePrintAll"
+        android:id="@+id/testePrintAll"
+        android:visible="true"/>
+
+    <item
+        android:title="TesteRemoval"
+        android:id="@+id/testeRemoval"
+        android:visible="true"/>
+
 </menu>
