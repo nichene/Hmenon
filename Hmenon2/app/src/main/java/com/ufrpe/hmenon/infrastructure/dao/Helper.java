@@ -16,7 +16,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 public class Helper extends SQLiteOpenHelper{
     private static final String NAMEDB = "hmenon";
-    private static final int VERSIONDB = 15;
+    private static final int VERSIONDB = 16;
     private Document document;
 
     public static final String TABLE_USER = "user";

@@ -2,7 +2,6 @@ package com.ufrpe.hmenon.infrastructure.dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.util.Log;
 
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.user.domain.User;
@@ -77,47 +76,6 @@ public class FavoriteDao extends DAO {
     public void clearTableFavourites() {
         open();
         getDb().delete(Helper.TABLE_FAVOURITE, null, null);
-        close();
-    }
-
-    /**
-     * TESTES-IMPRIME_EM_LOGCAT_TODOS_OS_FAVORITOS_DO_USUARIO
-     *
-     * @param user Usuário cujos favoritos serão consultados.
-     */
-    public void printUserFavourites(User user) {
-        open();
-        String selectionQuery = "SELECT * FROM " + Helper.TABLE_FAVOURITE
-                + " WHERE " + Helper.FAVOURITE_USER_ID + " = ? ";
-
-        Cursor cursor = getDb().rawQuery(selectionQuery, new String[]{
-                String.valueOf(user.getId()) });
-
-        if (cursor.moveToFirst()) {
-            do {
-                Log.d("UserFav", "tabId: " + cursor.getLong(0) + ", User: " + cursor.getLong(1)
-                        + ", Point_ID: " + cursor.getLong(2));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        close();
-    }
-
-    /**
-     * TESTES-IMPRIME-TODAS_AS_ENTRADAS_NA_TABELA_DE_FAVORITOS
-     */
-    public void printTableFavourites() {
-        open();
-        String selectionQuery = "SELECT * FROM " + Helper.TABLE_FAVOURITE;
-        Cursor cursor = getDb().rawQuery(selectionQuery, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                Log.d("TableFav", "tabId: " + cursor.getLong(0) + ", User: " + cursor.getLong(1)
-                        + ", Point_ID: " + cursor.getLong(2));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
         close();
     }
 

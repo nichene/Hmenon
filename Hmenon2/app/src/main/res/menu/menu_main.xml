@@ -35,42 +35,4 @@
         android:title="Favoritos"
         android:visible="true"/>
 
-    <item
-        android:id="@+id/action_testings"
-        android:title="Testes"
-        android:showAsAction="always"
-        android:visible="true">
-        <menu>
-            <item
-                android:title="TesteInsert"
-                android:id="@+id/testeInsert"
-                android:visible="true"/>
-
-            <item
-                android:title="TestePrintAll"
-                android:id="@+id/testePrintAll"
-                android:visible="true"/>
-
-            <item
-                android:title="TestePrintUserAll"
-                android:id="@+id/testePrintUserAll"
-                android:visible="true"/>
-
-            <item
-                android:title="TesteRemovePoint"
-                android:id="@+id/testeRemovePoint"
-                android:visible="true"/>
-
-            <item
-                android:title="TesteRemoveUserFavs"
-                android:id="@+id/testeRemoveUserFavs"
-                android:visible="true"/>
-
-            <item
-                android:title="TesteClearAll"
-                android:id="@+id/testeClearAll"
-                android:visible="true"/>
-        </menu>
-    </item>
-
 </menu>

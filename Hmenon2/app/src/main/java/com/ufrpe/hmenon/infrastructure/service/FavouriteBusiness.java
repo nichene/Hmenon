@@ -52,18 +52,6 @@ public class FavouriteBusiness {
     public void clearFavourites() { dao.clearTableFavourites(); }
 
     /**
-     * TESTES-IMPRIME_TODOS_OS_FAVORITOS_DE_UM_USUARIO
-     *
-     * @param user Usuário cujos favoritos serão consultados.
-     */
-    public void imprimeFavoritos(User user) { dao.printUserFavourites(user); }
-
-    /**
-     * TESTES-IMPRIME_TODOS_OS_FAVORITOS_DA_TABELA
-     */
-    public void imprimeFavoritos() { dao.printTableFavourites(); }
-
-    /**
      * Conta o número de pontos favoritos do usuário fornecido.
      *
      * @param user Usuário a ser consultado
