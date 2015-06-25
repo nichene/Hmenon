@@ -26,7 +26,7 @@ public class UserBusiness {
             exception.append("Email Inválido");
         } else {
             dao.insert(user);
-            StaticUser.setUser(user);
+//            StaticUser.setUser(user);
         }
 
         if (exception.length() > 0) {

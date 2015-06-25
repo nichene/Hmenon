@@ -47,8 +47,13 @@
         android:visible="true"/>
 
     <item
-        android:title="TesteRemoval"
-        android:id="@+id/testeRemoval"
+        android:title="TesteRemovePoint"
+        android:id="@+id/testeRemovePoint"
+        android:visible="true"/>
+
+    <item
+        android:title="TesteRemoveUserFavs"
+        android:id="@+id/testeRemoveUserFavs"
         android:visible="true"/>
 
     <item

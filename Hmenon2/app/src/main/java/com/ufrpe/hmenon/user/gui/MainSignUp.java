@@ -81,9 +81,10 @@ public class MainSignUp extends ActionBarActivity {
                 user.setName(name);
                 user.setPassword(password);
                 try {
-                    service.checkSignUp (user, confirmedPassword);
+                    service.checkSignUp(user, confirmedPassword);
                     finish();
-                    startActivity(new Intent(MainSignUp.this, MainActivity.class));
+//                    startActivity(new Intent(MainSignUp.this, MainActivity.class));
+                    startActivity(new Intent(MainSignUp.this, MainLogin.class));
                 } catch (Exception e){
                     Toast.makeText(MainSignUp.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 }

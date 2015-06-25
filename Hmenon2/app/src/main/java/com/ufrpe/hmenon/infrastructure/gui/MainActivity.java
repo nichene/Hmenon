@@ -134,10 +134,9 @@ public class MainActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
-        Log.d("MainActy", "new FavBuzz");
         FavouriteBusiness fav = new FavouriteBusiness(currentContext);
-        Log.d("MainActy", "new TrpBuzz");
         TouristicPointBusiness buzz = new TouristicPointBusiness(currentContext);
+        ArrayList<TouristicPoint> listPoints = new ArrayList<TouristicPoint>();
 
         switch (item.getItemId()){
             case R.id.editName:
@@ -174,11 +173,15 @@ public class MainActivity extends ActionBarActivity {
                 fav.imprimeFavoritos(StaticUser.getUser());
                 Log.d("MainActy", "Total Num Favoritos: " + fav.getCount(StaticUser.getUser()));
                 break;
-            case R.id.testeRemoval:
-                ArrayList<TouristicPoint> listPoints = buzz.checkGetAll();
+            case R.id.testeRemovePoint:
+                listPoints = buzz.checkGetAll();
                 Log.d("MainActy", "favBuzz.removePoint");
                 Log.d("TO_REM: " + listPoints.get(0).getId(), listPoints.get(0).getName());
                 fav.removeFavourite(StaticUser.getUser(), listPoints.get(0));
+                break;
+            case R.id.testeRemoveUserFavs:
+                Log.d("MainActy", "favBuzz.removeUserPoints");
+                fav.removeFavourite(StaticUser.getUser());
                 break;
             case R.id.testeClearAll:
                 Log.d("MainActy", "Clear Favs Table: Begin...");

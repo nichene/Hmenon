@@ -65,9 +65,9 @@ public class Helper extends SQLiteOpenHelper{
                 TOURISTICPOINT_MAP + " text not null," +
                 TOURISTICPOINT_COORDINATES + " text not null);");
         db.execSQL("create table " + TABLE_FAVOURITE + "(" +
-                FAVOURITE_ID + " integer primary key autoincrement, " +
-                FAVOURITE_POINT_ID + " integer, " +
-                FAVOURITE_USER_ID + " integer);");
+                FAVOURITE_ID + " integer primary key autoincrement," +
+                FAVOURITE_USER_ID + " integer, " +
+                FAVOURITE_POINT_ID + " integer);");
     }
 
     @Override

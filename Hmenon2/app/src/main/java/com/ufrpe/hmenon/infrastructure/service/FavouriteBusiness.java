@@ -27,15 +27,6 @@ public class FavouriteBusiness {
     }
 
     /**
-     * APENAS PARA TESTES.
-     *
-     * @param user Usuário cujos id's dos pontos turísticos favoritos devem ser consultados.
-     */
-    public void printAllFavsUnderUser(User user) {
-        dao.getUserFavouritesIDs(user);
-    }
-
-    /**
      * Desmarca o ponto turístico como favorito.
      *
      * @param user Usuário que remove o ponto turístico da lista de favoritos.
@@ -46,9 +37,19 @@ public class FavouriteBusiness {
     }
 
     /**
+     * Remove do banco de dados todos os favoritos do usuário fornecido.
+     *
+     * @param user Usuário cujos favoritos devem ser removidos.
+     */
+    public void removeFavourite(User user) {
+        dao.removeSingleUserFavourites(user);
+    }
+
+
+    /**
      * TESTES-LIMPA_TABELA_DE_FAVORITOS
      */
-    public void clearFavourites() { dao.clearFavouriteTable(); }
+    public void clearFavourites() { dao.clearTableFavourites(); }
 
     /**
      * TESTES-IMPRIME_TODOS_OS_FAVORITOS_DE_UM_USUARIO
