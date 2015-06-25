@@ -46,11 +46,36 @@ public class FavouriteBusiness {
     }
 
     /**
+     * TESTES-LIMPA_TABELA_DE_FAVORITOS
+     */
+    public void clearFavourites() { dao.clearFavouriteTable(); }
+
+    /**
+     * TESTES-IMPRIME_TODOS_OS_FAVORITOS_DE_UM_USUARIO
+     *
+     * @param user Usuário cujos favoritos serão consultados.
+     */
+    public void imprimeFavoritos(User user) { dao.printUserFavourites(user); }
+
+    /**
+     * TESTES-IMPRIME_TODOS_OS_FAVORITOS_DA_TABELA
+     */
+    public void imprimeFavoritos() { dao.printTableFavourites(); }
+
+    /**
+     * Conta o número de pontos favoritos do usuário fornecido.
+     *
+     * @param user Usuário a ser consultado
+     * @return Número de pontos favoritos.
+     */
+    public int getCount(User user) { return dao.getUserFavouriteCount(user); }
+
+    /**
      * Conta o número de linhas da tabela no banco de dados.
      *
      * @return Número de linhas da tabela.
      */
     public int getCount() {
-        return dao.getFavouriteCount();
+        return dao.getTableFavouriteCount();
     }
 }

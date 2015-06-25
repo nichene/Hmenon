@@ -166,8 +166,13 @@ public class MainActivity extends ActionBarActivity {
                 break;
             case R.id.testePrintAll:
                 Log.d("MainActy", "favBuzz.printAll");
-                fav.printAllFavsUnderUser(StaticUser.getUser());
-                Log.d("MainActy - FavCount", "" + fav.getCount());
+                fav.imprimeFavoritos();
+                Log.d("MainActy", "Total Num Favoritos: " + fav.getCount());
+                break;
+            case R.id.testePrintUserAll:
+                Log.d("MainActy", "favBuzz.printUserAll");
+                fav.imprimeFavoritos(StaticUser.getUser());
+                Log.d("MainActy", "Total Num Favoritos: " + fav.getCount(StaticUser.getUser()));
                 break;
             case R.id.testeRemoval:
                 ArrayList<TouristicPoint> listPoints = buzz.checkGetAll();
@@ -175,6 +180,10 @@ public class MainActivity extends ActionBarActivity {
                 Log.d("TO_REM: " + listPoints.get(0).getId(), listPoints.get(0).getName());
                 fav.removeFavourite(StaticUser.getUser(), listPoints.get(0));
                 break;
+            case R.id.testeClearAll:
+                Log.d("MainActy", "Clear Favs Table: Begin...");
+                fav.clearFavourites();
+                Log.d("MainActy", "Clear Favs Table: ... End");
         }
         return super.onOptionsItemSelected(item);
     }

@@ -32,9 +32,9 @@
         hmenon:actionViewClass="android.support.v7.widget.SearchView" />
 
     <item
-    android:title="TesteInsert"
-    android:id="@+id/testeInsert"
-    android:visible="true"/>
+        android:title="TesteInsert"
+        android:id="@+id/testeInsert"
+        android:visible="true"/>
 
     <item
         android:title="TestePrintAll"
@@ -42,8 +42,18 @@
         android:visible="true"/>
 
     <item
+        android:title="TestePrintUserAll"
+        android:id="@+id/testePrintUserAll"
+        android:visible="true"/>
+
+    <item
         android:title="TesteRemoval"
         android:id="@+id/testeRemoval"
+        android:visible="true"/>
+
+    <item
+        android:title="TesteClearAll"
+        android:id="@+id/testeClearAll"
         android:visible="true"/>
 
 </menu>
