@@ -35,7 +35,6 @@ public class MainFavourite extends ActionBarActivity{
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        StaticUser.setUser(null);
         Intent intentGoLogin = new Intent(MainFavourite.this, MainActivity.class);
         startActivity(intentGoLogin);
     }

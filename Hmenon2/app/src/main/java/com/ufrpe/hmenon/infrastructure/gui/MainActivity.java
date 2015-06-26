@@ -28,8 +28,10 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import com.ufrpe.hmenon.R;
+import com.ufrpe.hmenon.infrastructure.domain.FavouritePoint;
 import com.ufrpe.hmenon.infrastructure.domain.GPSTracker;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
+import com.ufrpe.hmenon.infrastructure.service.FavouriteBusiness;
 import com.ufrpe.hmenon.touristicpoint.gui.MainTuristicPoint;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.touristicpoint.service.TouristicPointBusiness;
@@ -58,6 +60,7 @@ public class MainActivity extends ActionBarActivity {
     private ListView list;
     private GPSTracker gps;
     private Context currentContext = MainActivity.this;
+    private FavouriteBusiness favouriteBusiness;
 
 
     @Override
@@ -73,6 +76,17 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         gps = new GPSTracker(MainInitial.getContext());
+        ArrayList<FavouritePoint> favouritePoints = new ArrayList<>();
+        favouriteBusiness = new FavouriteBusiness(MainInitial.getContext());
+        touristicPointBusiness = new TouristicPointBusiness(MainInitial.getContext());
+        ArrayList<String> pointsIds = favouriteBusiness.getFavouritesPointsIds(StaticUser.getUser().getId());
+        for (String id : pointsIds){
+            FavouritePoint favouritePoint = new FavouritePoint();
+            TouristicPoint point = touristicPointBusiness.getTouristicPointById(id);
+            favouritePoint.setPoint(point);
+            favouritePoints.add(favouritePoint);
+        }
+        StaticUser.getUser().setFavourites(favouritePoints);
         setContentView(R.layout.activity_main);
         list = (ListView) findViewById(R.id.listPoints);
         touristicPointBusiness = new TouristicPointBusiness(MainInitial.getContext());
