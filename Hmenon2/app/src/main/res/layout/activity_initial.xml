@@ -3,13 +3,12 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:id="@+id/imgInitial"
-        android:src="@drawable/sombrinha_inicio"
+        android:src="@drawable/sombrinha"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/sombrinha_inicio"
         android:visibility="visible" />
 
 </RelativeLayout>

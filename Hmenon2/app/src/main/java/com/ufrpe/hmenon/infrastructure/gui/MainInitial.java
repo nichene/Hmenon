@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
+
 import com.ufrpe.hmenon.R;
 import com.ufrpe.hmenon.touristicpoint.domain.History;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.touristicpoint.service.TouristicPointBusiness;
 import com.ufrpe.hmenon.user.gui.MainLogin;
+
 import java.util.ArrayList;
+
 
 public class MainInitial extends ActionBarActivity {
     private static Context context;
@@ -19,6 +22,7 @@ public class MainInitial extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_initial);
         context = this;

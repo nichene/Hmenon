@@ -76,7 +76,7 @@ public class MainTuristicPoint extends ActionBarActivity{
         favouriteImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isFavourite){
+                if (StaticUser.getUser().isFavourite(pointStatic.getName())){
                     StaticUser.getUser().removeFavourite(pointStatic);
                     favouriteImage.setImageResource(R.drawable.favourite_off_icon);
                     favouriteBusiness.removeFavourite(StaticUser.getUser(), pointStatic);
