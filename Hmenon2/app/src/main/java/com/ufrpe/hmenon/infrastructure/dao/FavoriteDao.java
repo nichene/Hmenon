@@ -27,11 +27,9 @@ public class FavoriteDao extends DAO {
      */
     public void insertFavourite(User user, TouristicPoint point) {
         open();
-
         ContentValues values = new ContentValues();
         values.put(Helper.FAVOURITE_USER_ID, user.getId());
         values.put(Helper.FAVOURITE_POINT_ID, point.getId());
-
         getDb().insert(Helper.TABLE_FAVOURITE, null, values);
         close();
     }

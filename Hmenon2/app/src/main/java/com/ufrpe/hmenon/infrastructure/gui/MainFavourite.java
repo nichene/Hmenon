@@ -44,6 +44,7 @@ public class MainFavourite extends ActionBarActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         gps = new GPSTracker(MainInitial.getContext());
+        setContentView(R.layout.activity_favourites);
         favouriteBusiness = new FavouriteBusiness(MainInitial.getContext());
         touristicPointBusiness = new TouristicPointBusiness(MainInitial.getContext());
         favouritesList = (ListView) findViewById(R.id.listFavourites);
@@ -57,7 +58,7 @@ public class MainFavourite extends ActionBarActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TouristicPoint touristicPoint = points.get(position);
-                MainTuristicPoint.setUpScreen(touristicPoint);
+                MainTuristicPoint.setUpScreen(touristicPoint, StaticUser.getUser().isFavourite(touristicPoint.getName()));
                 Intent intentGoPointScreen = new Intent(MainFavourite.this, MainTuristicPoint.class);
                 finish();
                 startActivity(intentGoPointScreen);

@@ -44,6 +44,10 @@
             android:name=".user.gui.MainLogin"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".infrastructure.gui.MainFavourite"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

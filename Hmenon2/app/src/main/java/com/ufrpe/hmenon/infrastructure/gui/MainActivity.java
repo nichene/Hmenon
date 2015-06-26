@@ -33,6 +33,7 @@ import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.touristicpoint.gui.MainTuristicPoint;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.touristicpoint.service.TouristicPointBusiness;
+import com.ufrpe.hmenon.user.domain.User;
 import com.ufrpe.hmenon.user.gui.MainEditUserName;
 import com.ufrpe.hmenon.user.gui.MainEditUserPassword;
 import com.ufrpe.hmenon.user.gui.MainLogin;
@@ -84,8 +85,9 @@ public class MainActivity extends ActionBarActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                User user = StaticUser.getUser();
                 TouristicPoint touristicPoint = touristicPoints.get(position);
-                MainTuristicPoint.setUpScreen(touristicPoint);
+                MainTuristicPoint.setUpScreen(touristicPoint, user.isFavourite(touristicPoint.getName()));
                 Intent intentGoPointScreen = new Intent(MainActivity.this, MainTuristicPoint.class);
                 finish();
                 startActivity(intentGoPointScreen);
@@ -152,7 +154,7 @@ public class MainActivity extends ActionBarActivity {
                 break;
             case R.id.main_to_favourites:
                 finish();
-                Intent intentGoFavourites = new Intent(MainActivity.this, MainActivity.class);
+                Intent intentGoFavourites = new Intent(MainActivity.this, MainFavourite.class);
                 startActivity(intentGoFavourites);
                 break;
         }
@@ -268,7 +270,7 @@ public class MainActivity extends ActionBarActivity {
                         throw new NullPointerException(getString(R.string.invalid_qr_code));
                     }
 
-                    MainTuristicPoint.setUpScreen(point);
+                    MainTuristicPoint.setUpScreen(point, StaticUser.getUser().isFavourite(point.getName()));
                     Intent intentToPoint = new Intent(currentContext, MainTuristicPoint.class);
                     finish();
                     startActivity(intentToPoint);
