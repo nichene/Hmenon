@@ -48,10 +48,13 @@ public class TouristicPointBusiness {
      * @throws BadPaddingException
      * @throws UnsupportedEncodingException
      */
-    public TouristicPoint getTouristicPointById(String cipherMessage) throws InvalidKeyException,
+    public TouristicPoint getTouristicPointByIdEncrypted(String cipherMessage) throws InvalidKeyException,
     IllegalBlockSizeException, BadPaddingException, UnsupportedEncodingException {
 
         long id = Long.parseLong(CryptoHelper.decryptString(cipherMessage));
         return dao.getPointFromId(id);
+    }
+    public TouristicPoint getTouristicPointById(String id){
+        return dao.getPointFromId(Long.parseLong(id));
     }
 }

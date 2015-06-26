@@ -54,7 +54,7 @@ public class MainActivity extends ActionBarActivity {
     private TouristicPointBusiness touristicPointBusiness;
     private List<TouristicPoint> touristicPoints;
     private List<TouristicPoint> allPoints;
-    private ListView lista;
+    private ListView list;
     private GPSTracker gps;
     private Context currentContext = MainActivity.this;
 
@@ -73,7 +73,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         gps = new GPSTracker(MainInitial.getContext());
         setContentView(R.layout.activity_main);
-        lista = (ListView) findViewById(R.id.listPoints);
+        list = (ListView) findViewById(R.id.listPoints);
         touristicPointBusiness = new TouristicPointBusiness(MainInitial.getContext());
         touristicPoints = touristicPointBusiness.checkGetAll();
         allPoints = touristicPoints;
@@ -81,7 +81,7 @@ public class MainActivity extends ActionBarActivity {
         getOverflowMenu();
         userService = new UserBusiness(MainInitial.getContext());
 
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TouristicPoint touristicPoint = touristicPoints.get(position);
@@ -150,13 +150,17 @@ public class MainActivity extends ActionBarActivity {
                 IntentIntegrator intentToScan = new IntentIntegrator(MainActivity.this);
                 intentToScan.initiateScan();
                 break;
+            case R.id.main_to_favourites:
+                finish();
+                Intent intentGoFavourites = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intentGoFavourites);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
     private void populate(){
         ArrayAdapter<TouristicPoint> adapter = new ContactListAdapter();
-        lista.setAdapter(adapter);
-
+        list.setAdapter(adapter);
     }
     private class ContactListAdapter extends ArrayAdapter<TouristicPoint> {
         public ContactListAdapter(){
@@ -257,7 +261,7 @@ public class MainActivity extends ActionBarActivity {
                             Toast.LENGTH_SHORT).show();
                 }
                 try {
-                    TouristicPoint point = touristicPointBusiness.getTouristicPointById(
+                    TouristicPoint point = touristicPointBusiness.getTouristicPointByIdEncrypted(
                             scanResult.getContents());
 
                     if (point == null) {

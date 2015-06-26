@@ -6,6 +6,8 @@ import com.ufrpe.hmenon.infrastructure.dao.FavoriteDao;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.user.domain.User;
 
+import java.util.ArrayList;
+
 /**
  * Faz a manipulação da tabela de favoritos no banco de dados.
  *
@@ -66,5 +68,8 @@ public class FavouriteBusiness {
      */
     public int getCount() {
         return dao.getTableFavouriteCount();
+    }
+    public ArrayList<String> getFavouritesPointsIds(long userId){
+        return dao.getAllFavouritePointsIds(userId);
     }
 }

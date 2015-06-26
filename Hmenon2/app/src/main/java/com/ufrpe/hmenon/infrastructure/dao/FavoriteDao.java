@@ -6,6 +6,8 @@ import android.database.Cursor;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.user.domain.User;
 
+import java.util.ArrayList;
+
 /**
  * Classe responsável por manipular sua respectiva tabela no banco de dados a partir das tabelas de
  * Usuários e Pontos turísticos.
@@ -114,6 +116,20 @@ public class FavoriteDao extends DAO {
         cursor.close();
         close();
         return counter;
+    }
+    public ArrayList<String> getAllFavouritePointsIds(long userId){
+        ArrayList<String> pointsIds = new ArrayList<>();
+        open();
+        Cursor cursor = getDb().rawQuery("select " + Helper.FAVOURITE_POINT_ID + " from " + Helper.TABLE_FAVOURITE
+                + " where " + Helper.FAVOURITE_USER_ID
+                + " = ?", new String[]{String.valueOf(userId)});
+        if (cursor.moveToFirst()){
+            do {
+                pointsIds.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        close();
+        return  pointsIds;
     }
 }
 
