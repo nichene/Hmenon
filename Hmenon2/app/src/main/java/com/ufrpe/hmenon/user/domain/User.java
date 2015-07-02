@@ -1,7 +1,7 @@
 package com.ufrpe.hmenon.user.domain;
 
 
-import com.ufrpe.hmenon.infrastructure.domain.FavouritePoint;
+import com.ufrpe.hmenon.favourite.FavouritePoint;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 
 import java.util.ArrayList;

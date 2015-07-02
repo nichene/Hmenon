@@ -1,4 +1,4 @@
-package com.ufrpe.hmenon.infrastructure.domain;
+package com.ufrpe.hmenon.favourite;
 
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 

@@ -28,7 +28,8 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import com.ufrpe.hmenon.R;
-import com.ufrpe.hmenon.infrastructure.domain.FavouritePoint;
+import com.ufrpe.hmenon.favourite.MainFavourite;
+import com.ufrpe.hmenon.favourite.FavouritePoint;
 import com.ufrpe.hmenon.infrastructure.domain.GPSTracker;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.infrastructure.service.FavouriteBusiness;
@@ -131,11 +132,10 @@ public class MainActivity extends ActionBarActivity {
                         }
                     }
                     touristicPoints = listAux;
-                    populate();
                 } else {
                     touristicPoints = allPoints;
-                    populate();
                 }
+                populate();
                 return false;
             }
         });

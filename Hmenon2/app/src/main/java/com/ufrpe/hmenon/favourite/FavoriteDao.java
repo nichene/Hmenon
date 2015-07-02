@@ -1,8 +1,10 @@
-package com.ufrpe.hmenon.infrastructure.dao;
+package com.ufrpe.hmenon.favourite;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import com.ufrpe.hmenon.infrastructure.dao.DAO;
+import com.ufrpe.hmenon.infrastructure.dao.Helper;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.user.domain.User;
 

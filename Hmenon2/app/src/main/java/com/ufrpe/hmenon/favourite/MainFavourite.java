@@ -1,4 +1,4 @@
-package com.ufrpe.hmenon.infrastructure.gui;
+package com.ufrpe.hmenon.favourite;
 
 import android.content.Intent;
 import android.location.Location;
@@ -12,13 +12,17 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.ufrpe.hmenon.R;
 import com.ufrpe.hmenon.infrastructure.domain.GPSTracker;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
+import com.ufrpe.hmenon.infrastructure.gui.MainActivity;
+import com.ufrpe.hmenon.infrastructure.gui.MainInitial;
 import com.ufrpe.hmenon.infrastructure.service.FavouriteBusiness;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.touristicpoint.gui.MainTuristicPoint;
 import com.ufrpe.hmenon.touristicpoint.service.TouristicPointBusiness;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
