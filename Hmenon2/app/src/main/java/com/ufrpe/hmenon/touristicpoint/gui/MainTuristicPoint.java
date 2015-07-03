@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.ufrpe.hmenon.favourite.FavouritePoint;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.infrastructure.gui.MainActivity;
 import com.ufrpe.hmenon.R;
@@ -16,6 +17,9 @@ import com.ufrpe.hmenon.infrastructure.gui.MainInitial;
 import com.ufrpe.hmenon.infrastructure.service.FavouriteBusiness;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 
+/**
+ * Activity responsável pela implementação da tela de informações sobre o ponto turístico.
+ */
 public class MainTuristicPoint extends ActionBarActivity{
 
     private TextView name;
@@ -28,6 +32,10 @@ public class MainTuristicPoint extends ActionBarActivity{
     private static TouristicPoint pointStatic;
     private static boolean isFavourite;
     private FavouriteBusiness favouriteBusiness;
+    /**
+     * Agregação de usuário logado e ponto turístico em um único objeto.
+     */
+    private FavouritePoint favouritePoint;
 
     @Override
     public void onBackPressed() {
@@ -70,22 +78,26 @@ public class MainTuristicPoint extends ActionBarActivity{
         favouriteImage = (ImageView) findViewById(R.id.imgFavorite);
         favouriteBusiness = new FavouriteBusiness(MainInitial.getContext());
 
+        favouritePoint = new FavouritePoint();
+        favouritePoint.setUser(StaticUser.getUser());
+        favouritePoint.setPoint(pointStatic);
+        isFavourite = favouriteBusiness.checkIfFavourite(favouritePoint);
+
         if (isFavourite){
             favouriteImage.setImageResource(R.drawable.favourite_on_icon);
         }
+
         favouriteImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (StaticUser.getUser().isFavourite(pointStatic.getName())){
-                    StaticUser.getUser().removeFavourite(pointStatic);
-                    favouriteImage.setImageResource(R.drawable.favourite_off_icon);
-                    favouriteBusiness.removeFavourite(StaticUser.getUser(), pointStatic);
+                if (favouriteBusiness.checkIfFavourite(favouritePoint)){
+                    flipFavouriteBoolean();
+                    favouriteBusiness.removeFavourite(favouritePoint);
 
                 }
                 else {
-                    StaticUser.getUser().addFavourite(pointStatic);
-                    favouriteImage.setImageResource(R.drawable.favourite_on_icon);
-                    favouriteBusiness.markPointAsFavourite(StaticUser.getUser(), pointStatic);
+                    flipFavouriteBoolean();
+                    favouriteBusiness.markPointAsFavourite(favouritePoint);
                 }
             }
         });
@@ -107,6 +119,48 @@ public class MainTuristicPoint extends ActionBarActivity{
         });
 
     }
+
+    @Override
+    protected void onStop() {
+        updateFavouriteStatusOnDb(favouritePoint);
+        super.onStop();
+    }
+
+    /**
+     * Alterna o estatus do ponto turístico entre favorito e não-favorito e muda a imagem do ícone
+     * sempre que o ícone for clicado.
+     */
+    private void flipFavouriteBoolean() {
+        if (isFavourite) {
+            isFavourite = false;
+            favouriteImage.setImageResource(R.drawable.favourite_off_icon);
+        } else {
+            isFavourite = true;
+            favouriteImage.setImageResource(R.drawable.favourite_on_icon);
+        }
+    }
+
+    /**
+     * Atualiza no banco de dados o estatus de favorito do ponto atualmente aberto pela activity,
+     * deve ser chamado apenas uma vez, logo antes da activity ser parada.
+     */
+    private void updateFavouriteStatusOnDb(FavouritePoint favouritePoint) {
+        if (isFavourite) {
+            favouriteBusiness.markPointAsFavourite(favouritePoint);
+        }
+        else {
+            favouriteBusiness.removeFavourite(favouritePoint);
+        }
+    }
+
+    /**
+     * Ajusta o usuário logado e o ponto turístico a ser aberto pela activity.
+     * A chamada deste método ocorre antes da inicialização da instância de Intent para esta
+     * activity.
+     *
+     * @param point Ponto turístico a ser mostrado pela activity.
+     * @param favourite Usuário logado no aplicativo.
+     */
     public static void setUpScreen(TouristicPoint point, boolean favourite){
         pointStatic = point;
         isFavourite = favourite;

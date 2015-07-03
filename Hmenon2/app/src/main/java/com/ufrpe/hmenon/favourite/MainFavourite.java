@@ -27,6 +27,9 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Activity responsável pela listagem de pontos turísticos favoritos do usuario logado.
+ */
 public class MainFavourite extends ActionBarActivity{
 
     private ListView favouritesList;
@@ -39,8 +42,8 @@ public class MainFavourite extends ActionBarActivity{
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        Intent intentGoLogin = new Intent(MainFavourite.this, MainActivity.class);
-        startActivity(intentGoLogin);
+        Intent intentBackToMain = new Intent(MainFavourite.this, MainActivity.class);
+        startActivity(intentBackToMain);
     }
 
     @Override

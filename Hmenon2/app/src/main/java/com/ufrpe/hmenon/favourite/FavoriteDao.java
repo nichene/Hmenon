@@ -36,6 +36,31 @@ public class FavoriteDao extends DAO {
         close();
     }
 
+    public void insertFavourite(FavouritePoint favouritePoint) {
+        open();
+        ContentValues values = new ContentValues();
+        values.put(Helper.FAVOURITE_USER_ID, favouritePoint.getUser().getId());
+        values.put(Helper.FAVOURITE_POINT_ID, favouritePoint.getPoint().getId());
+        getDb().insert(Helper.TABLE_FAVOURITE, null, values);
+        close();
+    }
+
+    /**
+     * Verifica se o ponto já encontra-se como favorito antes de tentar inserí-lo no banco.
+     *
+     * @param favouritePoint Ponto a ser inserido.
+     */
+    public void safeInsertFavourite(FavouritePoint favouritePoint) {
+        if (!checkIfPointIsFavourite(favouritePoint)) {
+            open();
+            ContentValues values = new ContentValues();
+            values.put(Helper.FAVOURITE_USER_ID, favouritePoint.getUser().getId());
+            values.put(Helper.FAVOURITE_POINT_ID, favouritePoint.getPoint().getId());
+            getDb().insert(Helper.TABLE_FAVOURITE, null, values);
+            close();
+        }
+    }
+
     /**
      * Remove o ponto turístico da lista de favoritos.
      *
@@ -49,6 +74,25 @@ public class FavoriteDao extends DAO {
 
         String arguments[] = new String[]{ Long.toString(user.getId()),
                 Long.toString(point.getId()) };
+
+        open();
+        int deletionCount = getDb().delete(Helper.TABLE_FAVOURITE, clause, arguments);
+        close();
+        return deletionCount;
+    }
+
+    /**
+     * Remove o ponto turístico do usuário da tabela de pontos favoritos no banco de dados.
+     *
+     * @param favouritePoint ponto a ser removido.
+     * @return um número aí.
+     */
+    public int removeFavourite(FavouritePoint favouritePoint) {
+        String clause = Helper.FAVOURITE_USER_ID + " = ? AND "
+                + Helper.FAVOURITE_POINT_ID + " = ? ";
+
+        String arguments[] = new String[]{ Long.toString(favouritePoint.getUser().getId()),
+                Long.toString(favouritePoint.getPoint().getId()) };
 
         open();
         int deletionCount = getDb().delete(Helper.TABLE_FAVOURITE, clause, arguments);
@@ -90,8 +134,8 @@ public class FavoriteDao extends DAO {
      */
     public int getUserFavouriteCount(User user) {
         open();
-        String countQuery = "SELECT  * FROM " + Helper.TABLE_FAVOURITE
-                + " WHERE " + Helper.FAVOURITE_USER_ID + " = ? ";
+        String countQuery = "SELECT  * FROM " + Helper.TABLE_FAVOURITE + " WHERE "
+                + Helper.FAVOURITE_USER_ID + " = ? ";
 
         Cursor cursor = getDb().rawQuery(countQuery, new String[]{
                 String.valueOf(user.getId()) });
@@ -117,12 +161,22 @@ public class FavoriteDao extends DAO {
         close();
         return counter;
     }
+
+    /**
+     * Retorna uma lista por implementação de ArrayList contendo todos os id's dos objetos pontos
+     * turísticos armazenados no banco de dados.
+     *
+     * @param userId Id do usuário a ser consultado.
+     * @return Lista de Id's de todos os pontos turísticos marcados pelo usuário.
+     */
     public ArrayList<String> getAllFavouritePointsIds(long userId){
         ArrayList<String> pointsIds = new ArrayList<>();
         open();
-        Cursor cursor = getDb().rawQuery("select " + Helper.FAVOURITE_POINT_ID + " from " + Helper.TABLE_FAVOURITE
-                + " where " + Helper.FAVOURITE_USER_ID
-                + " = ?", new String[]{String.valueOf(userId)});
+
+        Cursor cursor = getDb().rawQuery("select " + Helper.FAVOURITE_POINT_ID + " from "
+                + Helper.TABLE_FAVOURITE + " where " + Helper.FAVOURITE_USER_ID + " = ?"
+                , new String[]{String.valueOf(userId)});
+
         if (cursor.moveToFirst()){
             do {
                 pointsIds.add(cursor.getString(0));
@@ -131,5 +185,23 @@ public class FavoriteDao extends DAO {
         close();
         return  pointsIds;
     }
-}
 
+    /**
+     * TESTE_TESTE
+     * @param favouritePoint wrapper 'usuario + ponto' para remover
+     * @return flag booleana
+     */
+    public boolean checkIfPointIsFavourite(FavouritePoint favouritePoint) {
+        open();
+
+        Cursor cursor = getDb().rawQuery("SELECT 1 FROM " + Helper.TABLE_FAVOURITE + " WHERE "
+                + Helper.FAVOURITE_USER_ID + " = ? AND " + Helper.FAVOURITE_POINT_ID + " = ?"
+                , new String[]{String.valueOf(favouritePoint.getUser().getId())
+                , String.valueOf(favouritePoint.getPoint().getId())});
+
+        boolean isFavouriteBool = cursor.moveToFirst();
+        cursor.close();
+        close();
+        return isFavouriteBool;
+    }
+}

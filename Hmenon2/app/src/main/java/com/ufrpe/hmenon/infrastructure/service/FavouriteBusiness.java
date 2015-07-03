@@ -3,6 +3,7 @@ package com.ufrpe.hmenon.infrastructure.service;
 import android.content.Context;
 
 import com.ufrpe.hmenon.favourite.FavoriteDao;
+import com.ufrpe.hmenon.favourite.FavouritePoint;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.user.domain.User;
 
@@ -29,6 +30,15 @@ public class FavouriteBusiness {
     }
 
     /**
+     * Verifica se o ponto turístico já se encontra marcado como favorito antes de tentar
+     * adicioná-lo ao banco.
+     * @param favouritePoint Ponto turístico favorito a ser marcado.
+     */
+    public void markPointAsFavourite(FavouritePoint favouritePoint) {
+        dao.safeInsertFavourite(favouritePoint);
+    }
+
+    /**
      * Desmarca o ponto turístico como favorito.
      *
      * @param user Usuário que remove o ponto turístico da lista de favoritos.
@@ -39,7 +49,16 @@ public class FavouriteBusiness {
     }
 
     /**
-     * Remove do banco de dados todos os favoritos do usuário fornecido.
+     * Desmarca o ponto turísrico como favorito.
+     *
+     * @param favouritePoint Ponto favorito a ser desmarcado.
+     */
+    public void removeFavourite(FavouritePoint favouritePoint) {
+        dao.removeFavourite(favouritePoint);
+    }
+
+    /**
+     * Remove do banco de dados de favoritos o usuário fornecido e seus pontos turísticos.
      *
      * @param user Usuário cujos favoritos devem ser removidos.
      */
@@ -69,7 +88,20 @@ public class FavouriteBusiness {
     public int getCount() {
         return dao.getTableFavouriteCount();
     }
+
     public ArrayList<String> getFavouritesPointsIds(long userId){
         return dao.getAllFavouritePointsIds(userId);
+    }
+
+    /**
+     * Consulta o banco de dados através da classe FavouritePointDAO se um ponto turístico se
+     * encontra marcado como favorito por um dado usuário.
+     *
+     * @param favouritePoint Objeto que relaciona o ponto turístico e o usuário a serem consultados
+     *                       no banco de dados
+     * @return Booleano referente ao registo do ponto turístico como favorito do usuário em questão.
+     */
+    public boolean checkIfFavourite(FavouritePoint favouritePoint) {
+        return dao.checkIfPointIsFavourite(favouritePoint);
     }
 }
