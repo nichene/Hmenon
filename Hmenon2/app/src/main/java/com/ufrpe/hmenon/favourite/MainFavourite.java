@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Activity responsável pela listagem de pontos turísticos favoritos do usuario logado.
+ * Activity responsável pela listagem de pontos turísticos favoritos.
  */
 public class MainFavourite extends ActionBarActivity{
 
@@ -54,17 +54,21 @@ public class MainFavourite extends ActionBarActivity{
         favouriteBusiness = new FavouriteBusiness(MainInitial.getContext());
         touristicPointBusiness = new TouristicPointBusiness(MainInitial.getContext());
         favouritesList = (ListView) findViewById(R.id.listFavourites);
-        ArrayList<String> pointsIds = favouriteBusiness.getFavouritesPointsIds(StaticUser.getUser().getId());
+
+        ArrayList<String> pointsIds = favouriteBusiness.getFavouritesPointsIds(
+                StaticUser.getUser().getId());
+
         for (String id : pointsIds){
             TouristicPoint point = touristicPointBusiness.getTouristicPointById(id);
             points.add(point);
         }
+
         populate();
         favouritesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TouristicPoint touristicPoint = points.get(position);
-                MainTuristicPoint.setUpScreen(touristicPoint, StaticUser.getUser().isFavourite(touristicPoint.getName()));
+                MainTuristicPoint.setUpScreen(touristicPoint);
                 Intent intentGoPointScreen = new Intent(MainFavourite.this, MainTuristicPoint.class);
                 finish();
                 startActivity(intentGoPointScreen);
@@ -86,6 +90,7 @@ public class MainFavourite extends ActionBarActivity{
             if (view == null) {
                 view = getLayoutInflater().inflate(R.layout.list_item, parent, false);
             }
+
             DecimalFormat format = new DecimalFormat("#.##");
             TouristicPoint currentPoint = points.get(position);
             TextView name = (TextView) view.findViewById(R.id.txtNome);
@@ -97,6 +102,7 @@ public class MainFavourite extends ActionBarActivity{
             destLocation.setLatitude(latitude);
             double longitude = Double.parseDouble(parts[1]);
             destLocation.setLongitude(longitude);
+
             try {
                 Location currentLocation = gps.getLocation();
                 double distanceTo = destLocation.distanceTo(currentLocation);
@@ -110,6 +116,7 @@ public class MainFavourite extends ActionBarActivity{
             } catch (NullPointerException e){
                 Toast.makeText(MainFavourite.this, "GPS ou Rede desligados", Toast.LENGTH_LONG).show();
             }
+
             ImageView image = (ImageView) view.findViewById(R.id.imgPointIcon);
 
             int idIcon = getResources().getIdentifier("icon_"+currentPoint.getImage(), "drawable",

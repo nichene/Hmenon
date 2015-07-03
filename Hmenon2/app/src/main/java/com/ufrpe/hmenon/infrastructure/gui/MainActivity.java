@@ -80,14 +80,16 @@ public class MainActivity extends ActionBarActivity {
         ArrayList<FavouritePoint> favouritePoints = new ArrayList<>();
         favouriteBusiness = new FavouriteBusiness(MainInitial.getContext());
         touristicPointBusiness = new TouristicPointBusiness(MainInitial.getContext());
-        ArrayList<String> pointsIds = favouriteBusiness.getFavouritesPointsIds(StaticUser.getUser().getId());
+        ArrayList<String> pointsIds = favouriteBusiness.getFavouritesPointsIds(
+                StaticUser.getUser().getId());
+
         for (String id : pointsIds){
             FavouritePoint favouritePoint = new FavouritePoint();
             TouristicPoint point = touristicPointBusiness.getTouristicPointById(id);
             favouritePoint.setPoint(point);
             favouritePoints.add(favouritePoint);
         }
-        StaticUser.getUser().setFavourites(favouritePoints);
+
         setContentView(R.layout.activity_main);
         list = (ListView) findViewById(R.id.listPoints);
         touristicPointBusiness = new TouristicPointBusiness(MainInitial.getContext());
@@ -102,7 +104,7 @@ public class MainActivity extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 User user = StaticUser.getUser();
                 TouristicPoint touristicPoint = touristicPoints.get(position);
-                MainTuristicPoint.setUpScreen(touristicPoint, user.isFavourite(touristicPoint.getName()));
+                MainTuristicPoint.setUpScreen(touristicPoint);
                 Intent intentGoPointScreen = new Intent(MainActivity.this, MainTuristicPoint.class);
                 finish();
                 startActivity(intentGoPointScreen);
@@ -284,7 +286,7 @@ public class MainActivity extends ActionBarActivity {
                         throw new NullPointerException(getString(R.string.invalid_qr_code));
                     }
 
-                    MainTuristicPoint.setUpScreen(point, StaticUser.getUser().isFavourite(point.getName()));
+                    MainTuristicPoint.setUpScreen(point);
                     Intent intentToPoint = new Intent(currentContext, MainTuristicPoint.class);
                     finish();
                     startActivity(intentToPoint);

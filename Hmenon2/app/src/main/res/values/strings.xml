@@ -101,5 +101,8 @@ sábados e domingos e feriados das 13h30 às 17h\n
     <string name="ok">OK</string>
     <string name="cancel">CANCELAR</string>
     <string name="action_search">action_search</string>
+    <string name="history">História</string>
+    <string name="activity">Atividade</string>
+    <string name="location">Local</string>
 
 </resources>

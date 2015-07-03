@@ -3,7 +3,7 @@ package com.ufrpe.hmenon.touristicpoint.service;
 import android.content.Context;
 
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
-import com.ufrpe.hmenon.touristicpoint.dao.TouristicPointDao;
+import com.ufrpe.hmenon.touristicpoint.dao.TouristicPointDAO1;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
@@ -18,7 +18,7 @@ public class TouristicPointBusiness {
         dao.setUpAttributes(context);
     }
 
-    private TouristicPointDao dao = TouristicPointDao.getInstance();
+    private TouristicPointDAO1 dao = TouristicPointDAO1.getInstance();
 
     public void checkInsert(ArrayList<TouristicPoint> list){
         if (isEmpty()){

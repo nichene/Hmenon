@@ -4,16 +4,15 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import com.ufrpe.hmenon.infrastructure.dao.DAO;
 import com.ufrpe.hmenon.infrastructure.dao.Helper;
-import com.ufrpe.hmenon.touristicpoint.domain.History;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import java.util.ArrayList;
 
-public class TouristicPointDao extends DAO{
-    private TouristicPointDao(){
+public class TouristicPointDAO1 extends DAO{
+    private TouristicPointDAO1(){
     }
-    private static final TouristicPointDao instance = new TouristicPointDao();
+    private static final TouristicPointDAO1 instance = new TouristicPointDAO1();
 
-    public static TouristicPointDao getInstance(){
+    public static TouristicPointDAO1 getInstance(){
         return instance;
     }
 

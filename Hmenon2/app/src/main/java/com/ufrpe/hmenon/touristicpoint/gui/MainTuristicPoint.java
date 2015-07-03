@@ -20,7 +20,7 @@ import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 /**
  * Activity responsável pela implementação da tela de informações sobre o ponto turístico.
  */
-public class MainTuristicPoint extends ActionBarActivity{
+public class MainTuristicPoint extends ActionBarActivity {
 
     private TextView name;
     private TextView resume;
@@ -30,11 +30,8 @@ public class MainTuristicPoint extends ActionBarActivity{
     private ImageView map;
     private ImageView favouriteImage;
     private static TouristicPoint pointStatic;
-    private static boolean isFavourite;
+    private boolean isFavourite;
     private FavouriteBusiness favouriteBusiness;
-    /**
-     * Agregação de usuário logado e ponto turístico em um único objeto.
-     */
     private FavouritePoint favouritePoint;
 
     @Override
@@ -54,19 +51,19 @@ public class MainTuristicPoint extends ActionBarActivity{
         TabHost tabHost = (TabHost) findViewById(R.id.tabHost);
         tabHost.setup();
 
-        TabHost.TabSpec tabSpec = tabHost.newTabSpec("História");
+        TabHost.TabSpec tabSpec = tabHost.newTabSpec(getString(R.string.history));
         tabSpec.setContent(R.id.history);
-        tabSpec.setIndicator("História");
+        tabSpec.setIndicator(getString(R.string.history));
         tabHost.addTab(tabSpec);
 
-        tabSpec = tabHost.newTabSpec("Atividade");
+        tabSpec = tabHost.newTabSpec(getString(R.string.activity));
         tabSpec.setContent(R.id.activity);
-        tabSpec.setIndicator("Atividade");
+        tabSpec.setIndicator(getString(R.string.activity));
         tabHost.addTab(tabSpec);
 
-        tabSpec = tabHost.newTabSpec("Local");
+        tabSpec = tabHost.newTabSpec(getString(R.string.location));
         tabSpec.setContent(R.id.local);
-        tabSpec.setIndicator("Local");
+        tabSpec.setIndicator(getString(R.string.location));
         tabHost.addTab(tabSpec);
 
         name = (TextView) findViewById(R.id.txtLocalName);
@@ -81,21 +78,21 @@ public class MainTuristicPoint extends ActionBarActivity{
         favouritePoint = new FavouritePoint();
         favouritePoint.setUser(StaticUser.getUser());
         favouritePoint.setPoint(pointStatic);
+
         isFavourite = favouriteBusiness.checkIfFavourite(favouritePoint);
 
-        if (isFavourite){
+        if (isFavourite) {
             favouriteImage.setImageResource(R.drawable.favourite_on_icon);
         }
 
         favouriteImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (favouriteBusiness.checkIfFavourite(favouritePoint)){
+                if (favouriteBusiness.checkIfFavourite(favouritePoint)) {
                     flipFavouriteBoolean();
                     favouriteBusiness.removeFavourite(favouritePoint);
 
-                }
-                else {
+                } else {
                     flipFavouriteBoolean();
                     favouriteBusiness.markPointAsFavourite(favouritePoint);
                 }
@@ -113,7 +110,7 @@ public class MainTuristicPoint extends ActionBarActivity{
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goMaps = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:"+pointStatic.getCoordinates()));
+                Intent goMaps = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:" + pointStatic.getCoordinates()));
                 startActivity(goMaps);
             }
         });
@@ -147,8 +144,7 @@ public class MainTuristicPoint extends ActionBarActivity{
     private void updateFavouriteStatusOnDb(FavouritePoint favouritePoint) {
         if (isFavourite) {
             favouriteBusiness.markPointAsFavourite(favouritePoint);
-        }
-        else {
+        } else {
             favouriteBusiness.removeFavourite(favouritePoint);
         }
     }
@@ -159,10 +155,8 @@ public class MainTuristicPoint extends ActionBarActivity{
      * activity.
      *
      * @param point Ponto turístico a ser mostrado pela activity.
-     * @param favourite Usuário logado no aplicativo.
      */
-    public static void setUpScreen(TouristicPoint point, boolean favourite){
+    public static void setUpScreen(TouristicPoint point) {
         pointStatic = point;
-        isFavourite = favourite;
     }
 }
