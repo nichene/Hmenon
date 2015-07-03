@@ -1,14 +1,19 @@
 package com.ufrpe.hmenon.graph.gui;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.InputType;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.ufrpe.hmenon.R;
@@ -47,6 +52,12 @@ public class MainRoute extends ActionBarActivity {
                 node.setChecked(!node.getChecked());
             }
         });
+        btnCreateNewScript.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog(MainRoute.this);
+            }
+        });
     }
 
     private void populate() {
@@ -73,5 +84,31 @@ public class MainRoute extends ActionBarActivity {
 
     public static void setStaticScriptList(List<Node> staticScriptList) {
         MainRoute.staticScriptList = staticScriptList;
+    }
+    public void showDialog(Activity activity){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle("Definir novo roteiro");
+        builder.setMessage("Quantas horas você tem disponível?");
+        final EditText prompt = new EditText(this);
+        prompt.setInputType(InputType.TYPE_CLASS_NUMBER);
+        builder.setView(prompt);
+        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                try {
+                    int time = Integer.parseInt(prompt.getText().toString());
+                    if (time <= 24 && time >= 0) {
+                        MainRouteSugestion.setTimeLimit(time * 60);
+                        finish();
+                        Intent intentGoRouteSuggestion = new Intent(MainRoute.this, MainRouteSugestion.class);
+                        startActivity(intentGoRouteSuggestion);
+                    }
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+        builder.setNegativeButton(getString(R.string.cancel), null);
+        builder.show();
     }
 }

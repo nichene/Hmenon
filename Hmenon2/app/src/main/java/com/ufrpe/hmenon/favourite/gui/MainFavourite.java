@@ -16,12 +16,12 @@ import android.widget.Toast;
 import com.ufrpe.hmenon.R;
 import com.ufrpe.hmenon.infrastructure.domain.GPSTracker;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
-import com.ufrpe.hmenon.infrastructure.gui.MainActivity;
 import com.ufrpe.hmenon.infrastructure.gui.MainInitial;
 import com.ufrpe.hmenon.favourite.service.FavouriteBusiness;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.touristicpoint.gui.MainTuristicPoint;
 import com.ufrpe.hmenon.touristicpoint.service.TouristicPointBusiness;
+import com.ufrpe.hmenon.user.gui.MainMyPage;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -42,8 +42,8 @@ public class MainFavourite extends ActionBarActivity{
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        Intent intentBackToMain = new Intent(MainFavourite.this, MainActivity.class);
-        startActivity(intentBackToMain);
+        Intent intentBackToMyPage = new Intent(MainFavourite.this, MainMyPage.class);
+        startActivity(intentBackToMyPage);
     }
 
     @Override
