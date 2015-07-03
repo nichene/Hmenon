@@ -16,10 +16,10 @@ import java.util.ArrayList;
  *
  * Possui métodos para inserção, remoção e consulta da sua tabela no banco de dados.
  */
-public class FavoriteDAO1 extends DAO {
-    private FavoriteDAO1() {}
-    private static final FavoriteDAO1 INSTANCE = new FavoriteDAO1();
-    public static FavoriteDAO1 getInstance() { return INSTANCE; }
+public class FavoriteDAO extends DAO {
+    private FavoriteDAO() {}
+    private static final FavoriteDAO INSTANCE = new FavoriteDAO();
+    public static FavoriteDAO getInstance() { return INSTANCE; }
 
     /**
      * Insere novo favorito no banco de dados.

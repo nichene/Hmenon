@@ -7,12 +7,12 @@ import com.ufrpe.hmenon.infrastructure.dao.Helper;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import java.util.ArrayList;
 
-public class TouristicPointDAO1 extends DAO{
-    private TouristicPointDAO1(){
+public class TouristicPointDAO extends DAO{
+    private TouristicPointDAO(){
     }
-    private static final TouristicPointDAO1 instance = new TouristicPointDAO1();
+    private static final TouristicPointDAO instance = new TouristicPointDAO();
 
-    public static TouristicPointDAO1 getInstance(){
+    public static TouristicPointDAO getInstance(){
         return instance;
     }
 
