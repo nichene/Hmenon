@@ -45,9 +45,19 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".favourite.MainFavourite"
+            android:name=".favourite.gui.MainFavourite"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".user.gui.MainMyPage"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".graph.gui.MainRoute"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".graph.gui.MainRouteSugestion"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

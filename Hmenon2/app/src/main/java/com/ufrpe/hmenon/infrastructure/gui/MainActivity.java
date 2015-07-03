@@ -28,11 +28,10 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import com.ufrpe.hmenon.R;
-import com.ufrpe.hmenon.favourite.MainFavourite;
-import com.ufrpe.hmenon.favourite.FavouritePoint;
+import com.ufrpe.hmenon.favourite.domain.FavouritePoint;
 import com.ufrpe.hmenon.infrastructure.domain.GPSTracker;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
-import com.ufrpe.hmenon.infrastructure.service.FavouriteBusiness;
+import com.ufrpe.hmenon.favourite.service.FavouriteBusiness;
 import com.ufrpe.hmenon.touristicpoint.gui.MainTuristicPoint;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.touristicpoint.service.TouristicPointBusiness;
@@ -40,6 +39,7 @@ import com.ufrpe.hmenon.user.domain.User;
 import com.ufrpe.hmenon.user.gui.MainEditUserName;
 import com.ufrpe.hmenon.user.gui.MainEditUserPassword;
 import com.ufrpe.hmenon.user.gui.MainLogin;
+import com.ufrpe.hmenon.user.gui.MainMyPage;
 import com.ufrpe.hmenon.user.service.UserBusiness;
 
 import java.io.UnsupportedEncodingException;
@@ -102,7 +102,6 @@ public class MainActivity extends ActionBarActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                User user = StaticUser.getUser();
                 TouristicPoint touristicPoint = touristicPoints.get(position);
                 MainTuristicPoint.setUpScreen(touristicPoint);
                 Intent intentGoPointScreen = new Intent(MainActivity.this, MainTuristicPoint.class);
@@ -168,10 +167,10 @@ public class MainActivity extends ActionBarActivity {
                 IntentIntegrator intentToScan = new IntentIntegrator(MainActivity.this);
                 intentToScan.initiateScan();
                 break;
-            case R.id.main_to_favourites:
+            case R.id.mainToMyPage:
                 finish();
-                Intent intentGoFavourites = new Intent(MainActivity.this, MainFavourite.class);
-                startActivity(intentGoFavourites);
+                Intent intentGoMyPage = new Intent(MainActivity.this, MainMyPage.class);
+                startActivity(intentGoMyPage);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -181,6 +180,7 @@ public class MainActivity extends ActionBarActivity {
         list.setAdapter(adapter);
     }
     private class ContactListAdapter extends ArrayAdapter<TouristicPoint> {
+        private double min = Double.MAX_VALUE;
         public ContactListAdapter(){
             super(MainActivity.this, R.layout.list_item, touristicPoints);
         }
@@ -190,6 +190,7 @@ public class MainActivity extends ActionBarActivity {
             if (view == null) {
                 view = getLayoutInflater().inflate(R.layout.list_item, parent, false);
             }
+
             DecimalFormat format = new DecimalFormat("#.##");
             TouristicPoint currentPoint = touristicPoints.get(position);
             TextView name = (TextView) view.findViewById(R.id.txtNome);
@@ -204,6 +205,10 @@ public class MainActivity extends ActionBarActivity {
             try {
                 Location currentLocation = gps.getLocation();
                 double distanceTo = destLocation.distanceTo(currentLocation);
+                if (distanceTo < min){
+                    min = distanceTo;
+                    StaticUser.setCloserPoint(currentPoint);
+                }
                 String metric = "m";
                 if (distanceTo > 1000) {
                     distanceTo = distanceTo / 1000;

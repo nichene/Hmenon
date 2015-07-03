@@ -9,12 +9,12 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-import com.ufrpe.hmenon.favourite.FavouritePoint;
+import com.ufrpe.hmenon.favourite.domain.FavouritePoint;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.infrastructure.gui.MainActivity;
 import com.ufrpe.hmenon.R;
 import com.ufrpe.hmenon.infrastructure.gui.MainInitial;
-import com.ufrpe.hmenon.infrastructure.service.FavouriteBusiness;
+import com.ufrpe.hmenon.favourite.service.FavouriteBusiness;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 
 /**

@@ -1,4 +1,4 @@
-package com.ufrpe.hmenon.favourite;
+package com.ufrpe.hmenon.favourite.gui;
 
 import android.content.Intent;
 import android.location.Location;
@@ -18,7 +18,7 @@ import com.ufrpe.hmenon.infrastructure.domain.GPSTracker;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.infrastructure.gui.MainActivity;
 import com.ufrpe.hmenon.infrastructure.gui.MainInitial;
-import com.ufrpe.hmenon.infrastructure.service.FavouriteBusiness;
+import com.ufrpe.hmenon.favourite.service.FavouriteBusiness;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.touristicpoint.gui.MainTuristicPoint;
 import com.ufrpe.hmenon.touristicpoint.service.TouristicPointBusiness;

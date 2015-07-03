@@ -1,4 +1,4 @@
-package com.ufrpe.hmenon.favourite;
+package com.ufrpe.hmenon.favourite.domain;
 
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.user.domain.User;

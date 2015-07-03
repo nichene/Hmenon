@@ -1,9 +1,9 @@
-package com.ufrpe.hmenon.infrastructure.service;
+package com.ufrpe.hmenon.favourite.service;
 
 import android.content.Context;
 
-import com.ufrpe.hmenon.favourite.FavoriteDAO;
-import com.ufrpe.hmenon.favourite.FavouritePoint;
+import com.ufrpe.hmenon.favourite.dao.FavoriteDAO;
+import com.ufrpe.hmenon.favourite.domain.FavouritePoint;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.user.domain.User;
 

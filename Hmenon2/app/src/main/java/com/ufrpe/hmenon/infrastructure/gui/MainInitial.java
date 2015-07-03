@@ -7,6 +7,9 @@ import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 
 import com.ufrpe.hmenon.R;
+import com.ufrpe.hmenon.graph.domain.Graph;
+import com.ufrpe.hmenon.graph.domain.Node;
+import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.touristicpoint.domain.History;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.touristicpoint.service.TouristicPointBusiness;
@@ -28,13 +31,43 @@ public class MainInitial extends ActionBarActivity {
         context = this;
         touristicPointBusiness = new TouristicPointBusiness(MainInitial.getContext());
         points = new ArrayList<>();
+        Graph graph = new Graph();
 
-        points.add(createPoint("marcoZero"));
-        points.add(createPoint("brennand"));
-        points.add(createPoint("museuDePernambuco"));
-        points.add(createPoint("sinagoga"));
-        points.add(createPoint("forteCincoPontas"));
+
+        TouristicPoint marcoZero = createPoint("marcoZero");
+        points.add(marcoZero);
+        TouristicPoint brennand = createPoint("brennand");
+        points.add(brennand);
+        TouristicPoint museuDePernambuco = createPoint("museuDePernambuco");
+        points.add(museuDePernambuco);
+        TouristicPoint sinagoga = createPoint("sinagoga");
+        points.add(sinagoga);
+        TouristicPoint forteCincoPontas = createPoint("forteCincoPontas");
+        points.add(forteCincoPontas);
         touristicPointBusiness.checkInsert(points);
+        Node marcoZeroNode = new Node(marcoZero, 90);
+        Node brennandNode = new Node(brennand, 120);
+        Node museuNode = new Node(museuDePernambuco, 120);
+        Node sinagogaNode = new Node(sinagoga, 90);
+        Node forteNode = new Node(forteCincoPontas, 90);
+        graph.addNode(marcoZeroNode);
+        graph.addNode(brennandNode);
+        graph.addNode(museuNode);
+        graph.addNode(sinagogaNode);
+        graph.addNode(forteNode);
+        graph.addEdge(brennandNode, sinagogaNode, 30);
+        graph.addEdge(brennandNode, marcoZeroNode , 30);
+        graph.addEdge(brennandNode, forteNode , 30);
+        graph.addEdge(brennandNode, museuNode , 30);
+        graph.addEdge(marcoZeroNode, forteNode, 10);
+        graph.addEdge(marcoZeroNode, museuNode, 15);
+        graph.addEdge(marcoZeroNode, sinagogaNode, 5);
+        graph.addEdge(sinagogaNode, museuNode, 15);
+        graph.addEdge(sinagogaNode, forteNode, 5);
+        graph.addEdge(forteNode, museuNode, 15);
+        StaticUser.setGraph(graph);
+
+
 
 
         Handler handler = new Handler();
