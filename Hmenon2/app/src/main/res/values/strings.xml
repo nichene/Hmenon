@@ -104,5 +104,10 @@ sábados e domingos e feriados das 13h30 às 17h\n
     <string name="history">História</string>
     <string name="activity">Atividade</string>
     <string name="location">Local</string>
+    <string name="define_new_script">Definir novo roteiro</string>
+    <string name="how_many_avaliable_hours">Quantas horas você tem disponível?</string>
+    <string name="gps_offline">GPS ou Rede desligados</string>
+    <string name="login_success">" logado com sucesso!"</string>
+    <string name="user_update_success">Alterações feitas com sucesso</string>
 
 </resources>

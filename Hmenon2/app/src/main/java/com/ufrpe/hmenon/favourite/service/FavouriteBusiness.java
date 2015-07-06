@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.ufrpe.hmenon.favourite.dao.FavoriteDAO;
 import com.ufrpe.hmenon.favourite.domain.FavouritePoint;
-import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.user.domain.User;
 
 import java.util.ArrayList;
@@ -20,32 +19,13 @@ public class FavouriteBusiness {
     public FavouriteBusiness (Context context) { dao.setUpAttributes(context); }
 
     /**
-     * Marca o ponto turístico como favorito.
-     *
-     * @param user Usuário que adiciona o ponto turistico como favorito.
-     * @param point Ponto turístico a ser marcado como favorito.
-     */
-    public void markPointAsFavourite(User user, TouristicPoint point) {
-        dao.insertFavourite(user, point);
-    }
-
-    /**
      * Verifica se o ponto turístico já se encontra marcado como favorito antes de tentar
      * adicioná-lo ao banco.
+     *
      * @param favouritePoint Ponto turístico favorito a ser marcado.
      */
     public void markPointAsFavourite(FavouritePoint favouritePoint) {
         dao.safeInsertFavourite(favouritePoint);
-    }
-
-    /**
-     * Desmarca o ponto turístico como favorito.
-     *
-     * @param user Usuário que remove o ponto turístico da lista de favoritos.
-     * @param point Ponto turístico a ser desmarcado como favorito.
-     */
-    public void removeFavourite(User user, TouristicPoint point) {
-        dao.removeFavourite(user, point);
     }
 
     /**
@@ -58,22 +38,16 @@ public class FavouriteBusiness {
     }
 
     /**
-     * Remove do banco de dados de favoritos o usuário fornecido e seus pontos turísticos.
+     * Remove da tabela de favoritos o usuário fornecido e todos os seus pontos turísticos.
      *
-     * @param user Usuário cujos favoritos devem ser removidos.
+     * @param user Usuário cujas entradas na tabela de favoritos devem ser removidas.
      */
     public void removeFavourite(User user) {
         dao.removeSingleUserFavourites(user);
     }
 
-
     /**
-     * TESTES-LIMPA_TABELA_DE_FAVORITOS
-     */
-    public void clearFavourites() { dao.clearTableFavourites(); }
-
-    /**
-     * Conta o número de pontos favoritos do usuário fornecido.
+     * Recupera o número de pontos favoritos do usuário fornecido.
      *
      * @param user Usuário a ser consultado
      * @return Número de pontos favoritos.
@@ -81,9 +55,9 @@ public class FavouriteBusiness {
     public int getCount(User user) { return dao.getUserFavouriteCount(user); }
 
     /**
-     * Conta o número de linhas da tabela no banco de dados.
+     * Recupera o número total de favoritos no banco de dados.
      *
-     * @return Número de linhas da tabela.
+     * @return Número total de linhas da tabela.
      */
     public int getCount() {
         return dao.getTableFavouriteCount();

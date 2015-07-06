@@ -35,7 +35,6 @@ import com.ufrpe.hmenon.favourite.service.FavouriteBusiness;
 import com.ufrpe.hmenon.touristicpoint.gui.MainTuristicPoint;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.touristicpoint.service.TouristicPointBusiness;
-import com.ufrpe.hmenon.user.domain.User;
 import com.ufrpe.hmenon.user.gui.MainEditUserName;
 import com.ufrpe.hmenon.user.gui.MainEditUserPassword;
 import com.ufrpe.hmenon.user.gui.MainLogin;
@@ -52,6 +51,9 @@ import java.util.List;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 
+/**
+ * Activity responsável por implementar as funcionalidades da tela principal do aplicativo.
+ */
 public class MainActivity extends ActionBarActivity {
     private SearchView search;
     private UserBusiness userService;
@@ -217,7 +219,7 @@ public class MainActivity extends ActionBarActivity {
                 String dist = String.valueOf(format.format(distanceTo * 1.3));
                 distance.setText("~" + dist + " " + metric);
             } catch (NullPointerException e){
-                Toast.makeText(MainActivity.this, "GPS ou Rede desligados", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, getString(R.string.gps_offline), Toast.LENGTH_LONG).show();
             }
             ImageView image = (ImageView) view.findViewById(R.id.imgPointIcon);
 
@@ -268,6 +270,7 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    //Lidando com o resultado do scan.
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode,
                 intent);

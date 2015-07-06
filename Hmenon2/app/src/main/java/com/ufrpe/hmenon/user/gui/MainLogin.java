@@ -16,7 +16,9 @@ import com.ufrpe.hmenon.infrastructure.gui.MainInitial;
 import com.ufrpe.hmenon.user.domain.User;
 import com.ufrpe.hmenon.user.service.UserBusiness;
 
-
+/**
+ * Activity responsável por efetuar o login do usuário no aplicativo.
+ */
 public class MainLogin extends ActionBarActivity {
     private Button btnCadastreSe;
     private Button btnLogin;
@@ -24,19 +26,25 @@ public class MainLogin extends ActionBarActivity {
     private EditText edtPassword;
     private UserBusiness service;
 
-    public boolean isReady(EditText editText, int i){
-        return editText.getText().toString().trim().length() > i;
+    /**
+     * Verifica se o Campo de texto fornecido tem comprimento maior que o argumento minimumLength.
+     *
+     * @param editText Campo de texto a ser verificado se possui um número mínimo de caracteres.
+     * @param minimumLength Valor mínimo de caracteres permitidos.
+     * @return Booleano referente a se o campo possui ou não um número de caracteres maior que o
+     * limite mínimo.
+     */
+    public boolean isReady(EditText editText, int minimumLength){
+        return editText.getText().toString().trim().length() > minimumLength;
     }
 
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
 
         service = new UserBusiness(MainInitial.getContext());
-
-
-        setContentView(R.layout.activity_login);
 
         edtEmail = (EditText)findViewById(R.id.edtNome);
         edtPassword = (EditText)findViewById(R.id.edtSenha);
@@ -76,21 +84,19 @@ public class MainLogin extends ActionBarActivity {
                 User user = new User();
                 user.setEmail(email);
                 user.setPassword(password);
+
                 try {
                     service.checkLogin(user);
-                    Toast.makeText(MainLogin.this, StaticUser.getUser().getName() +" logado com sucesso!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainLogin.this, StaticUser.getUser().getName()
+                            + getString(R.string.login_success), Toast.LENGTH_LONG).show();
+
                     finish();
                     Intent intentGoMain = new Intent(MainLogin.this, MainActivity.class);
                     startActivity(intentGoMain);
-
                 } catch (Exception e){
                     Toast.makeText(MainLogin.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
-
-
-
     }
-
 }

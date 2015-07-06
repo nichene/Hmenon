@@ -6,6 +6,8 @@ import com.ufrpe.hmenon.user.domain.User;
 /**
  * Utilizada para manter uma ligação entre o ponto turístico a ser consultado e o usuário a quem o
  * ponto se relaciona no banco de dados.
+ *
+ * Apenas implementa getters e setters.
  */
 public class FavouritePoint {
     private User user;

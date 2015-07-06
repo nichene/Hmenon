@@ -7,6 +7,9 @@ import com.ufrpe.hmenon.infrastructure.dao.Helper;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import java.util.ArrayList;
 
+/**
+ * Realiza as operações de consulta de pontos turísticos ao banco de dados para a activity.
+ */
 public class TouristicPointDAO extends DAO{
     private TouristicPointDAO(){
     }
@@ -19,8 +22,8 @@ public class TouristicPointDAO extends DAO{
     /**
      * Recupera ponto turístico armazenado no cursor.
      *
-     * @param cursor - Objeto cursor com o ponto turístico recuperado do banco de dados.
-     * @return - Ponto turístico do cursor como instância da classe TouristicPoint.
+     * @param cursor Objeto cursor com o ponto turístico recuperado do banco de dados.
+     * @return Ponto turístico do cursor como instância da classe TouristicPoint.
      */
     private static TouristicPoint recoverPointFromCursor(Cursor cursor) {
         TouristicPoint point = new TouristicPoint();
@@ -37,6 +40,11 @@ public class TouristicPointDAO extends DAO{
 
         return point;
     }
+
+    /**
+     * Insere o ponto turístico fornecido na sua tabela no banco de dados.
+     * @param point Ponto turístico a ser inserido.
+     */
     public void insert(TouristicPoint point){
         open();
         ContentValues values = new ContentValues();
@@ -51,6 +59,12 @@ public class TouristicPointDAO extends DAO{
         getDb().insert(Helper.TABLE_TOURISTICPOINT, null, values);
         close();
     }
+
+    /**
+     * Recupera do banco todos os pontos turísticos cadastrados.
+     *
+     * @return ArrayList contendo todos os pontos turísticos inseridos no banco de dados.
+     */
     public ArrayList<TouristicPoint> returnAll(){
         open();
         ArrayList<TouristicPoint> points = new ArrayList<>();
@@ -72,6 +86,12 @@ public class TouristicPointDAO extends DAO{
         close();
         return points;
     }
+
+    /**
+     * Verifica se a tabela dos pontos turísticos no banco de dados se encontra vazia.
+     *
+     * @return Booleano referente ao banco estar vazio ou não.
+     */
     public boolean isEmpty(){
         open();
         boolean empty;
@@ -86,16 +106,17 @@ public class TouristicPointDAO extends DAO{
                 Helper.TOURISTICPOINT_MAP,
                 Helper.TOURISTICPOINT_COORDINATES}, null, null, null, null, null);
         empty = !cursor.moveToFirst();
+        cursor.close();
         close();
         return empty;
     }
 
     /**
-     * Recupera um ponto turístico do banco de dados a partir de do id no qual o ponto turístico foi
+     * Recupera um ponto turístico do banco de dados a partir de do id no qual o ponto foi
      * armazenado.
      *
-     * @param id - Id da linha requisitada.
-     * @return - Instância de TouristicPoint referente à linha requisitada
+     * @param id Id da linha requisitada.
+     * @return Instância de TouristicPoint referente à linha requisitada
      */
     public TouristicPoint getPointFromId(long id) {
         this.open();
@@ -117,6 +138,14 @@ public class TouristicPointDAO extends DAO{
         }
         return null;
     }
+
+    /**
+     * Recupera um ponto turístico do banco de dados a partir de do nome no qual o ponto foi
+     * armazenado.
+     *
+     * @param nome Nome do ponto turístico a ser consultado no banco de dados.
+     * @return Instância de TouristicPoint referente à linha requisitada
+     */
     public TouristicPoint getPointFromName(String nome) {
         this.open();
         Cursor cursor = getDb().query(Helper.TABLE_TOURISTICPOINT, new String[]{

@@ -6,6 +6,12 @@ import com.ufrpe.hmenon.graph.domain.Graph;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.user.domain.User;
 
+/**
+ * Classe para acesso ao usuário logado.
+ *
+ * Implementa getters, setters além do contexto e ponto turístico mais próximo da localização atual
+ * do usuário.
+ */
 public class StaticUser {
 
     private static User user;

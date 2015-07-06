@@ -16,6 +16,9 @@ import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.infrastructure.gui.MainInitial;
 import com.ufrpe.hmenon.user.service.UserBusiness;
 
+/**
+ * Activity responsável por alterar a senha do usuário.
+ */
 public class MainEditUserPassword extends ActionBarActivity {
 
     private EditText edtEditPassword;
@@ -32,8 +35,16 @@ public class MainEditUserPassword extends ActionBarActivity {
         startActivity(intentGoMain);
     }
 
-    public boolean isReady(EditText editText, int i){
-        return editText.getText().toString().trim().length() > i;
+    /**
+     * Verifica se o Campo de texto fornecido tem comprimento maior que o argumento minimumLength.
+     *
+     * @param editText Campo de texto a ser verificado se possui um número mínimo de caracteres.
+     * @param minimumLength Valor mínimo de caracteres permitidos.
+     * @return Booleano referente a se o campo possui ou não um número de caracteres maior que o
+     * limite mínimo.
+     */
+    public boolean isReady(EditText editText, int minimumLength){
+        return editText.getText().toString().trim().length() > minimumLength;
     }
 
 
@@ -41,42 +52,45 @@ public class MainEditUserPassword extends ActionBarActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         service = new UserBusiness(MainInitial.getContext());
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_edituserpassword);
+
         edtPassword = (EditText) findViewById(R.id.edtPasswordEditPassword);
         edtEditPassword = (EditText) findViewById(R.id.edtPasswordEdit);
         edtConfirmEditPassword = (EditText) findViewById(R.id.edtConfirmPasswordEdit);
         btnConfirmEditPassword = (Button) findViewById(R.id.btnConfirmPasswordEdit);
+
         edtConfirmEditPassword.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
             @Override
             public void afterTextChanged(Editable s) {
-                btnConfirmEditPassword.setEnabled(isReady(edtPassword, 3) && isReady(edtEditPassword, 3) && isReady(edtConfirmEditPassword, 3));
-
+                btnConfirmEditPassword.setEnabled(isReady(edtPassword, 3)
+                        && isReady(edtEditPassword, 3) && isReady(edtConfirmEditPassword, 3));
             }
         });
+
         btnConfirmEditPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String oldPassword = edtPassword.getText().toString();
                 String password = edtEditPassword.getText().toString();
                 String confirmedPassword = edtConfirmEditPassword.getText().toString();
+
                 try {
                     service.checkPasswordUpdate(password, confirmedPassword, oldPassword);
                     StaticUser.getUser().setPassword(password);
-                    Toast.makeText(MainEditUserPassword.this, "Alterações feitas com sucesso", Toast.LENGTH_LONG).show();
+
+                    Toast.makeText(MainEditUserPassword.this, getString(R.string.user_update_success),
+                            Toast.LENGTH_LONG).show();
+
                     onBackPressed();
                 } catch (Exception e){
-                    Toast.makeText(MainEditUserPassword.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainEditUserPassword.this, e.getMessage(),
+                            Toast.LENGTH_LONG).show();
                 }
             }
 

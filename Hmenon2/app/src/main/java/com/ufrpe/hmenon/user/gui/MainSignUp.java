@@ -17,6 +17,9 @@ import com.ufrpe.hmenon.infrastructure.gui.MainInitial;
 import com.ufrpe.hmenon.user.domain.User;
 import com.ufrpe.hmenon.user.service.UserBusiness;
 
+/**
+ * Activity responsável pelo cadastro de novos usuários.
+ */
 public class MainSignUp extends ActionBarActivity {
 
     private Button btnCadastrar;
@@ -33,8 +36,17 @@ public class MainSignUp extends ActionBarActivity {
         Intent intentGoLogin = new Intent(MainSignUp.this, MainLogin.class);
         startActivity(intentGoLogin);
     }
-    public boolean isReady(EditText editText, int i){
-        return editText.getText().toString().trim().length() > i;
+
+    /**
+     * Verifica se o Campo de texto fornecido tem comprimento maior que o argumento minimumLength.
+     *
+     * @param editText Campo de texto a ser verificado se possui um número mínimo de caracteres.
+     * @param minimumLength Valor mínimo de caracteres permitidos.
+     * @return Booleano referente ao campo possuir ou não um número de caracteres maior que o
+     * limite mínimo.
+     */
+    public boolean isReady(EditText editText, int minimumLength){
+        return editText.getText().toString().trim().length() > minimumLength;
     }
 
 
@@ -53,19 +65,15 @@ public class MainSignUp extends ActionBarActivity {
 
         edtConfirmPassword.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
             @Override
             public void afterTextChanged(Editable s) {
-                btnCadastrar.setEnabled(isReady(edtName, 3) && isReady(edtPassword, 3) && isReady(edtConfirmPassword, 3));
-
+                btnCadastrar.setEnabled(isReady(edtName, 3) && isReady(edtPassword, 3)
+                        && isReady(edtConfirmPassword, 3));
             }
         });
 
@@ -76,10 +84,12 @@ public class MainSignUp extends ActionBarActivity {
                 String name = edtName.getText().toString();
                 String password = edtPassword.getText().toString();
                 String confirmedPassword = edtConfirmPassword.getText().toString();
+
                 User user = new User();
                 user.setEmail(email);
                 user.setName(name);
                 user.setPassword(password);
+
                 try {
                     service.checkSignUp(user, confirmedPassword);
                     finish();
@@ -90,7 +100,5 @@ public class MainSignUp extends ActionBarActivity {
             }
 
         });
-
-
     }
 }

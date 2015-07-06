@@ -17,7 +17,10 @@ import com.ufrpe.hmenon.user.gui.MainLogin;
 
 import java.util.ArrayList;
 
-
+/**
+ * Mostra a tela de abertura (splash screen) durante a inicialização do aplicativo enquanto cria e
+ * insere os pontos turísticos no banco de dados, caso estes já não estejam incluidos.
+ */
 public class MainInitial extends ActionBarActivity {
     private static Context context;
     private TouristicPointBusiness touristicPointBusiness;
@@ -44,12 +47,15 @@ public class MainInitial extends ActionBarActivity {
         points.add(sinagoga);
         TouristicPoint forteCincoPontas = createPoint("forteCincoPontas");
         points.add(forteCincoPontas);
+
         touristicPointBusiness.checkInsert(points);
+
         Node marcoZeroNode = new Node(marcoZero, 90);
         Node brennandNode = new Node(brennand, 120);
         Node museuNode = new Node(museuDePernambuco, 120);
         Node sinagogaNode = new Node(sinagoga, 90);
         Node forteNode = new Node(forteCincoPontas, 90);
+
         graph.addNode(marcoZeroNode);
         graph.addNode(brennandNode);
         graph.addNode(museuNode);
@@ -65,10 +71,8 @@ public class MainInitial extends ActionBarActivity {
         graph.addEdge(sinagogaNode, museuNode, 15);
         graph.addEdge(sinagogaNode, forteNode, 5);
         graph.addEdge(forteNode, museuNode, 15);
+
         StaticUser.setGraph(graph);
-
-
-
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -80,8 +84,10 @@ public class MainInitial extends ActionBarActivity {
             }
         }, 3000);
     }
+
     public TouristicPoint createPoint(String pointName){
         TouristicPoint point = new TouristicPoint();
+
         int idName = getResources().getIdentifier(pointName+"Name", "string", getPackageName());
         int idResume = getResources().getIdentifier(pointName+"Resume", "string", getPackageName());
         int idHistory = getResources().getIdentifier(pointName+"History", "string", getPackageName());
@@ -90,6 +96,7 @@ public class MainInitial extends ActionBarActivity {
         int idAddress = getResources().getIdentifier(pointName+"Address", "string", getPackageName());
         int idCoordinates = getResources().getIdentifier(pointName+"Coordinates", "string", getPackageName());
         int idMap = getResources().getIdentifier(pointName+"Map", "string", getPackageName());
+
         point.setMap(getResources().getString(idMap));
         point.setAddress(getResources().getString(idAddress));
         point.setCoordinates(getResources().getString(idCoordinates));
@@ -99,9 +106,9 @@ public class MainInitial extends ActionBarActivity {
         point.setHistoryText(getResources().getString(idHistory));
         point.setImage(getResources().getString(idImage));
         point.setActivityText(getResources().getString(idActivityHistory));
+
         return point;
     }
-
     public static Context getContext() {
         return context;
     }

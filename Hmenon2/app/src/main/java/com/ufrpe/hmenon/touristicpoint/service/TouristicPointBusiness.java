@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 
+/**
+ * Classe responsável pela consulta à tabela de pontos turísticos no banco de dados.
+ */
 public class TouristicPointBusiness {
 
     public TouristicPointBusiness(Context context){
@@ -20,6 +23,11 @@ public class TouristicPointBusiness {
 
     private TouristicPointDAO dao = TouristicPointDAO.getInstance();
 
+    /**
+     * Insere uma lista de pontos turísticos no banco de dados caso este esteja vazio.
+     *
+     * @param list ArrayList contendo todos os pontos turísticos a serem inseridos.
+     */
     public void checkInsert(ArrayList<TouristicPoint> list){
         if (isEmpty()){
             for (TouristicPoint point : list){
@@ -28,10 +36,20 @@ public class TouristicPointBusiness {
         }
     }
 
+    /**
+     * Recupera uma lista contendo todos os pontos turísticos cadastrados no banco de dados.
+     *
+     * @return ArrayList contendo todos os pontos cadastrados.
+     */
     public ArrayList<TouristicPoint> checkGetAll(){
         return dao.returnAll();
     }
 
+    /**
+     * Verifica se a tabela de pontos turísticos no banco de dados se encontra vazia.
+     *
+     * @return Booleano referente ao banco estar vazio ou não.
+     */
     private boolean isEmpty(){
         return dao.isEmpty();
     }

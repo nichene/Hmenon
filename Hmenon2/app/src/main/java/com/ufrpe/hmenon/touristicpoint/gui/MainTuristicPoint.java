@@ -18,7 +18,7 @@ import com.ufrpe.hmenon.favourite.service.FavouriteBusiness;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 
 /**
- * Activity responsável pela implementação da tela de informações sobre o ponto turístico.
+ * Activity responsável por implementar a tela com informações detalhadas sobre o ponto turístico.
  */
 public class MainTuristicPoint extends ActionBarActivity {
 
@@ -107,10 +107,12 @@ public class MainTuristicPoint extends ActionBarActivity {
         int idImage = getResources().getIdentifier(pointStatic.getImage(), "drawable", getPackageName());
         image.setImageResource(idImage);
         map.setImageResource(idMap);
+
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goMaps = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:" + pointStatic.getCoordinates()));
+                Intent goMaps = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:"
+                        + pointStatic.getCoordinates()));
                 startActivity(goMaps);
             }
         });
@@ -125,7 +127,7 @@ public class MainTuristicPoint extends ActionBarActivity {
 
     /**
      * Alterna o estatus do ponto turístico entre favorito e não-favorito e muda a imagem do ícone
-     * sempre que o ícone for clicado.
+     * sempre que o mesmo for clicado.
      */
     private void flipFavouriteBoolean() {
         if (isFavourite) {
@@ -139,7 +141,7 @@ public class MainTuristicPoint extends ActionBarActivity {
 
     /**
      * Atualiza no banco de dados o estatus de favorito do ponto atualmente aberto pela activity,
-     * deve ser chamado apenas uma vez, logo antes da activity ser parada.
+     * deve ser chamado apenas uma vez, logo antes da activity perder a sua visibilidade.
      */
     private void updateFavouriteStatusOnDb(FavouritePoint favouritePoint) {
         if (isFavourite) {
@@ -150,9 +152,8 @@ public class MainTuristicPoint extends ActionBarActivity {
     }
 
     /**
-     * Ajusta o usuário logado e o ponto turístico a ser aberto pela activity.
-     * A chamada deste método ocorre antes da inicialização da instância de Intent para esta
-     * activity.
+     * Ajusta o ponto turístico a ser aberto pela activity. A chamada deste método ocorre antes da
+     * inicialização desta activity.
      *
      * @param point Ponto turístico a ser mostrado pela activity.
      */

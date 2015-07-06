@@ -17,6 +17,11 @@ import com.ufrpe.hmenon.graph.gui.MainRouteSugestion;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.infrastructure.gui.MainActivity;
 import com.ufrpe.hmenon.user.domain.User;
+
+/**
+ * Activity responsável por mostrar a página do usuário e oferecer as opções de visualizar favoritos
+ * ou criar rotas de visitação.
+ */
 public class MainMyPage extends ActionBarActivity {
     private TextView txtNome;
     private Button btnFavourite;
@@ -40,6 +45,7 @@ public class MainMyPage extends ActionBarActivity {
         User user = StaticUser.getUser();
         String name = user.getName();
         txtNome.setText(name);
+
         btnFavourite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,6 +54,7 @@ public class MainMyPage extends ActionBarActivity {
                 startActivity(intentGoFavourites);
             }
         });
+
         btnScript.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,10 +62,11 @@ public class MainMyPage extends ActionBarActivity {
             }
         });
     }
+
     public void showDialog(Activity activity){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("Definir novo roteiro");
-        builder.setMessage("Quantas horas você tem disponível?");
+        builder.setTitle(getString(R.string.define_new_script));
+        builder.setMessage(getString(R.string.how_many_avaliable_hours));
         final EditText prompt = new EditText(this);
         prompt.setInputType(InputType.TYPE_CLASS_NUMBER);
         builder.setView(prompt);
@@ -70,7 +78,10 @@ public class MainMyPage extends ActionBarActivity {
                     if (time <= 24 && time >= 0) {
                         MainRouteSugestion.setTimeLimit(time * 60);
                         finish();
-                        Intent intentGoRouteSuggestion = new Intent(MainMyPage.this, MainRouteSugestion.class);
+
+                        Intent intentGoRouteSuggestion = new Intent(MainMyPage.this,
+                                MainRouteSugestion.class);
+
                         startActivity(intentGoRouteSuggestion);
                     }
                 } catch (Exception e){

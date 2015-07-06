@@ -6,7 +6,6 @@ import android.database.Cursor;
 import com.ufrpe.hmenon.favourite.domain.FavouritePoint;
 import com.ufrpe.hmenon.infrastructure.dao.DAO;
 import com.ufrpe.hmenon.infrastructure.dao.Helper;
-import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.user.domain.User;
 
 import java.util.ArrayList;
@@ -23,33 +22,9 @@ public class FavoriteDAO extends DAO {
     public static FavoriteDAO getInstance() { return INSTANCE; }
 
     /**
-     * Insere novo favorito no banco de dados.
-     *
-     * @param user Usuário que adiciona ponto turístico a lista de favoritos.
-     * @param point Ponto turístico a ser marcado como favorito.
-     */
-    public void insertFavourite(User user, TouristicPoint point) {
-        open();
-        ContentValues values = new ContentValues();
-        values.put(Helper.FAVOURITE_USER_ID, user.getId());
-        values.put(Helper.FAVOURITE_POINT_ID, point.getId());
-        getDb().insert(Helper.TABLE_FAVOURITE, null, values);
-        close();
-    }
-
-    public void insertFavourite(FavouritePoint favouritePoint) {
-        open();
-        ContentValues values = new ContentValues();
-        values.put(Helper.FAVOURITE_USER_ID, favouritePoint.getUser().getId());
-        values.put(Helper.FAVOURITE_POINT_ID, favouritePoint.getPoint().getId());
-        getDb().insert(Helper.TABLE_FAVOURITE, null, values);
-        close();
-    }
-
-    /**
      * Verifica se o ponto já encontra-se como favorito antes de tentar inserí-lo no banco.
      *
-     * @param favouritePoint Ponto a ser inserido.
+     * @param favouritePoint Ponto turístico a ser inserido.
      */
     public void safeInsertFavourite(FavouritePoint favouritePoint) {
         if (!checkIfPointIsFavourite(favouritePoint)) {
@@ -63,32 +38,11 @@ public class FavoriteDAO extends DAO {
     }
 
     /**
-     * Remove o ponto turístico da lista de favoritos.
+     * Remove o ponto turístico do usuário da tabela de favoritos.
      *
-     * @param user Usuário que requesita a remoção do ponto turístico da lista de favoritos.
-     * @param point Ponto turístico a ser removido da lista.
-     * @return Inteiro indicando o número de linhas removidas no banco de dados.
+     * @param favouritePoint Ponto turístico a ser removido.
      */
-    public int removeFavourite(User user, TouristicPoint point) {
-        String clause = Helper.FAVOURITE_USER_ID + " = ? AND "
-                + Helper.FAVOURITE_POINT_ID + " = ? ";
-
-        String arguments[] = new String[]{ Long.toString(user.getId()),
-                Long.toString(point.getId()) };
-
-        open();
-        int deletionCount = getDb().delete(Helper.TABLE_FAVOURITE, clause, arguments);
-        close();
-        return deletionCount;
-    }
-
-    /**
-     * Remove o ponto turístico do usuário da tabela de pontos favoritos no banco de dados.
-     *
-     * @param favouritePoint ponto a ser removido.
-     * @return um número aí.
-     */
-    public int removeFavourite(FavouritePoint favouritePoint) {
+    public void removeFavourite(FavouritePoint favouritePoint) {
         String clause = Helper.FAVOURITE_USER_ID + " = ? AND "
                 + Helper.FAVOURITE_POINT_ID + " = ? ";
 
@@ -96,34 +50,27 @@ public class FavoriteDAO extends DAO {
                 Long.toString(favouritePoint.getPoint().getId()) };
 
         open();
-        int deletionCount = getDb().delete(Helper.TABLE_FAVOURITE, clause, arguments);
+//        int deletionCount = getDb().delete(Helper.TABLE_FAVOURITE, clause, arguments);
+        getDb().delete(Helper.TABLE_FAVOURITE, clause, arguments);
         close();
-        return deletionCount;
+//        return deletionCount;
     }
 
     /**
-     * Remove do banco de dados todos os favoritos do usuário fornecido.
+     * Remove o usuário e seus pontos da tabela de favoritos no banco de dados.
      *
-     * @param user Usuário cujos favoritos devem ser removidos.
+     * @param user Usuário cujas entradas na tabela de favoritos devem ser removidas.
      */
-    public int removeSingleUserFavourites(User user) {
+    public void removeSingleUserFavourites(User user) {
         String clause = Helper.FAVOURITE_USER_ID + " = ? ";
 
         String arguments[] = new String[]{ Long.toString(user.getId()) };
 
         open();
-        int deletionCount = getDb().delete(Helper.TABLE_FAVOURITE, clause, arguments);
+//        int deletionCount = getDb().delete(Helper.TABLE_FAVOURITE, clause, arguments);
+        getDb().delete(Helper.TABLE_FAVOURITE, clause, arguments);
         close();
-        return deletionCount;
-    }
-
-    /**
-     * TESTES-APENAS_LIMPA_TABELA_FAVORITOS
-     */
-    public void clearTableFavourites() {
-        open();
-        getDb().delete(Helper.TABLE_FAVOURITE, null, null);
-        close();
+//        return deletionCount;
     }
 
     /**
@@ -183,14 +130,16 @@ public class FavoriteDAO extends DAO {
                 pointsIds.add(cursor.getString(0));
             } while (cursor.moveToNext());
         }
+        cursor.close();
         close();
         return  pointsIds;
     }
 
     /**
-     * TESTE_TESTE
-     * @param favouritePoint wrapper 'usuario + ponto' para remover
-     * @return flag booleana
+     * Verifica se o ponto turístico está marcado como favorito pelo usuário.
+     *
+     * @param favouritePoint Objeto que reúne ambos os ponto turístico e o usuário.
+     * @return Booleano referente a o ponto estar marcado como favorito ou não.
      */
     public boolean checkIfPointIsFavourite(FavouritePoint favouritePoint) {
         open();

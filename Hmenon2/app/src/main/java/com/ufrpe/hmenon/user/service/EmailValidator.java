@@ -2,12 +2,18 @@ package com.ufrpe.hmenon.user.service;
 import java.util.regex.*;
 
 /**
+ * Verifica a validade do campo de texto E-mail.
  *
  * @author marcio.pulcinelli
  */
 public class EmailValidator
 {
-
+    /**
+     * Verifica através de uma expressão regular se o string é um e-mail válido.
+     *
+     * @param email String a ser verificado.
+     * @return Booleano referente a se o string é válido ou não.
+     */
     public static boolean validar(String email)
     {
         boolean isEmailIdValid = false;
@@ -21,5 +27,4 @@ public class EmailValidator
         }
         return isEmailIdValid;
     }
-
 }

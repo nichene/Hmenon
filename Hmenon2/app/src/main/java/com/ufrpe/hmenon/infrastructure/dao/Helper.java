@@ -14,6 +14,9 @@ import java.io.File;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+/**
+ * Implementação de OpenHelper para as classes de DAO do projeto.
+ */
 public class Helper extends SQLiteOpenHelper{
     private static final String NAMEDB = "hmenon";
     private static final int VERSIONDB = 16;
@@ -24,7 +27,8 @@ public class Helper extends SQLiteOpenHelper{
     public static final String USER_EMAIL = "user_email";
     public static final String USER_NAME = "user_name";
     public static final String USER_PASSWORD = "user_password";
-    public static final String CREATED_AT = "creation_date";
+    public static final String USER_STATUS = "user_status";
+//    public static final String CREATED_AT = "creation_date";
 
     public static final String TABLE_TOURISTICPOINT = "touristic_point";
     public static final String TOURISTICPOINT_ID = "_touristic_point_id";
@@ -90,6 +94,7 @@ public class Helper extends SQLiteOpenHelper{
             e.printStackTrace();
         }
     }
+
     public TouristicPoint createPoint(String pointName){
         TouristicPoint point = new TouristicPoint();
         point.setName(document.getElementsByTagName(pointName+"Name").item(0).getTextContent());

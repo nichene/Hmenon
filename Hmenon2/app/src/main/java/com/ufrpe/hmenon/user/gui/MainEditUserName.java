@@ -16,7 +16,9 @@ import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.infrastructure.gui.MainInitial;
 import com.ufrpe.hmenon.user.service.UserBusiness;
 
-
+/**
+ * Activity responsável pela alteração do nome do usuário.
+ */
 public class MainEditUserName extends ActionBarActivity{
 
     private EditText edtEditName;
@@ -33,8 +35,16 @@ public class MainEditUserName extends ActionBarActivity{
         startActivity(intentGoMain);
     }
 
-    public boolean isReady(EditText editText, int i){
-        return editText.getText().toString().trim().length() > i;
+    /**
+     * Verifica se o Campo de texto fornecido tem comprimento maior que o argumento minimumLength.
+     *
+     * @param editText Campo de texto a ser verificado se possui um número mínimo de caracteres.
+     * @param minimumLength Valor mínimo de caracteres permitidos.
+     * @return Booleano referente a se o campo possui ou não um número de caracteres maior que o
+     * limite mínimo.
+     */
+    public boolean isReady(EditText editText, int minimumLength){
+        return editText.getText().toString().trim().length() > minimumLength;
     }
 
     @Override
@@ -47,6 +57,7 @@ public class MainEditUserName extends ActionBarActivity{
         edtEditName = (EditText) findViewById(R.id.edtNameEdit);
         edtConfirmEditName = (EditText) findViewById(R.id.edtConfirmNameEdit);
         btnConfirmEditName = (Button) findViewById(R.id.btnConfirmEdit);
+
         edtConfirmEditName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -64,16 +75,21 @@ public class MainEditUserName extends ActionBarActivity{
 
             }
         });
+
         btnConfirmEditName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String oldPassword = edtPassword.getText().toString();
                 String name = edtEditName.getText().toString();
                 String confirmedName = edtConfirmEditName.getText().toString();
+
                 try {
                     service.checkNameUpdate(name, confirmedName, oldPassword);
                     StaticUser.getUser().setPassword(name);
-                    Toast.makeText(MainEditUserName.this, "Alterações feitas com sucesso", Toast.LENGTH_LONG).show();
+
+                    Toast.makeText(MainEditUserName.this, getString(R.string.user_update_success),
+                            Toast.LENGTH_LONG).show();
+
                     onBackPressed();
                 } catch (Exception e) {
                     Toast.makeText(MainEditUserName.this, e.getMessage(), Toast.LENGTH_LONG).show();

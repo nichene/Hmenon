@@ -49,8 +49,9 @@ public class MainFavourite extends ActionBarActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        gps = new GPSTracker(MainInitial.getContext());
         setContentView(R.layout.activity_favourites);
+
+        gps = new GPSTracker(MainInitial.getContext());
         favouriteBusiness = new FavouriteBusiness(MainInitial.getContext());
         touristicPointBusiness = new TouristicPointBusiness(MainInitial.getContext());
         favouritesList = (ListView) findViewById(R.id.listFavourites);
@@ -107,14 +108,17 @@ public class MainFavourite extends ActionBarActivity{
                 Location currentLocation = gps.getLocation();
                 double distanceTo = destLocation.distanceTo(currentLocation);
                 String metric = "m";
+
                 if (distanceTo > 1000) {
                     distanceTo = distanceTo / 1000;
                     metric = "km";
                 }
+
                 String dist = String.valueOf(format.format(distanceTo * 1.3));
                 distance.setText("~" + dist + " " + metric);
             } catch (NullPointerException e){
-                Toast.makeText(MainFavourite.this, "GPS ou Rede desligados", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainFavourite.this, getString(R.string.gps_offline),
+                        Toast.LENGTH_LONG).show();
             }
 
             ImageView image = (ImageView) view.findViewById(R.id.imgPointIcon);

@@ -13,6 +13,9 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
+/**
+ * Classe responsável pela criptografia de Strings para serem utilizados no QR-Code.
+ */
 public abstract class CryptoHelper {
 
     private static final String ALGORITHM = "AES";

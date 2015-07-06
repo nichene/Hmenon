@@ -7,10 +7,11 @@ import com.ufrpe.hmenon.infrastructure.dao.Helper;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.user.domain.User;
 
-
+/**
+ * Faz a consulta e escrita de usuários em sua respectiva tabela no banco de dados.
+ */
 public class UserDAO extends DAO{
-    private UserDAO(){
-    }
+    private UserDAO(){}
 
     private static final UserDAO instance = new UserDAO();
 
@@ -18,6 +19,11 @@ public class UserDAO extends DAO{
         return instance;
     }
 
+    /**
+     * Insere os usuário passado como argumento no banco de dados.
+     *
+     * @param user Objeto usuário a ser inserido no banco.
+     */
     public void insert(User user){
         open();
         ContentValues values = new ContentValues();
@@ -28,12 +34,24 @@ public class UserDAO extends DAO{
         close();
     }
 
+    /**
+     * Remove se possível o usuário do banco de dados através do atributo email.
+     *
+     * @param user Usuário a ser removido do banco.
+     */
     public void delete(User user){
         open();
         getDb().delete(Helper.TABLE_USER, Helper.USER_EMAIL + " = ?", new String[]{user.getEmail()});
         close();
     }
 
+    /**
+     * Consulta o banco de dados por usuários cadastrados com o email fornecido, e o retorna como uma
+     * instância da classe User ou retorna null caso contrário.
+     *
+     * @param email Chave utilizada para procura no banco de dados.
+     * @return Usuário como instância da classe User ou null caso não existir no banco de dados.
+     */
     public User search(String email){
         open();
         Cursor cursor = getDb().rawQuery("select * from " + Helper.TABLE_USER
@@ -47,19 +65,33 @@ public class UserDAO extends DAO{
             user.setName(cursor.getString(2));
             user.setPassword(cursor.getString(3));
         }
+        cursor.close();
         close();
         return user;
     }
 
+    /**
+     * Atualiza no banco de dados o nome do usuário logado.
+     *
+     * @param name Novo atributo nome do usuário logado a ser atualizado no banco de dados.
+     */
     public void updateName(String name){
         open();
         User user = StaticUser.getUser();
         ContentValues values = new ContentValues();
         values.put(Helper.USER_NAME, name);
-        getDb().update(Helper.TABLE_USER, values, Helper.USER_EMAIL + " = ?", new String[]{user.getEmail()});
+
+        getDb().update(Helper.TABLE_USER, values, Helper.USER_EMAIL + " = ?",
+                new String[]{user.getEmail()});
+
         close();
     }
 
+    /**
+     * Atualiza no banco de dados a senha do usuário logado.
+     *
+     * @param password Novo atributo senha do usuário logado a ser atualizado no banco de dados.
+     */
     public void updatePassword(String password){
         open();
         User user = StaticUser.getUser();
@@ -68,6 +100,14 @@ public class UserDAO extends DAO{
         getDb().update(Helper.TABLE_USER, values, Helper.USER_EMAIL + " = ?", new String[]{user.getEmail()});
     }
 
+    /**
+     * Consulta o banco de dados por usuários cadastrados com ambos o E-mail e senha fornecidos e o
+     * retorna caso exista como uma instância da classe User enquanto retorna null caso contrário.
+     *
+     * @param email E-mail do usuário a ser consultado.
+     * @param password Senha do usuário a ser consultado.
+     * @return Usuário como instância da classe User ou null caso não existir no banco de dados.
+     */
     public User search(String email, String password){
         open();
         Cursor cursor = getDb().rawQuery("select * from " + Helper.TABLE_USER

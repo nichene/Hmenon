@@ -1,6 +1,10 @@
 package com.ufrpe.hmenon.touristicpoint.domain;
 
-
+/**
+ * Representação da estrutura de um ponto turístico.
+ *
+ * Apenas implementa getters e setters.
+ */
 public class TouristicPoint {
     private Long id;
     private String name;
