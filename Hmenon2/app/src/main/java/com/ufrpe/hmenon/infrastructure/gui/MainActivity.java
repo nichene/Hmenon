@@ -78,10 +78,11 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        gps = new GPSTracker(MainInitial.getContext());
+        StaticUser.setContext(this);
+        gps = new GPSTracker(StaticUser.getContext());
         ArrayList<FavouritePoint> favouritePoints = new ArrayList<>();
-        favouriteBusiness = new FavouriteBusiness(MainInitial.getContext());
-        touristicPointBusiness = new TouristicPointBusiness(MainInitial.getContext());
+        favouriteBusiness = new FavouriteBusiness(StaticUser.getContext());
+        touristicPointBusiness = new TouristicPointBusiness(StaticUser.getContext());
         ArrayList<String> pointsIds = favouriteBusiness.getFavouritesPointsIds(
                 StaticUser.getUser().getId());
 
@@ -94,12 +95,12 @@ public class MainActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_main);
         list = (ListView) findViewById(R.id.listPoints);
-        touristicPointBusiness = new TouristicPointBusiness(MainInitial.getContext());
+        touristicPointBusiness = new TouristicPointBusiness(StaticUser.getContext());
         touristicPoints = touristicPointBusiness.checkGetAll();
         allPoints = touristicPoints;
         populate();
         getOverflowMenu();
-        userService = new UserBusiness(MainInitial.getContext());
+        userService = new UserBusiness(StaticUser.getContext());
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -209,6 +210,7 @@ public class MainActivity extends ActionBarActivity {
                 double distanceTo = destLocation.distanceTo(currentLocation);
                 if (distanceTo < min){
                     min = distanceTo;
+                    StaticUser.setCloserTime((long) ((distanceTo * 1.3) / 5.5) / 60);
                     StaticUser.setCloserPoint(currentPoint);
                 }
                 String metric = "m";

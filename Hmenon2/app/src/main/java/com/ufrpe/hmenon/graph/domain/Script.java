@@ -1,9 +1,7 @@
-package com.ufrpe.hmenon.graph.path;
+package com.ufrpe.hmenon.graph.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.ufrpe.hmenon.graph.domain.Edge;
-import com.ufrpe.hmenon.graph.domain.Node;
 
 public class Script {
 	private Node origin;
@@ -26,11 +24,11 @@ public class Script {
 		path.setNodes(new ArrayList<Node>());
 		path.setWheight(0);
         if (origin!=null) {
-            blowNode(origin, path, limitWheight);
+            blowNode(origin, path, limitWheight, 0);
         }
 	}
 	
-	private void blowNode(Node node, Path currentPath, long limit){
+	private void blowNode(Node node, Path currentPath, long limit, long travelTime){
 		long wheight = currentPath.getWheight() + node.getCost();
 		if (limit < wheight){
             if (!checkDuplicate(currentPath.getNodes())) {
@@ -38,7 +36,12 @@ public class Script {
             }
 			return;
 		}
-		currentPath.addNode(node);
+        Node n = new Node(node.getData());
+        n.setCost(node.getCost());
+        n.setChecked(node.getChecked());
+        n.setConections(node.getConections());
+        n.setTravelTime(travelTime);
+		currentPath.addNode(n);
 		long currentWheight = wheight;
 		if (node.hasOpenedConnection(currentPath.getNodes())){
 			for (Edge edge : node.getOpenConnections(currentPath.getNodes())){
@@ -48,7 +51,7 @@ public class Script {
 				path.setNodes(clone);
 				path.setWheight(currentWheight);
 				currentWheight = wheight;
-				blowNode(edge.getNodeB(), path, limit);
+				blowNode(edge.getNodeB(), path, limit, edge.getDistance());
 			}
 		}
 		else {

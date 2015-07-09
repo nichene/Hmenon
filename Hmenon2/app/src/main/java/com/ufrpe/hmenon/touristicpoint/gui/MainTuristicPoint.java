@@ -13,7 +13,6 @@ import com.ufrpe.hmenon.favourite.domain.FavouritePoint;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.infrastructure.gui.MainActivity;
 import com.ufrpe.hmenon.R;
-import com.ufrpe.hmenon.infrastructure.gui.MainInitial;
 import com.ufrpe.hmenon.favourite.service.FavouriteBusiness;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 
@@ -47,6 +46,7 @@ public class MainTuristicPoint extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_turistic_point);
+        StaticUser.setContext(this);
 
         TabHost tabHost = (TabHost) findViewById(R.id.tabHost);
         tabHost.setup();
@@ -73,7 +73,7 @@ public class MainTuristicPoint extends ActionBarActivity {
         address = (TextView) findViewById(R.id.txtAddress);
         map = (ImageView) findViewById(R.id.imgMap);
         favouriteImage = (ImageView) findViewById(R.id.imgFavorite);
-        favouriteBusiness = new FavouriteBusiness(MainInitial.getContext());
+        favouriteBusiness = new FavouriteBusiness(StaticUser.getContext());
 
         favouritePoint = new FavouritePoint();
         favouritePoint.setUser(StaticUser.getUser());

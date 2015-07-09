@@ -15,12 +15,21 @@ import com.ufrpe.hmenon.user.domain.User;
 public class StaticUser {
 
     private static User user;
+    private static long closerTime;
     private static TouristicPoint closerPoint;
     private static Context context;
     private static Graph graph;
 
     public static User getUser() {
         return user;
+    }
+
+    public static long getCloserTime() {
+        return closerTime;
+    }
+
+    public static void setCloserTime(long closerTime) {
+        StaticUser.closerTime = closerTime;
     }
 
     public static void setUser(User user) {

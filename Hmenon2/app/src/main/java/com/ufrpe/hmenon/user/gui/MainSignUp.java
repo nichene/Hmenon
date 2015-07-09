@@ -10,10 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.ufrpe.hmenon.infrastructure.gui.MainActivity;
+import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.R;
-import com.ufrpe.hmenon.infrastructure.gui.MainInitial;
 import com.ufrpe.hmenon.user.domain.User;
 import com.ufrpe.hmenon.user.service.UserBusiness;
 
@@ -54,8 +52,8 @@ public class MainSignUp extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-
-        service = new UserBusiness(MainInitial.getContext());
+        StaticUser.setContext(this);
+        service = new UserBusiness(StaticUser.getContext());
         edtEmail  = (EditText) findViewById(R.id.edtEmailSignUp);
         edtName = (EditText) findViewById(R.id.edtNameSignUp);
         edtPassword = (EditText) findViewById(R.id.edtPasswordSignUp);

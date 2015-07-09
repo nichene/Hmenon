@@ -1,7 +1,6 @@
-package com.ufrpe.hmenon.graph.path;
+package com.ufrpe.hmenon.graph.domain;
 
 import java.util.ArrayList;
-import com.ufrpe.hmenon.graph.domain.Node;
 
 public class Path {
 	private ArrayList<Node> nodes;

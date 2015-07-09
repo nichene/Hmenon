@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.ufrpe.hmenon.infrastructure.gui.MainActivity;
 import com.ufrpe.hmenon.R;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
-import com.ufrpe.hmenon.infrastructure.gui.MainInitial;
 import com.ufrpe.hmenon.user.service.UserBusiness;
 
 /**
@@ -51,8 +50,8 @@ public class MainEditUserName extends ActionBarActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editusername);
-
-        service = new UserBusiness(MainInitial.getContext());
+        StaticUser.setContext(this);
+        service = new UserBusiness(StaticUser.getContext());
         edtPassword = (EditText) findViewById(R.id.edtNameEditPassword);
         edtEditName = (EditText) findViewById(R.id.edtNameEdit);
         edtConfirmEditName = (EditText) findViewById(R.id.edtConfirmNameEdit);
