@@ -36,7 +36,8 @@ public class TouristicPointDAO extends DAO{
         point.setActivityText(cursor.getString(5));
         point.setAddress(cursor.getString(6));
         point.setMap(cursor.getString(7));
-        point.setCoordinates(cursor.getString(8));
+        point.setChecked(cursor.getInt(8));
+        point.setCoordinates(cursor.getString(9));
 
         return point;
     }
@@ -55,8 +56,17 @@ public class TouristicPointDAO extends DAO{
         values.put(Helper.TOURISTICPOINT_ACTIVITYTEXT, point.getActivityText());
         values.put(Helper.TOURISTICPOINT_ADDRESS, point.getAddress());
         values.put(Helper.TOURISTICPOINT_MAP, point.getMap());
+        values.put(Helper.TOURISTICPOINT_CHECKED, point.getChecked());
         values.put(Helper.TOURISTICPOINT_COORDINATES, point.getCoordinates());
         getDb().insert(Helper.TABLE_TOURISTICPOINT, null, values);
+        close();
+    }
+
+    public void updateChecked(String name, int newChecked){
+        open();
+        ContentValues values = new ContentValues();
+        values.put(Helper.TOURISTICPOINT_CHECKED, newChecked);
+        getDb().update(Helper.TABLE_TOURISTICPOINT, values, Helper.TOURISTICPOINT_NAME +" = ?", new String[]{name});
         close();
     }
 
@@ -77,6 +87,7 @@ public class TouristicPointDAO extends DAO{
                 Helper.TOURISTICPOINT_ACTIVITYTEXT,
                 Helper.TOURISTICPOINT_ADDRESS,
                 Helper.TOURISTICPOINT_MAP,
+                Helper.TOURISTICPOINT_CHECKED,
                 Helper.TOURISTICPOINT_COORDINATES}, null, null, null, null, null);
         if (cursor.moveToFirst()){
             do {
@@ -129,6 +140,7 @@ public class TouristicPointDAO extends DAO{
                         Helper.TOURISTICPOINT_ACTIVITYTEXT,
                         Helper.TOURISTICPOINT_ADDRESS,
                         Helper.TOURISTICPOINT_MAP,
+                        Helper.TOURISTICPOINT_CHECKED,
                         Helper.TOURISTICPOINT_COORDINATES},
                 Helper.TOURISTICPOINT_ID + "=?", new String[]{ String.valueOf(id) },
                 null, null, null);
@@ -157,6 +169,7 @@ public class TouristicPointDAO extends DAO{
                         Helper.TOURISTICPOINT_ACTIVITYTEXT,
                         Helper.TOURISTICPOINT_ADDRESS,
                         Helper.TOURISTICPOINT_MAP,
+                        Helper.TOURISTICPOINT_CHECKED,
                         Helper.TOURISTICPOINT_COORDINATES},
                 Helper.TOURISTICPOINT_NAME + "=?", new String[]{nome},
                 null, null, null);

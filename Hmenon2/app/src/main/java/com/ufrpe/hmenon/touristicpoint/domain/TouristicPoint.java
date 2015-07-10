@@ -14,6 +14,7 @@ public class TouristicPoint {
     private String coordinates;
     private String map;
     private String address;
+    private int checked;
 
     public TouristicPoint() {
         setHistory(new History());
@@ -24,7 +25,12 @@ public class TouristicPoint {
     public void setCoordinates(String coordinates) {
         this.coordinates = coordinates;
     }
-
+    public int getChecked() {
+        return checked;
+    }
+    public void setChecked(int checked) {
+        this.checked = checked;
+    }
     public String getAddress() {
         return address;
     }

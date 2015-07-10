@@ -1,13 +1,16 @@
 package com.ufrpe.hmenon.graph.domain;
 
+/**
+ * Classe que representa uma aresta no grafo
+ */
 public class Edge {
 	private Node nodeA;
 	private Node nodeB;
 	private int distance;
-	
-	public Edge(Node f, Node t, int distance){
-		this.nodeA = f;
-		this.nodeB = t;
+
+	public Edge(Node a, Node b, int distance){
+		this.nodeA = a;
+		this.nodeB = b;
 		this.distance = distance;
 	}
 

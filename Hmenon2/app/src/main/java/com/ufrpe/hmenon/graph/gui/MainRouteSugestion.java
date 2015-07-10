@@ -24,8 +24,12 @@ import com.ufrpe.hmenon.user.gui.MainMyPage;
 import java.util.ArrayList;
 
 
+/**
+ * Activity responsável pela exibição das opções de roteiro
+ */
 public class MainRouteSugestion extends ActionBarActivity {
     private ListView routes;
+    private static ArrayList<Node> closedNodes;
     private ArrayList<Node> routeList;
     private ImageButton btnNext;
     private ImageButton btnPrev;
@@ -50,7 +54,7 @@ public class MainRouteSugestion extends ActionBarActivity {
         graph = StaticUser.getGraph();
         script = new Script();
         script.setOrigin(graph.get(StaticUser.getCloserPoint()));
-        script.generatePlan(timeLimit - StaticUser.getCloserTime());
+        script.generatePlan(timeLimit - StaticUser.getCloserTime(), closedNodes);
         routes = (ListView) findViewById(R.id.listRouteSugestion);
         btnNext = (ImageButton) findViewById(R.id.imageButtonNext);
         btnPrev = (ImageButton) findViewById(R.id.imageButtonPrevious);
@@ -80,6 +84,7 @@ public class MainRouteSugestion extends ActionBarActivity {
         } else {
             Path path = script.getPaths().get(currentPathIndex);
             routeList = path.getNodes();
+            routeList.add(0, new Node(new TouristicPoint()));
             populate();
         }
     }
@@ -117,6 +122,10 @@ public class MainRouteSugestion extends ActionBarActivity {
             return view;
             }
         }
+
+    public static void setClosedNodes(ArrayList<Node> closedNodes) {
+        MainRouteSugestion.closedNodes = closedNodes;
+    }
     public static void setTimeLimit(long limit){
         timeLimit = limit;
     }

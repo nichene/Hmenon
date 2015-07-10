@@ -54,16 +54,19 @@ public class Node {
 	}
 
 
-	
+
 	public void addConnection(Node node, int distance){
-		Edge edge = new Edge(this, node, distance);
-		conections.add(edge);
-	}
-	
+        if (node!= null) {
+            Edge edge = new Edge(this, node, distance);
+            conections.add(edge);
+        }
+    }
+
+
 	public boolean hasOpenedConnection(ArrayList<Node> closed){
 		boolean open = false;
 		for (Edge edge : conections){
-			if (!closed.contains(edge.getNodeB())){
+			if (!contains(closed, edge.getNodeB())){
 				open = true;
 			}
 		}
@@ -72,10 +75,19 @@ public class Node {
 	public ArrayList<Edge> getOpenConnections(ArrayList<Node> closed){
 		ArrayList<Edge> opened = new ArrayList<>();
 		for (Edge edge : conections){
-			if (!closed.contains(edge.getNodeB())){
+			if (!contains(closed, edge.getNodeB())){
 				opened.add(edge);
 			}
 		}
 		return opened;
 	}
+    public boolean contains(ArrayList<Node> list, Node node){
+        boolean contains = false;
+        for (Node n : list) {
+            if (n.getData().getName().equals(node.getData().getName())){
+                contains = true;
+            }
+        }
+        return contains;
+    }
 }

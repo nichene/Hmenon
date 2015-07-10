@@ -4,6 +4,12 @@ import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 
 import java.util.ArrayList;
 
+/**
+ * Classe que representa um grafo, com conjuntos de nós e arestas
+ *
+ * @see com.ufrpe.hmenon.graph.domain.Edge
+ * @see com.ufrpe.hmenon.graph.domain.Node
+ */
 public class Graph {
 	private ArrayList <Node> nodes = new ArrayList<>();
 	private ArrayList <Edge> edges = new ArrayList<>();

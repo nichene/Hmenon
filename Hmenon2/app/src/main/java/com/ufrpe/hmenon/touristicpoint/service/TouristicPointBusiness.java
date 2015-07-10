@@ -36,6 +36,14 @@ public class TouristicPointBusiness {
         }
     }
 
+    public void checkUpdateChecked(String name, int newChecked){
+        try {
+            dao.updateChecked(name, newChecked);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Recupera uma lista contendo todos os pontos turísticos cadastrados no banco de dados.
      *

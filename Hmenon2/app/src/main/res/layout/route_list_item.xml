@@ -4,11 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <CheckBox
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/imgChecked"/>
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New CheckBox"
-        android:id="@+id/checkBox"
-        android:layout_alignParentTop="true"
-        />
+        android:id="@+id/txtNameCheck"
+        android:text="Exemplo"
+        android:textSize="20sp"
+        android:layout_alignBottom="@+id/imgChecked"
+        android:layout_toRightOf="@+id/imgChecked"
+        android:layout_toEndOf="@+id/imgChecked" />
 </RelativeLayout>

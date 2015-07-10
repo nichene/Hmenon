@@ -12,22 +12,30 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.ufrpe.hmenon.R;
 import com.ufrpe.hmenon.graph.domain.Node;
+import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
+import com.ufrpe.hmenon.touristicpoint.service.TouristicPointBusiness;
 import com.ufrpe.hmenon.user.gui.MainMyPage;
 
+import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Activity responsável pela exibição da lista de opções de pontos turísticos a serem visitados
+ */
 public class MainChoosePoints extends ActionBarActivity {
     private ListView script;
     private Button btnCreateNewScript;
     private List<Node> scriptList;
-    private static List<Node> staticScriptList;
+    private TouristicPointBusiness pointBusiness;
 
     @Override
     public void onBackPressed() {
@@ -40,21 +48,42 @@ public class MainChoosePoints extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_route);
+        setContentView(R.layout.activity_choose_points);
+        StaticUser.setContext(this);
         script = (ListView) findViewById(R.id.listScript);
+        pointBusiness = new TouristicPointBusiness(StaticUser.getContext());
         btnCreateNewScript = (Button) findViewById(R.id.btnCreateNewScript);
-        scriptList = staticScriptList;
+        scriptList = StaticUser.getGraph().getNodes();
+        for (Node node : scriptList){
+            node.setChecked(false);
+        }
         populate();
         script.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Node node = scriptList.get(position);
                 node.setChecked(!node.getChecked());
+                populate();
             }
         });
         btnCreateNewScript.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ArrayList<Node> notChecked = new ArrayList<>();
+                for (Node node : scriptList){
+                    if (!node.getChecked()){
+                        notChecked.add(node);
+                    } else {
+                        TouristicPoint point = node.getData();
+                        int checked = point.getChecked();
+                        point.setChecked(checked +1);
+                        String name = point.getName();
+                        pointBusiness.checkUpdateChecked(name, checked);
+
+                    }
+                }
+
+                MainRouteSugestion.setClosedNodes(notChecked);
                 showDialog(MainChoosePoints.this);
             }
         });
@@ -75,15 +104,15 @@ public class MainChoosePoints extends ActionBarActivity {
             }
             Node currentNode = scriptList.get(position);
             TouristicPoint currentPoint = currentNode.getData();
-            CheckBox item = (CheckBox) view.findViewById(R.id.checkBox);
-            item.setText("Visitar " + currentPoint.getName());
-            item.setChecked(currentNode.getChecked());
+            ImageView checkImage = (ImageView) view.findViewById(R.id.imgChecked);
+            TextView textView = (TextView) view.findViewById(R.id.txtNameCheck);
+            textView.setText(currentPoint.getName());
+            if (currentNode.getChecked()){
+                checkImage.setImageResource(R.drawable.check_icon);
+            }
+            checkImage.setBackgroundResource(android.R.color.transparent);
             return view;
         }
-    }
-
-    public static void setStaticScriptList(List<Node> staticScriptList) {
-        MainChoosePoints.staticScriptList = staticScriptList;
     }
     public void showDialog(Activity activity){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);

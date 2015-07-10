@@ -2,6 +2,12 @@ package com.ufrpe.hmenon.graph.domain;
 
 import java.util.ArrayList;
 
+
+/**
+ * Classe que representa um caminho
+ *
+ * @see com.ufrpe.hmenon.graph.domain.Script
+ */
 public class Path {
 	private ArrayList<Node> nodes;
 	private long wheight;
@@ -21,6 +27,9 @@ public class Path {
 	public void addNode(Node node){
 		nodes.add(node);
 	}
+    public void removeNode(Node node){
+        nodes.remove(node);
+    }
 	public void show(){
 		for (Node node : nodes){
 			System.out.print(node.getData() + " ");

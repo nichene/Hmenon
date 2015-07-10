@@ -5,7 +5,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
 import com.ufrpe.hmenon.touristicpoint.domain.History;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import org.w3c.dom.Document;
@@ -19,7 +18,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
  */
 public class Helper extends SQLiteOpenHelper{
     private static final String NAMEDB = "hmenon";
-    private static final int VERSIONDB = 16;
+    private static final int VERSIONDB = 17;
     private Document document;
 
     public static final String TABLE_USER = "user";
@@ -40,6 +39,7 @@ public class Helper extends SQLiteOpenHelper{
     public static final String TOURISTICPOINT_ADDRESS = "touristic_point_adress";
     public static final String TOURISTICPOINT_MAP = "touristic_point_map";
     public static final String TOURISTICPOINT_COORDINATES = "touristic_point_coordinate";
+    public static final String TOURISTICPOINT_CHECKED = "touristic_point_checked";
 
     public static final String TABLE_FAVOURITE = "favourite";
     public static final String FAVOURITE_ID = "favourite_id";
@@ -67,6 +67,7 @@ public class Helper extends SQLiteOpenHelper{
                 TOURISTICPOINT_ACTIVITYTEXT + " text not null," +
                 TOURISTICPOINT_ADDRESS + " text not null," +
                 TOURISTICPOINT_MAP + " text not null," +
+                TOURISTICPOINT_CHECKED + " integer," +
                 TOURISTICPOINT_COORDINATES + " text not null);");
         db.execSQL("create table " + TABLE_FAVOURITE + "(" +
                 FAVOURITE_ID + " integer primary key autoincrement," +
@@ -87,9 +88,7 @@ public class Helper extends SQLiteOpenHelper{
         try {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = documentBuilderFactory.newDocumentBuilder();
-            //document = builder.parse("touristic_point_resource.xml");
             document = builder.parse(file);
-            //document = builder.parse(".touristic_point_resource.xml");
         } catch (Exception e){
             e.printStackTrace();
         }

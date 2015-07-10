@@ -109,5 +109,6 @@ sábados e domingos e feriados das 13h30 às 17h\n
     <string name="gps_offline">GPS ou Rede desligados</string>
     <string name="login_success">" logado com sucesso!"</string>
     <string name="user_update_success">Alterações feitas com sucesso</string>
+    <string name="chooseText">Marque os Pontos Turisticos que deseja visitar</string>
 
 </resources>

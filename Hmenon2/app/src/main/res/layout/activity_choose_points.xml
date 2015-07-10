@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:text="Roteiro de Visitação"
-        android:textSize="24dp"
+        android:text="@string/chooseText"
+        android:gravity="center"
+        android:textSize="20dp"
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,6 +16,7 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="25dp"
         android:layout_below="@+id/txtRouteTitle"
         android:layout_above="@+id/btnCreateNewScript"
         android:id="@+id/listScript">
@@ -22,7 +24,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CRIAR NOVO ROTEIRO"
+        android:text="OK"
+        android:background="@color/zxing_transparent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:id="@+id/btnCreateNewScript"/>

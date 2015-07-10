@@ -106,6 +106,7 @@ public class MainInitial extends ActionBarActivity {
         point.setHistoryText(getResources().getString(idHistory));
         point.setImage(getResources().getString(idImage));
         point.setActivityText(getResources().getString(idActivityHistory));
+        point.setChecked(0);
 
         return point;
     }
