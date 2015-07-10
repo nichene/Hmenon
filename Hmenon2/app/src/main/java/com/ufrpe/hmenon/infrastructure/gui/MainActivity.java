@@ -80,6 +80,9 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         StaticUser.setContext(this);
         gps = new GPSTracker(StaticUser.getContext());
+        setContentView(R.layout.activity_main);
+
+        gps = new GPSTracker(MainInitial.getContext());
         ArrayList<FavouritePoint> favouritePoints = new ArrayList<>();
         favouriteBusiness = new FavouriteBusiness(StaticUser.getContext());
         touristicPointBusiness = new TouristicPointBusiness(StaticUser.getContext());
@@ -93,7 +96,6 @@ public class MainActivity extends ActionBarActivity {
             favouritePoints.add(favouritePoint);
         }
 
-        setContentView(R.layout.activity_main);
         list = (ListView) findViewById(R.id.listPoints);
         touristicPointBusiness = new TouristicPointBusiness(StaticUser.getContext());
         touristicPoints = touristicPointBusiness.checkGetAll();

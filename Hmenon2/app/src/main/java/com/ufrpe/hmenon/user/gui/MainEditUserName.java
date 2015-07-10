@@ -1,10 +1,12 @@
 package com.ufrpe.hmenon.user.gui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import com.ufrpe.hmenon.infrastructure.gui.MainActivity;
 import com.ufrpe.hmenon.R;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
+import com.ufrpe.hmenon.infrastructure.gui.MainInitial;
 import com.ufrpe.hmenon.user.service.UserBusiness;
 
 /**
@@ -25,6 +28,7 @@ public class MainEditUserName extends ActionBarActivity{
     private EditText edtConfirmEditName;
     private Button btnConfirmEditName;
     private UserBusiness service;
+    private Context currentContext = MainEditUserName.this;
 
     @Override
     public void onBackPressed() {
@@ -52,6 +56,11 @@ public class MainEditUserName extends ActionBarActivity{
         setContentView(R.layout.activity_editusername);
         StaticUser.setContext(this);
         service = new UserBusiness(StaticUser.getContext());
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home_white_24dp);
+
+        service = new UserBusiness(MainInitial.getContext());
         edtPassword = (EditText) findViewById(R.id.edtNameEditPassword);
         edtEditName = (EditText) findViewById(R.id.edtNameEdit);
         edtConfirmEditName = (EditText) findViewById(R.id.edtConfirmNameEdit);
@@ -95,5 +104,17 @@ public class MainEditUserName extends ActionBarActivity{
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                Intent intentGoHome = new Intent(currentContext, MainActivity.class);
+                finish();
+                startActivity(intentGoHome);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

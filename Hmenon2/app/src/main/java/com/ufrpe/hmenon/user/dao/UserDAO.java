@@ -11,8 +11,14 @@ import com.ufrpe.hmenon.user.domain.User;
  * Faz a consulta e escrita de usuários em sua respectiva tabela no banco de dados.
  */
 public class UserDAO extends DAO{
+    /**
+     * Restringindo acesso ao construtor padrão.
+     */
     private UserDAO(){}
 
+    /**
+     * Instância da classe para acesso ao DAO.
+     */
     private static final UserDAO instance = new UserDAO();
 
     public static UserDAO getInstance() {
@@ -35,7 +41,7 @@ public class UserDAO extends DAO{
     }
 
     /**
-     * Remove se possível o usuário do banco de dados através do atributo email.
+     * Remove se possível o usuário do banco de dados através do atributo <code>email</code>.
      *
      * @param user Usuário a ser removido do banco.
      */
@@ -46,11 +52,12 @@ public class UserDAO extends DAO{
     }
 
     /**
-     * Consulta o banco de dados por usuários cadastrados com o email fornecido, e o retorna como uma
-     * instância da classe User ou retorna null caso contrário.
+     * Consulta o banco de dados por usuários cadastrados com o e-mail fornecido, e o retorna como
+     * uma instância da classe {@link User} ou retorna <code>null</code> caso contrário.
      *
      * @param email Chave utilizada para procura no banco de dados.
-     * @return Usuário como instância da classe User ou null caso não existir no banco de dados.
+     * @return Usuário como instância da classe {@link User} ou <code>null</code> caso não existir
+     * no banco de dados.
      */
     public User search(String email){
         open();
@@ -102,11 +109,13 @@ public class UserDAO extends DAO{
 
     /**
      * Consulta o banco de dados por usuários cadastrados com ambos o E-mail e senha fornecidos e o
-     * retorna caso exista como uma instância da classe User enquanto retorna null caso contrário.
+     * retorna caso exista como uma instância da classe {@link User} enquanto retorna
+     * <code>null</code> caso contrário.
      *
      * @param email E-mail do usuário a ser consultado.
      * @param password Senha do usuário a ser consultado.
-     * @return Usuário como instância da classe User ou null caso não existir no banco de dados.
+     * @return Usuário como instância da classe {@link User} ou <code>null</code> caso não existir
+     * no banco de dados.
      */
     public User search(String email, String password){
         open();

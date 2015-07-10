@@ -62,13 +62,20 @@ public class Script {
             }
 			return;
 		}
+
         Node n = new Node(node.getData());
         n.setCost(node.getCost());
         n.setChecked(node.getChecked());
         n.setConections(node.getConections());
         n.setTravelTime(travelTime);
+<<<<<<< HEAD
         currentPath.addNode(n);
         long currentWheight = wheight;
+=======
+		currentPath.addNode(n);
+		long currentWheight = wheight;
+
+>>>>>>> origin/master
 		if (node.hasOpenedConnection(currentPath.getNodes())){
 			for (Edge edge : node.getOpenConnections(currentPath.getNodes())){
                 currentWheight += edge.getDistance();

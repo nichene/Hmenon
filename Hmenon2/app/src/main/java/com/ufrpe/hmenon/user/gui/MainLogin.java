@@ -27,7 +27,8 @@ public class MainLogin extends ActionBarActivity {
     private UserBusiness service;
 
     /**
-     * Verifica se o Campo de texto fornecido tem comprimento maior que o argumento minimumLength.
+     * Verifica se o campo de texto fornecido tem comprimento maior que o argumento
+     * <code>minimumLength</code>.
      *
      * @param editText Campo de texto a ser verificado se possui um número mínimo de caracteres.
      * @param minimumLength Valor mínimo de caracteres permitidos.

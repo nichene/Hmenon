@@ -19,7 +19,6 @@ import com.ufrpe.hmenon.user.service.UserBusiness;
  * Activity responsável pelo cadastro de novos usuários.
  */
 public class MainSignUp extends ActionBarActivity {
-
     private Button btnCadastrar;
     private EditText edtEmail;
     private EditText edtName;
@@ -36,7 +35,8 @@ public class MainSignUp extends ActionBarActivity {
     }
 
     /**
-     * Verifica se o Campo de texto fornecido tem comprimento maior que o argumento minimumLength.
+     * Verifica se o campo de texto fornecido tem comprimento maior que o argumento
+     * <code>minimumLength</code>.
      *
      * @param editText Campo de texto a ser verificado se possui um número mínimo de caracteres.
      * @param minimumLength Valor mínimo de caracteres permitidos.
@@ -53,6 +53,7 @@ public class MainSignUp extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         StaticUser.setContext(this);
+
         service = new UserBusiness(StaticUser.getContext());
         edtEmail  = (EditText) findViewById(R.id.edtEmailSignUp);
         edtName = (EditText) findViewById(R.id.edtNameSignUp);

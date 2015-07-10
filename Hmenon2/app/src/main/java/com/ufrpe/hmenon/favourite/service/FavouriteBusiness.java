@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  * Faz a manipulação da tabela de favoritos no banco de dados.
- *
+ * <p>
  * Possui métodos para inserção, remoção e contagem de entradas na tabela.
  */
 public class FavouriteBusiness {
@@ -43,7 +43,7 @@ public class FavouriteBusiness {
      * @param user Usuário cujas entradas na tabela de favoritos devem ser removidas.
      */
     public void removeFavourite(User user) {
-        dao.removeSingleUserFavourites(user);
+        dao.removeUserAndFavorites(user);
     }
 
     /**
@@ -63,12 +63,19 @@ public class FavouriteBusiness {
         return dao.getTableFavouriteCount();
     }
 
+    /**
+     * Recupera do banco de dados todos os pontos turísticos marcados como favoritos pelo usuário
+     * registrado sobre o id passado como argumento através de um <code>ArrayList</code>.
+     *
+     * @param userId Id do usuário cujos favoritos deverão ser consultados.
+     * @return ArrayList contendo todos os pontos turísticos marcados pelo usuário.
+     */
     public ArrayList<String> getFavouritesPointsIds(long userId){
         return dao.getAllFavouritePointsIds(userId);
     }
 
     /**
-     * Consulta o banco de dados através da classe FavouritePointDAO se um ponto turístico se
+     * Consulta o banco de dados através da classe {@link FavoriteDAO} se um ponto turístico se
      * encontra marcado como favorito por um dado usuário.
      *
      * @param favouritePoint Objeto que relaciona o ponto turístico e o usuário a serem consultados

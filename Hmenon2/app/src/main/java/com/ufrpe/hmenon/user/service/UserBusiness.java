@@ -10,7 +10,11 @@ import com.ufrpe.hmenon.user.domain.User;
  */
 public class UserBusiness {
     private UserDAO dao = UserDAO.getInstance();
-
+    /**
+     * Ajustando o contexto da classe DAO.
+     *
+     * @param context Contexto da activity.
+     */
     public UserBusiness(Context context) {
         dao.setUpAttributes(context);
     }
@@ -83,8 +87,8 @@ public class UserBusiness {
 
         if (!name.equals(confirmedName)){
             exception.append("Os nomes não estão equivalentes!");
-        } else if (dao.search(name) != null){
-            exception.append("O nome já está sendo usado");
+//        } else if (dao.search(name) != null){
+//            exception.append("O nome já está sendo usado");
         } else if (!user.getPassword().equals(password)){
             exception.append("Senha Incorreta");
         } else {
@@ -148,4 +152,3 @@ public class UserBusiness {
         }
     }
 }
-

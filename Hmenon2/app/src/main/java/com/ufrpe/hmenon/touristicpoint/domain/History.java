@@ -1,9 +1,9 @@
 package com.ufrpe.hmenon.touristicpoint.domain;
 
 /**
- * Apenas uma simples classe para representação da história do ponto turístico.
- *
- * Apenas implementa getters e setters.
+ * Representação da história do ponto turístico.
+ * <p>
+ * Apenas mplementa getters e setters.
  */
 public class History {
     private String resume;

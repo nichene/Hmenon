@@ -8,11 +8,11 @@ import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import java.util.ArrayList;
 
 /**
- * Realiza as operações de consulta de pontos turísticos ao banco de dados para a activity.
+ * Realiza as operações de consulta de pontos turísticos no banco de dados.
  */
 public class TouristicPointDAO extends DAO{
-    private TouristicPointDAO(){
-    }
+    private TouristicPointDAO(){}
+
     private static final TouristicPointDAO instance = new TouristicPointDAO();
 
     public static TouristicPointDAO getInstance(){
@@ -20,10 +20,10 @@ public class TouristicPointDAO extends DAO{
     }
 
     /**
-     * Recupera ponto turístico armazenado no cursor.
+     * Recupera ponto turístico armazenado no <code>cursor</code>.
      *
-     * @param cursor Objeto cursor com o ponto turístico recuperado do banco de dados.
-     * @return Ponto turístico do cursor como instância da classe TouristicPoint.
+     * @param cursor Objeto <code>cursor</code> com o ponto turístico recuperado do banco de dados.
+     * @return Ponto turístico do <code>cursor</code> como instância da classe TouristicPoint.
      */
     private static TouristicPoint recoverPointFromCursor(Cursor cursor) {
         TouristicPoint point = new TouristicPoint();
@@ -44,6 +44,7 @@ public class TouristicPointDAO extends DAO{
 
     /**
      * Insere o ponto turístico fornecido na sua tabela no banco de dados.
+     *
      * @param point Ponto turístico a ser inserido.
      */
     public void insert(TouristicPoint point){
@@ -73,7 +74,8 @@ public class TouristicPointDAO extends DAO{
     /**
      * Recupera do banco todos os pontos turísticos cadastrados.
      *
-     * @return ArrayList contendo todos os pontos turísticos inseridos no banco de dados.
+     * @return <code>ArrayList</code> contendo todos os pontos turísticos inseridos no banco de
+     * dados.
      */
     public ArrayList<TouristicPoint> returnAll(){
         open();
@@ -101,7 +103,7 @@ public class TouristicPointDAO extends DAO{
     /**
      * Verifica se a tabela dos pontos turísticos no banco de dados se encontra vazia.
      *
-     * @return Booleano referente ao banco estar vazio ou não.
+     * @return <code>Booleano</code> referente ao banco estar vazio ou não.
      */
     public boolean isEmpty(){
         open();
@@ -127,7 +129,7 @@ public class TouristicPointDAO extends DAO{
      * armazenado.
      *
      * @param id Id da linha requisitada.
-     * @return Instância de TouristicPoint referente à linha requisitada
+     * @return Instância de {@link TouristicPoint} referente à linha requisitada.
      */
     public TouristicPoint getPointFromId(long id) {
         this.open();
@@ -156,7 +158,7 @@ public class TouristicPointDAO extends DAO{
      * armazenado.
      *
      * @param nome Nome do ponto turístico a ser consultado no banco de dados.
-     * @return Instância de TouristicPoint referente à linha requisitada
+     * @return Instância de {@link TouristicPoint} referente à linha requisitada
      */
     public TouristicPoint getPointFromName(String nome) {
         this.open();

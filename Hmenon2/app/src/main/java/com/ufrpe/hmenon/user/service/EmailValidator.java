@@ -2,8 +2,8 @@ package com.ufrpe.hmenon.user.service;
 import java.util.regex.*;
 
 /**
- * Verifica a validade do campo de texto E-mail.
- *
+ * Verifica a validade do campo de texto <code>E-mail</code>.
+ * <p>
  * @author marcio.pulcinelli
  */
 public class EmailValidator

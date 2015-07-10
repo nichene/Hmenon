@@ -2,11 +2,16 @@ package com.ufrpe.hmenon.graph.domain;
 
 import java.util.ArrayList;
 
+<<<<<<< HEAD
 
 /**
  * Classe que representa um caminho
  *
  * @see com.ufrpe.hmenon.graph.domain.Script
+=======
+/**
+ * Representação de um caminho do grafo.
+>>>>>>> origin/master
  */
 public class Path {
 	private ArrayList<Node> nodes;

@@ -17,7 +17,6 @@ import javax.crypto.spec.SecretKeySpec;
  * Classe responsável pela criptografia de Strings para serem utilizados no QR-Code.
  */
 public abstract class CryptoHelper {
-
     private static final String ALGORITHM = "AES";
     private static final String MODE = "ECB";
     private static final String PADDING = "PKCS5Padding";
@@ -29,16 +28,16 @@ public abstract class CryptoHelper {
     /**
      * Seta o cifrador a partir do algoritmo, modo e padding.
      *
-     * @throws NoSuchAlgorithmException
-     * @throws NoSuchPaddingException
+     * @throws NoSuchAlgorithmException Caso o argumento algoritmo seja inválido.
+     * @throws NoSuchPaddingException Caso o argumento Padding seja inválido.
      */
     private static void setupCipher() throws NoSuchAlgorithmException, NoSuchPaddingException {
         cipher = Cipher.getInstance(ALGORITHM + '/' + MODE + '/' + PADDING);
     }
 
     /**
-     * Decodifica a chave privada a partir do formato String para array de bytes para ser usado na
-     * criptografia.
+     * Decodifica a chave privada a partir do formato <code>String</code> para array de bytes para
+     * ser usado na criptografia.
      */
     private static void setPrivateKeyFromString() {
         byte[] byteKey = Base64.decode(STRING_KEY, Base64.DEFAULT);
@@ -46,8 +45,8 @@ public abstract class CryptoHelper {
     }
 
     /**
-     * Verifica se os atributos secretKey e cipher se encontram inicializados e os inicia caso
-     * necessário.
+     * Verifica se os atributos <code>secretKey</code> e <code>cipher</code> se encontram
+     * inicializados e os inicializa caso necessário.
      */
     private static void checkKeyAndCipherInitialization() {
         try {
@@ -64,7 +63,7 @@ public abstract class CryptoHelper {
     }
 
     /**
-     * Criptografa um String (não é utilizado na aplicação).
+     * Criptografa um <code>String</code>(não é utilizado na aplicação).
      *
      * @param id - String original a ser criptografado.
      * @return - Formatação em String do conteúdo criptografado.
@@ -87,9 +86,9 @@ public abstract class CryptoHelper {
     }
 
     /**
-     * Descriptografa o String fornecido.
+     * Descriptografa o <code>String</code> fornecido.
      *
-     * @param stringCipher - Codificação em utf-8 do string criptografado.
+     * @param stringCipher - Codificação em UTF-8 do string criptografado.
      * @return - Resultado descriptografado do string de entrada.
      *
      * @throws InvalidKeyException

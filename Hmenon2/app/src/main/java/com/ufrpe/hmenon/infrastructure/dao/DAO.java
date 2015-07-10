@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
  * Classe que serve de base para todas as implementações de DAO do projeto.
  */
 public abstract class DAO {
+    /**
+     * Instância do <code>OpenHelper</code> da classe.
+     */
     private static Helper helper;
     private static SQLiteDatabase db;
     private Context context;

@@ -26,8 +26,6 @@ public class Helper extends SQLiteOpenHelper{
     public static final String USER_EMAIL = "user_email";
     public static final String USER_NAME = "user_name";
     public static final String USER_PASSWORD = "user_password";
-    public static final String USER_STATUS = "user_status";
-//    public static final String CREATED_AT = "creation_date";
 
     public static final String TABLE_TOURISTICPOINT = "touristic_point";
     public static final String TOURISTICPOINT_ID = "_touristic_point_id";
@@ -48,7 +46,6 @@ public class Helper extends SQLiteOpenHelper{
 
     public Helper(Context context){
         super(context, NAMEDB, null, VERSIONDB);
-
     }
 
     @Override
