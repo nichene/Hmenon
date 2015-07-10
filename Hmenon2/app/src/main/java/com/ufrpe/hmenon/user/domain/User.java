@@ -2,10 +2,13 @@ package com.ufrpe.hmenon.user.domain;
 
 /**
  * User é uma classe simples para representação do usuário do aplicativo.
- *
+ * <p>
  * Apenas implementa getters e setters.
  */
 public class User {
+    /**
+     * Identificador único para registro no banco de dados.
+     */
     private long id;
     private String email;
     private String name;

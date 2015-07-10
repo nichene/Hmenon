@@ -36,6 +36,7 @@ public class Script {
             }
 			return;
 		}
+
         Node n = new Node(node.getData());
         n.setCost(node.getCost());
         n.setChecked(node.getChecked());
@@ -43,6 +44,7 @@ public class Script {
         n.setTravelTime(travelTime);
 		currentPath.addNode(n);
 		long currentWheight = wheight;
+
 		if (node.hasOpenedConnection(currentPath.getNodes())){
 			for (Edge edge : node.getOpenConnections(currentPath.getNodes())){
 				currentWheight += edge.getDistance();

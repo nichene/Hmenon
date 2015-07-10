@@ -1,9 +1,11 @@
 package com.ufrpe.hmenon.touristicpoint.gui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
@@ -32,6 +34,7 @@ public class MainTuristicPoint extends ActionBarActivity {
     private boolean isFavourite;
     private FavouriteBusiness favouriteBusiness;
     private FavouritePoint favouritePoint;
+    private Context currentContext = MainTuristicPoint.this;
 
     @Override
     public void onBackPressed() {
@@ -47,6 +50,9 @@ public class MainTuristicPoint extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_turistic_point);
         StaticUser.setContext(this);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home_white_24dp);
 
         TabHost tabHost = (TabHost) findViewById(R.id.tabHost);
         tabHost.setup();
@@ -103,8 +109,13 @@ public class MainTuristicPoint extends ActionBarActivity {
         resume.setText(pointStatic.getHistory().getResume());
         activity.setText(pointStatic.getActivityText());
         address.setText(pointStatic.getAddress());
-        int idMap = getResources().getIdentifier(pointStatic.getMap(), "drawable", getPackageName());
-        int idImage = getResources().getIdentifier(pointStatic.getImage(), "drawable", getPackageName());
+
+        int idMap = getResources().getIdentifier(pointStatic.getMap(), "drawable",
+                getPackageName());
+
+        int idImage = getResources().getIdentifier(pointStatic.getImage(), "drawable",
+                getPackageName());
+
         image.setImageResource(idImage);
         map.setImageResource(idMap);
 
@@ -117,6 +128,18 @@ public class MainTuristicPoint extends ActionBarActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                Intent intentGoHome = new Intent(currentContext, MainActivity.class);
+                finish();
+                startActivity(intentGoHome);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -142,6 +165,9 @@ public class MainTuristicPoint extends ActionBarActivity {
     /**
      * Atualiza no banco de dados o estatus de favorito do ponto atualmente aberto pela activity,
      * deve ser chamado apenas uma vez, logo antes da activity perder a sua visibilidade.
+     *
+     * @param favouritePoint Ponto turístico favorito cuja marcação de favorito deve ser atualizado
+     *                       no banco de dados.
      */
     private void updateFavouriteStatusOnDb(FavouritePoint favouritePoint) {
         if (isFavourite) {

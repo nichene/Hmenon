@@ -13,12 +13,20 @@ import java.util.ArrayList;
 /**
  * Classe responsável por manipular sua respectiva tabela no banco de dados a partir das tabelas de
  * Usuários e Pontos turísticos.
- *
+ * <p>
  * Possui métodos para inserção, remoção e consulta da sua tabela no banco de dados.
  */
 public class FavoriteDAO extends DAO {
+    /**
+     * Restringe o acesso ao construtor padrão da classe.
+     */
     private FavoriteDAO() {}
+
+    /**
+     * Instância do objeto banco de dados.
+     */
     private static final FavoriteDAO INSTANCE = new FavoriteDAO();
+
     public static FavoriteDAO getInstance() { return INSTANCE; }
 
     /**
@@ -50,10 +58,8 @@ public class FavoriteDAO extends DAO {
                 Long.toString(favouritePoint.getPoint().getId()) };
 
         open();
-//        int deletionCount = getDb().delete(Helper.TABLE_FAVOURITE, clause, arguments);
         getDb().delete(Helper.TABLE_FAVOURITE, clause, arguments);
         close();
-//        return deletionCount;
     }
 
     /**
@@ -61,16 +67,14 @@ public class FavoriteDAO extends DAO {
      *
      * @param user Usuário cujas entradas na tabela de favoritos devem ser removidas.
      */
-    public void removeSingleUserFavourites(User user) {
+    public void removeUserAndFavorites(User user) {
         String clause = Helper.FAVOURITE_USER_ID + " = ? ";
 
         String arguments[] = new String[]{ Long.toString(user.getId()) };
 
         open();
-//        int deletionCount = getDb().delete(Helper.TABLE_FAVOURITE, clause, arguments);
         getDb().delete(Helper.TABLE_FAVOURITE, clause, arguments);
         close();
-//        return deletionCount;
     }
 
     /**
@@ -111,8 +115,8 @@ public class FavoriteDAO extends DAO {
     }
 
     /**
-     * Retorna uma lista por implementação de ArrayList contendo todos os id's dos objetos pontos
-     * turísticos armazenados no banco de dados.
+     * Retorna uma lista por implementação de <code>ArrayList</code> contendo todos os id's dos
+     * pontos turísticos armazenados no banco de dados.
      *
      * @param userId Id do usuário a ser consultado.
      * @return Lista de Id's de todos os pontos turísticos marcados pelo usuário.
@@ -136,9 +140,9 @@ public class FavoriteDAO extends DAO {
     }
 
     /**
-     * Verifica se o ponto turístico está marcado como favorito pelo usuário.
+     * Verifica se o ponto turístico foi marcado como favorito pelo usuário.
      *
-     * @param favouritePoint Objeto que reúne ambos os ponto turístico e o usuário.
+     * @param favouritePoint Objeto que reúne ambos ponto turístico e usuário.
      * @return Booleano referente a o ponto estar marcado como favorito ou não.
      */
     public boolean checkIfPointIsFavourite(FavouritePoint favouritePoint) {

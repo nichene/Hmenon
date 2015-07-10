@@ -2,6 +2,9 @@ package com.ufrpe.hmenon.graph.domain;
 
 import java.util.ArrayList;
 
+/**
+ * Representação de um caminho do grafo.
+ */
 public class Path {
 	private ArrayList<Node> nodes;
 	private long wheight;

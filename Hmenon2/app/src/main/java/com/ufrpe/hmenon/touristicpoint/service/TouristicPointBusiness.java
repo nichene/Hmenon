@@ -26,7 +26,7 @@ public class TouristicPointBusiness {
     /**
      * Insere uma lista de pontos turísticos no banco de dados caso este esteja vazio.
      *
-     * @param list ArrayList contendo todos os pontos turísticos a serem inseridos.
+     * @param list <code>ArrayList</code> contendo todos os pontos turísticos a serem inseridos.
      */
     public void checkInsert(ArrayList<TouristicPoint> list){
         if (isEmpty()){
@@ -56,10 +56,12 @@ public class TouristicPointBusiness {
 
     /**
      * Recupera um ponto turístico do banco de dados a partir de um id da tabela e o retorna como
-     * uma instância da classe TouristicPoint ou 'null', caso o id não esteja cadastrado no banco.
+     * uma instância da classe {@link TouristicPoint} ou <code>'null'</code>, caso o
+     * <code>id</code> não esteja cadastrado no banco.
      *
-     * @param cipherMessage - String a ser descriptografado.
-     * @return - Ponto turístico como instância da classe TouristicPoint, caso exista no banco.
+     * @param cipherMessage String a ser descriptografado.
+     * @return Ponto turístico como instância da classe {@link TouristicPoint}, caso exista no
+     * banco.
      *
      * @throws InvalidKeyException
      * @throws IllegalBlockSizeException

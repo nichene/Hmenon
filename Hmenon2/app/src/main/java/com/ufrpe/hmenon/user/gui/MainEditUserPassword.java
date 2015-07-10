@@ -1,10 +1,12 @@
 package com.ufrpe.hmenon.user.gui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +28,7 @@ public class MainEditUserPassword extends ActionBarActivity {
     private EditText edtConfirmEditPassword;
     private Button btnConfirmEditPassword;
     private UserBusiness service;
+    private Context currentContext = MainEditUserPassword.this;
 
     @Override
     public void onBackPressed() {
@@ -53,6 +56,9 @@ public class MainEditUserPassword extends ActionBarActivity {
         service = new UserBusiness(MainInitial.getContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edituserpassword);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home_white_24dp);
 
         edtPassword = (EditText) findViewById(R.id.edtPasswordEditPassword);
         edtEditPassword = (EditText) findViewById(R.id.edtPasswordEdit);
@@ -95,5 +101,17 @@ public class MainEditUserPassword extends ActionBarActivity {
             }
 
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                Intent intentGoHome = new Intent(currentContext, MainActivity.class);
+                finish();
+                startActivity(intentGoHome);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

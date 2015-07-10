@@ -12,7 +12,7 @@ import android.os.IBinder;
 import android.provider.Settings;
 
 /**
- * Implementa as funcionalidades de GPS.
+ * Implements GPS functionalities.
  */
 public class GPSTracker extends Service implements android.location.LocationListener {
     private final Context mContext;
@@ -31,16 +31,17 @@ public class GPSTracker extends Service implements android.location.LocationList
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
     // Declaring a Location Manager
     protected LocationManager locationManager;
+
+    /**
+     * Adjusts context and current location.
+     *
+     * @param context Current activity context.
+     */
     public GPSTracker(Context context) {
         this.mContext = context;
         getLocation();
     }
 
-    /**
-     * Returns current geografic location.
-     *
-     * @return Location instance.
-     */
     public Location getLocation() {
         try {
             locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
@@ -123,7 +124,6 @@ public class GPSTracker extends Service implements android.location.LocationList
     }
     /**
      * Function to check GPS/wifi enabled
-     * @return boolean
      * */
     public boolean canGetLocation() {
         return this.canGetLocation;

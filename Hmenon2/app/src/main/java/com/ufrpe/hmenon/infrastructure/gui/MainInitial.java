@@ -85,6 +85,13 @@ public class MainInitial extends ActionBarActivity {
         }, 3000);
     }
 
+    /**
+     * Instancia e retorna um ponto turístico a partir dos atributos salvos em um arquivo
+     * <code>.xml</code>.
+     *
+     * @param pointName Nome do elemento no arquivo <code>.xml</code> que contém o ponto turístico.
+     * @return Instância do ponto turístico
+     */
     public TouristicPoint createPoint(String pointName){
         TouristicPoint point = new TouristicPoint();
 
@@ -109,6 +116,7 @@ public class MainInitial extends ActionBarActivity {
 
         return point;
     }
+
     public static Context getContext() {
         return context;
     }

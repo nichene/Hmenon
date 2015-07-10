@@ -1,9 +1,11 @@
 package com.ufrpe.hmenon.favourite.gui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 import com.ufrpe.hmenon.R;
 import com.ufrpe.hmenon.infrastructure.domain.GPSTracker;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
+import com.ufrpe.hmenon.infrastructure.gui.MainActivity;
 import com.ufrpe.hmenon.infrastructure.gui.MainInitial;
 import com.ufrpe.hmenon.favourite.service.FavouriteBusiness;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
@@ -37,6 +40,7 @@ public class MainFavourite extends ActionBarActivity{
     private GPSTracker gps;
     private TouristicPointBusiness touristicPointBusiness;
     private FavouriteBusiness favouriteBusiness;
+    private Context currentContext = MainFavourite.this;
 
     @Override
     public void onBackPressed() {
@@ -50,6 +54,9 @@ public class MainFavourite extends ActionBarActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourites);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home_white_24dp);
 
         gps = new GPSTracker(MainInitial.getContext());
         favouriteBusiness = new FavouriteBusiness(MainInitial.getContext());
@@ -75,6 +82,18 @@ public class MainFavourite extends ActionBarActivity{
                 startActivity(intentGoPointScreen);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                Intent intentGoHome = new Intent(currentContext, MainActivity.class);
+                finish();
+                startActivity(intentGoHome);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void populate(){
