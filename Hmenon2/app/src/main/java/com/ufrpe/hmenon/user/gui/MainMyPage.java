@@ -1,11 +1,8 @@
 package com.ufrpe.hmenon.user.gui;
 
-<<<<<<< HEAD
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-=======
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -15,7 +12,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.InputType;
 import android.view.MenuItem;
->>>>>>> origin/master
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -73,47 +69,9 @@ public class MainMyPage extends ActionBarActivity {
         btnScript.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-<<<<<<< HEAD
                 finish();
                 Intent intentGoChoosePoints = new Intent(MainMyPage.this, MainChoosePoints.class);
                 startActivity(intentGoChoosePoints);
-=======
-                showDialog(MainMyPage.this);
-            }
-        });
-    }
-
-    public void showDialog(Activity activity){
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(getString(R.string.define_new_script));
-        builder.setMessage(getString(R.string.how_many_avaliable_hours));
-        final EditText prompt = new EditText(this);
-        prompt.setInputType(InputType.TYPE_CLASS_NUMBER);
-        builder.setView(prompt);
-        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                try {
-                    int time = Integer.parseInt(prompt.getText().toString());
-
-                    if (time <= 24 && time > 0) {
-                        MainRouteSugestion.setTimeLimit(time * 60);
-                        finish();
-
-                        Intent intentGoRouteSuggestion = new Intent(MainMyPage.this,
-                                MainRouteSugestion.class);
-
-                        startActivity(intentGoRouteSuggestion);
-                    }
-                    else {
-                        Toast.makeText(currentContext, getString(R.string.invalid_number_of_hours),
-                                Toast.LENGTH_SHORT).show();
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
->>>>>>> origin/master
             }
         });
     }

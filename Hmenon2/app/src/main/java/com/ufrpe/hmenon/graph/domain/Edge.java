@@ -1,35 +1,21 @@
 package com.ufrpe.hmenon.graph.domain;
 
 /**
-<<<<<<< HEAD
- * Classe que representa uma aresta no grafo
-=======
  * A classe Edge representa as arestas de um grafo, cada instância da classe sempre está conectada
  * à duas instâncias de {@link Node} para formar um grafo não-direcionado.
  * <p>
  * Implementa getters e setters, a classe fica responsável por manter as referências dos nós de
  * ambas as suas extremidades e suas respectivas distâncias.
->>>>>>> origin/master
  */
 public class Edge {
 	private Node nodeA;
 	private Node nodeB;
 	private int distance;
-<<<<<<< HEAD
-
-	public Edge(Node a, Node b, int distance){
-		this.nodeA = a;
-		this.nodeB = b;
-		this.distance = distance;
-=======
-	
-	public Edge(Node f, Node t, int distance){
-		this.nodeA = f;
-		this.nodeB = t;
-		this.setDistance(distance);
->>>>>>> origin/master
-	}
-
+	public Edge(Node a, Node b, int distance) {
+        this.nodeA = a;
+        this.nodeB = b;
+        this.distance = distance;
+    }
 	public Node getNodeA() {
 		return nodeA;
 	}

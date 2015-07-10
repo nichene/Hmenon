@@ -36,12 +36,7 @@ public class MainChoosePoints extends ActionBarActivity {
     private ListView script;
     private Button btnCreateNewScript;
     private List<Node> scriptList;
-<<<<<<< HEAD
     private TouristicPointBusiness pointBusiness;
-=======
-    private static List<Node> staticScriptList;
-    private Context currentContext = MainChoosePoints.this;
->>>>>>> origin/master
 
     @Override
     public void onBackPressed() {
@@ -54,16 +49,8 @@ public class MainChoosePoints extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD
         setContentView(R.layout.activity_choose_points);
         StaticUser.setContext(this);
-=======
-        setContentView(R.layout.activity_route);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home_white_24dp);
-
->>>>>>> origin/master
         script = (ListView) findViewById(R.id.listScript);
         pointBusiness = new TouristicPointBusiness(StaticUser.getContext());
         btnCreateNewScript = (Button) findViewById(R.id.btnCreateNewScript);

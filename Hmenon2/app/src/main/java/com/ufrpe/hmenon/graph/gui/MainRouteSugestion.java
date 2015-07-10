@@ -25,15 +25,9 @@ import com.ufrpe.hmenon.user.gui.MainMyPage;
 
 import java.util.ArrayList;
 
-<<<<<<< HEAD
-
-/**
- * Activity responsável pela exibição das opções de roteiro
-=======
 /**
  * Activity responsável por listar os possíveis roteiros de visitas dentro das limitações de tempo
  * do usuário.
->>>>>>> origin/master
  */
 public class MainRouteSugestion extends ActionBarActivity {
     private ListView routes;
@@ -166,17 +160,14 @@ public class MainRouteSugestion extends ActionBarActivity {
             }
         }
 
-<<<<<<< HEAD
     public static void setClosedNodes(ArrayList<Node> closedNodes) {
         MainRouteSugestion.closedNodes = closedNodes;
     }
-=======
     /**
      * Ajusta o limite de tempo do passeio.
      *
      * @param limit Limite de tempo.
      */
->>>>>>> origin/master
     public static void setTimeLimit(long limit){
         timeLimit = limit;
     }

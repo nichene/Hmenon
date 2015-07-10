@@ -70,18 +70,6 @@ public class Node {
 		this.conections = conections;
 	}
 
-<<<<<<< HEAD
-
-
-	public void addConnection(Node node, int distance){
-        if (node!= null) {
-            Edge edge = new Edge(this, node, distance);
-            conections.add(edge);
-        }
-    }
-
-
-=======
 	/**
 	 * Adiciona conexão com um outro nó do grafo.
 	 *
@@ -99,7 +87,6 @@ public class Node {
 	 * @param closed Lista de nós.
 	 * @return Booleano referente à.
 	 */
->>>>>>> origin/master
 	public boolean hasOpenedConnection(ArrayList<Node> closed){
 		boolean open = false;
 
