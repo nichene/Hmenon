@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.ufrpe.hmenon.R;
 import com.ufrpe.hmenon.graph.domain.Graph;
 import com.ufrpe.hmenon.graph.domain.Node;
