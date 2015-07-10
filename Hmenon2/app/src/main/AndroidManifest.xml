@@ -53,7 +53,7 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".graph.gui.MainRoute"
+            android:name=".graph.gui.MainChoosePoints"
             android:screenOrientation="portrait">
         </activity>
         <activity android:name=".graph.gui.MainRouteSugestion"

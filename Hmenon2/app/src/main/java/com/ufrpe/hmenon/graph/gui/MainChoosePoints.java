@@ -23,7 +23,7 @@ import com.ufrpe.hmenon.user.gui.MainMyPage;
 
 import java.util.List;
 
-public class MainRoute extends ActionBarActivity {
+public class MainChoosePoints extends ActionBarActivity {
     private ListView script;
     private Button btnCreateNewScript;
     private List<Node> scriptList;
@@ -33,7 +33,7 @@ public class MainRoute extends ActionBarActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        Intent intentGoMyPage = new Intent(MainRoute.this, MainMyPage.class);
+        Intent intentGoMyPage = new Intent(MainChoosePoints.this, MainMyPage.class);
         startActivity(intentGoMyPage);
     }
 
@@ -55,7 +55,7 @@ public class MainRoute extends ActionBarActivity {
         btnCreateNewScript.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog(MainRoute.this);
+                showDialog(MainChoosePoints.this);
             }
         });
     }
@@ -66,7 +66,7 @@ public class MainRoute extends ActionBarActivity {
     }
     private class ContactListAdapter extends ArrayAdapter<Node> {
         public ContactListAdapter(){
-            super(MainRoute.this, R.layout.route_list_item, scriptList);
+            super(MainChoosePoints.this, R.layout.route_list_item, scriptList);
         }
         @Override
         public View getView(int position, View view, ViewGroup parent){
@@ -83,7 +83,7 @@ public class MainRoute extends ActionBarActivity {
     }
 
     public static void setStaticScriptList(List<Node> staticScriptList) {
-        MainRoute.staticScriptList = staticScriptList;
+        MainChoosePoints.staticScriptList = staticScriptList;
     }
     public void showDialog(Activity activity){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -100,7 +100,7 @@ public class MainRoute extends ActionBarActivity {
                     if (time <= 24 && time >= 0) {
                         MainRouteSugestion.setTimeLimit(time * 60);
                         finish();
-                        Intent intentGoRouteSuggestion = new Intent(MainRoute.this, MainRouteSugestion.class);
+                        Intent intentGoRouteSuggestion = new Intent(MainChoosePoints.this, MainRouteSugestion.class);
                         startActivity(intentGoRouteSuggestion);
                     }
                 } catch (Exception e){
