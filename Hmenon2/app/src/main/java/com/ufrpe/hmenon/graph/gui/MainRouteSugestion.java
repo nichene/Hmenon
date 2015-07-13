@@ -62,6 +62,7 @@ public class MainRouteSugestion extends ActionBarActivity {
         script = new Script();
         script.setOrigin(graph.get(StaticUser.getCloserPoint()));
         script.generatePlan(timeLimit - StaticUser.getCloserTime(), closedNodes);
+        putInitialValue();
         routes = (ListView) findViewById(R.id.listRouteSugestion);
         btnNext = (ImageButton) findViewById(R.id.imageButtonNext);
         btnPrev = (ImageButton) findViewById(R.id.imageButtonPrevious);
@@ -99,9 +100,14 @@ public class MainRouteSugestion extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    public void putInitialValue(){
+        for (Path path: script.getPaths()){
+            path.addNode(0, new Node(new TouristicPoint()));
+        }
+    }
 
     /**
-     *
+     *Muda caminho mostrado para o próximo ou anterior
      */
     private void updateSuggestion(){
         if (script.getPaths().size() == 0 || script.getPaths().get(
@@ -111,7 +117,6 @@ public class MainRouteSugestion extends ActionBarActivity {
         } else {
             Path path = script.getPaths().get(currentPathIndex);
             routeList = path.getNodes();
-            routeList.add(0, new Node(new TouristicPoint()));
             populate();
         }
     }

@@ -30,6 +30,9 @@ public class Path {
     public void removeNode(Node node){
         nodes.remove(node);
     }
+    public void addNode(int index, Node node){
+        nodes.add(index, node);
+    }
 	public void show(){
 		for (Node node : nodes){
 			System.out.print(node.getData() + " ");

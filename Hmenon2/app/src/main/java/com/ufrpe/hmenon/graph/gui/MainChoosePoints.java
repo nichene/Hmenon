@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.InputType;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import com.ufrpe.hmenon.R;
 import com.ufrpe.hmenon.graph.domain.Node;
 import com.ufrpe.hmenon.infrastructure.domain.StaticUser;
+import com.ufrpe.hmenon.infrastructure.gui.MainActivity;
 import com.ufrpe.hmenon.touristicpoint.domain.TouristicPoint;
 import com.ufrpe.hmenon.touristicpoint.service.TouristicPointBusiness;
 import com.ufrpe.hmenon.user.gui.MainMyPage;
@@ -50,6 +52,10 @@ public class MainChoosePoints extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_points);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home_white_24dp);
+
         StaticUser.setContext(this);
         script = (ListView) findViewById(R.id.listScript);
         pointBusiness = new TouristicPointBusiness(StaticUser.getContext());
@@ -140,5 +146,16 @@ public class MainChoosePoints extends ActionBarActivity {
         });
         builder.setNegativeButton(getString(R.string.cancel), null);
         builder.show();
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                Intent intentGoHome = new Intent(StaticUser.getContext(), MainActivity.class);
+                finish();
+                startActivity(intentGoHome);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
